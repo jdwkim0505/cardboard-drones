@@ -42,9 +42,6 @@
   .brand img { height: 40px; width: auto; display: block; }
   @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .brand img { filter: invert(1); } }
   :root[data-theme="dark"] .brand img { filter: invert(1); }
-  nav.links { display: flex; gap: 28px; }
-  nav.links a { font: 500 12px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); text-decoration: none; }
-  nav.links a:hover { color: var(--ink); }
 
   .hero { padding: 96px 0 72px; border-bottom: 1px solid var(--line); }
   h1 { font-size: clamp(38px, 6.4vw, 72px); line-height: 1.02; letter-spacing: -0.03em; font-weight: 600; margin: 20px 0 24px; max-width: 14ch; }
@@ -90,7 +87,6 @@
     .grid3 > div { padding: 28px 0; }
     .grid3 > div + div::before { display: none; }
     .grid3 > div + div { border-top: 1px solid var(--line); }
-    nav.links a:not(:last-child) { display: none; }
   }
   @media (max-width: 560px) {
     .wrap { padding: 0 16px; }
@@ -106,11 +102,6 @@
 <header class="nav">
   <div class="wrap">
     <a class="brand" href="#top"><img src="media/logo.png" alt="Suho Industries"></a>
-    <nav class="links">
-      <a href="#concept">Concept</a>
-      <a href="#media">Media</a>
-      <a href="#contact">Contact</a>
-    </nav>
   </div>
 </header>
 
