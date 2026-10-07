@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Foldable Cardboard Drones</title>
+<meta name="description" content="Drones that ship flat, fold in minutes, and fly.">
+<style>
+  :root {
+    --bg: #f4ede1;
+    --surface: #fbf7f0;
+    --kraft: #c89b63;
+    --kraft-dark: #8a6233;
+    --ink: #2a2118;
+    --muted: #6d5f50;
+    --line: #dccbb2;
+    --max: 1080px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1b1713; --surface: #241f19; --kraft: #d6a96f; --kraft-dark: #e4bf8c;
+      --ink: #f1e8db; --muted: #b3a593; --line: #3b3228;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #1b1713; --surface: #241f19; --kraft: #d6a96f; --kraft-dark: #e4bf8c;
+    --ink: #f1e8db; --muted: #b3a593; --line: #3b3228;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  a { color: var(--kraft-dark); }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+
+  header.nav { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
+  header.nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 16px; }
+  .brand { font-weight: 800; letter-spacing: -0.01em; text-decoration: none; color: var(--ink); display: flex; align-items: center; gap: 10px; }
+  .brand svg { width: 28px; height: 28px; }
+  nav.links { display: flex; gap: 20px; font-size: 15px; }
+  nav.links a { color: var(--muted); text-decoration: none; }
+  nav.links a:hover { color: var(--ink); }
+
+  .hero { padding: 72px 0 56px; }
+  .hero .wrap { display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: center; }
+  .eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: 13px; font-weight: 700; color: var(--kraft-dark); }
+  h1 { font-size: clamp(36px, 6vw, 60px); line-height: 1.05; letter-spacing: -0.02em; margin: 12px 0 18px; }
+  .lede { font-size: 19px; color: var(--muted); max-width: 34ch; }
+  .btns { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
+  .btn { display: inline-block; padding: 12px 20px; border-radius: 10px; font-weight: 650; text-decoration: none; }
+  .btn.primary { background: var(--ink); color: var(--bg); }
+  .btn.ghost { border: 1.5px solid var(--ink); color: var(--ink); }
+
+  /* Placeholders: swap each .ph for an <img> or <video> when media is ready */
+  .ph {
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 2px dashed var(--kraft); background:
+      repeating-linear-gradient(135deg, transparent 0 14px, color-mix(in srgb, var(--kraft) 12%, transparent) 14px 15px),
+      var(--surface);
+    display: grid; place-items: center; text-align: center; color: var(--muted); font-size: 14px; padding: 16px;
+  }
+  .ph strong { display: block; color: var(--ink); font-size: 15px; margin-top: 6px; }
+  .ph svg { width: 40px; height: 40px; opacity: .7; }
+  .ph.video .play { width: 64px; height: 64px; border-radius: 50%; background: var(--ink); display: grid; place-items: center; margin: 0 auto; }
+  .ph.video .play::after { content: ""; border-left: 18px solid var(--bg); border-top: 11px solid transparent; border-bottom: 11px solid transparent; margin-left: 5px; }
+  .r169 { aspect-ratio: 16 / 9; }
+  .r43 { aspect-ratio: 4 / 3; }
+  .r11 { aspect-ratio: 1 / 1; }
+
+  section { padding: 64px 0; }
+  section.alt { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  h2 { font-size: clamp(28px, 4vw, 38px); letter-spacing: -0.015em; margin: 0 0 10px; }
+  .sub { color: var(--muted); margin: 0 0 32px; max-width: 60ch; }
+
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .step .num { margin-top: 16px; font-weight: 800; color: var(--kraft-dark); font-size: 14px; letter-spacing: .08em; }
+  .step h3 { margin: 12px 0 6px; font-size: 20px; }
+  .step p { margin: 0; color: var(--muted); font-size: 16px; }
+
+  .features { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .card { background: var(--bg); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
+  section:not(.alt) .card { background: var(--surface); }
+  .card h3 { margin: 0 0 6px; font-size: 18px; }
+  .card p { margin: 0; color: var(--muted); font-size: 15px; }
+
+  .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .gallery .wide { grid-column: span 2; }
+
+  .contact { text-align: center; }
+  .contact .sub { margin-left: auto; margin-right: auto; }
+  footer { padding: 28px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+  footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+  @media (max-width: 860px) {
+    .hero .wrap { grid-template-columns: 1fr; gap: 32px; }
+    .steps { grid-template-columns: 1fr; }
+    .features { grid-template-columns: 1fr 1fr; }
+    .gallery { grid-template-columns: 1fr 1fr; }
+    .gallery .wide { grid-column: span 2; }
+    nav.links a:not(:last-child) { display: none; }
+  }
+  @media (max-width: 520px) {
+    .wrap { padding: 0 16px; }
+    .features, .gallery { grid-template-columns: 1fr; }
+    .gallery .wide { grid-column: auto; }
+    .hero { padding-top: 48px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M8 8l16 16M24 8L8 24"/><circle cx="7" cy="7" r="4"/><circle cx="25" cy="7" r="4"/><circle cx="7" cy="25" r="4"/><circle cx="25" cy="25" r="4"/></g><rect x="12.5" y="12.5" width="7" height="7" rx="1.5" fill="#c89b63"/></svg>
+      <span id="site-name">Foldable Cardboard Drones</span>
+    </a>
+    <nav class="links">
+      <a href="#how">How it works</a>
+      <a href="#why">Why cardboard</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <div class="eyebrow">Ships flat. Folds fast. Flies.</div>
+        <h1>A drone you can fold out of a box.</h1>
+        <p class="lede">Lightweight, low-cost airframes made from die-cut cardboard. Snap in the electronics and you're in the air.</p>
+        <div class="btns">
+          <a class="btn primary" href="#gallery">See it fly</a>
+          <a class="btn ghost" href="#contact">Get in touch</a>
+        </div>
+      </div>
+      <!-- HERO VIDEO: replace with <video src="media/hero.mp4" autoplay muted loop playsinline></video> -->
+      <div class="ph video r169">
+        <div><div class="play"></div><strong>Hero video</strong>Flight footage or fold time-lapse</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="how">
+    <div class="wrap">
+      <h2>How it works</h2>
+      <p class="sub">From a flat sheet to a flying drone in three steps.</p>
+      <div class="steps">
+        <div class="step">
+          <!-- PHOTO: media/step-1.jpg -->
+          <div class="ph r43"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-8 8"/></svg><strong>Photo: flat-packed kit</strong></div></div>
+          <div class="num">STEP 1</div>
+          <h3>Unpack</h3>
+          <p>The airframe arrives as a single flat cardboard sheet, pre-cut and scored.</p>
+        </div>
+        <div class="step">
+          <!-- PHOTO: media/step-2.jpg -->
+          <div class="ph r43"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-8 8"/></svg><strong>Photo: folding the frame</strong></div></div>
+          <div class="num">STEP 2</div>
+          <h3>Fold</h3>
+          <p>Fold along the lines and lock the tabs. No glue or tools needed.</p>
+        </div>
+        <div class="step">
+          <!-- PHOTO: media/step-3.jpg -->
+          <div class="ph r43"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-8 8"/></svg><strong>Photo: ready to fly</strong></div></div>
+          <div class="num">STEP 3</div>
+          <h3>Fly</h3>
+          <p>Drop in the motors, battery and flight controller, then take off.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="why">
+    <div class="wrap">
+      <h2>Why cardboard?</h2>
+      <p class="sub">It sounds unusual. It turns out to be a very good material for small airframes.</p>
+      <div class="features">
+        <div class="card"><h3>Low cost</h3><p>Airframes cost a fraction of molded or carbon frames.</p></div>
+        <div class="card"><h3>Ships flat</h3><p>Dozens of frames fit in the space of one assembled drone.</p></div>
+        <div class="card"><h3>Light</h3><p>Corrugated board is stiff for its weight, which means longer flights.</p></div>
+        <div class="card"><h3>Recyclable</h3><p>Crashed or worn out frames go straight into the recycling bin.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="gallery">
+    <div class="wrap">
+      <h2>Gallery</h2>
+      <p class="sub">Photos and flight videos coming soon.</p>
+      <div class="gallery">
+        <!-- VIDEO: media/flight-1.mp4 -->
+        <div class="ph video r169 wide"><div><div class="play"></div><strong>Video: first flight</strong></div></div>
+        <!-- PHOTO: media/photo-1.jpg -->
+        <div class="ph r11"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-8 8"/></svg><strong>Photo</strong></div></div>
+        <!-- PHOTO: media/photo-2.jpg -->
+        <div class="ph r11"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-8 8"/></svg><strong>Photo</strong></div></div>
+        <!-- PHOTO: media/photo-3.jpg -->
+        <div class="ph r11"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-8 8"/></svg><strong>Photo</strong></div></div>
+        <!-- VIDEO: media/fold-timelapse.mp4 -->
+        <div class="ph video r11"><div><div class="play"></div><strong>Video: fold time-lapse</strong></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <h2>Want one?</h2>
+      <p class="sub">We're building and testing the first batch now. Reach out if you want to follow along or try one.</p>
+      <a class="btn primary" href="mailto:hello@example.com">hello@example.com</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>&copy; 2026 Foldable Cardboard Drones</span>
+    <span>Made of cardboard, mostly.</span>
+  </div>
+</footer>
+
+</body>
+</html>
