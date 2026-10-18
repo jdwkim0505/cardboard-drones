@@ -49,6 +49,7 @@
   .btn { display: inline-block; padding: 13px 22px; font: 500 12px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; text-decoration: none; border: 1px solid var(--ink); }
   .btn.primary { background: var(--ink); color: var(--bg); }
   .hero .media { margin-top: 56px; }
+  .hero-video { display: block; width: 100%; object-fit: cover; background: var(--surface); border: 1px solid var(--line); }
 
   /* Placeholders: swap each .ph for an <img> or <video> when media is ready */
   .ph { position: relative; background: var(--surface); border: 1px solid var(--line); display: grid; place-items: center; }
@@ -111,8 +112,7 @@
     <div class="wrap">
       <div class="label"><span class="acc">&#9632;</span>&nbsp; Low-cost unmanned airframes</div>
       <h1>Ships flat. Folds in minutes. Flies.</h1>
-      <!-- HERO VIDEO: replace with <video src="media/hero.mp4" autoplay muted loop playsinline></video> -->
-      <div class="media ph r21"><span>Video: flight footage</span></div>
+      <video class="media hero-video r169" src="media/hero.mp4" poster="media/hero-poster.jpg" autoplay muted loop playsinline preload="auto" aria-label="Suho Industries cardboard flying-wing prototype"></video>
     </div>
   </section>
 
