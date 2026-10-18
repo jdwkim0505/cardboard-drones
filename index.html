@@ -79,6 +79,8 @@
   .gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
   .gallery .ph { border: 0; }
   .gallery .wide { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; }
+  .pending span { font-size: 13px; }
+  .pending em { display: block; margin-top: 10px; font: 400 15px/1.5 "Inter", system-ui, sans-serif; letter-spacing: 0; text-transform: none; font-style: normal; }
 
   .contact .wrap { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
   footer { padding: 28px 0; }
@@ -97,6 +99,7 @@
     section { padding: 64px 0; }
     .gallery { grid-template-columns: 1fr; }
     .gallery .wide { grid-column: auto; grid-row: auto; aspect-ratio: 16 / 9; }
+    .pending.r21 { aspect-ratio: 4 / 3; }
   }
 </style>
 </head>
@@ -127,7 +130,7 @@
         <div>
           <div class="label">Step 01</div>
           <h3>Ship</h3>
-          <p>Airframes travel as flat, pre-cut sheets. Many units fit in the space of one assembled drone.</p>
+          <p>Airframes travel as flat, closely-packed sheets.</p>
           <img class="step-img r43" src="media/step-1.svg" alt="Stack of flat cardboard sheets">
         </div>
         <div>
@@ -152,20 +155,8 @@
         <div class="label">02 / Media</div>
         <h2>Testing and flight footage.</h2>
       </div>
-      <div class="gallery">
-        <!-- VIDEO: media/flight-1.mp4 -->
-        <div class="ph r169 wide"><span>Video: flight test</span></div>
-        <!-- PHOTO: media/photo-1.jpg -->
-        <div class="ph r169"><span>Photo</span></div>
-        <!-- PHOTO: media/photo-2.jpg -->
-        <div class="ph r169"><span>Photo</span></div>
-        <!-- PHOTO: media/photo-3.jpg -->
-        <div class="ph r169"><span>Photo</span></div>
-        <!-- VIDEO: media/fold-timelapse.mp4 -->
-        <div class="ph r169"><span>Video: assembly time-lapse</span></div>
-        <!-- PHOTO: media/photo-4.jpg -->
-        <div class="ph r169"><span>Photo</span></div>
-      </div>
+      <!-- Swap this panel for the .gallery grid once flight footage is ready -->
+      <div class="ph r21 pending"><span>In progress<br><em>Flight testing underway. Footage coming soon.</em></span></div>
     </div>
   </section>
 
