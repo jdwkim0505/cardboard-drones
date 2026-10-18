@@ -73,6 +73,7 @@
   .grid3 p { margin: 0; color: var(--muted); font-size: 15px; }
   .grid3 > div { display: flex; flex-direction: column; }
   .grid3 .ph { order: -1; margin-bottom: 24px; }
+  .grid3 .step-img { order: -1; margin-bottom: 24px; display: block; width: 100%; height: auto; background: var(--surface); border: 1px solid var(--line); }
 
 
   .gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
@@ -127,22 +128,19 @@
           <div class="label">Step 01</div>
           <h3>Ship</h3>
           <p>Airframes travel as flat, pre-cut sheets. Many units fit in the space of one assembled drone.</p>
-          <!-- PHOTO: media/step-1.jpg -->
-          <div class="ph r43"><span>Photo: flat-packed kit</span></div>
+          <img class="step-img r43" src="media/step-1.svg" alt="Stack of flat cardboard sheets">
         </div>
         <div>
           <div class="label">Step 02</div>
           <h3>Fold</h3>
           <p>Fold each sheet along its scored lines and glue the seams. Two spars slide through the fuselage to carry the wings.</p>
-          <!-- PHOTO: media/step-2.jpg -->
-          <div class="ph r43"><span>Photo: assembly</span></div>
+          <img class="step-img r43" src="media/step-2.svg" alt="A cardboard sheet being folded">
         </div>
         <div>
           <div class="label">Step 03</div>
           <h3>Fly</h3>
           <p>Install motors, battery and flight controller. Launch.</p>
-          <!-- PHOTO: media/step-3.jpg -->
-          <div class="ph r43"><span>Photo: ready to fly</span></div>
+          <img class="step-img r43" src="media/step-3.svg" alt="Assembled flying-wing drone with box fuselage, winglets and rear propeller">
         </div>
       </div>
     </div>
