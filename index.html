@@ -44,13 +44,14 @@
   @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .brand img { filter: invert(1); } }
   :root[data-theme="dark"] .brand img { filter: invert(1); }
 
-  .hero { padding: 96px 0 72px; border-bottom: 1px solid var(--line); }
+  .hero { padding: 72px 0; border-bottom: 1px solid var(--line); }
   h1 { font-size: clamp(38px, 6.4vw, 72px); line-height: 1.02; letter-spacing: -0.03em; font-weight: 600; margin: 20px 0 24px; max-width: 14ch; }
   .btn { display: inline-block; padding: 13px 22px; font: 500 12px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; text-decoration: none; border: 1px solid var(--ink); }
   .btn.primary { background: var(--ink); color: var(--bg); }
-  .hero .media { margin-top: 56px; }
-  .hero-frame { display: flex; justify-content: center; background: var(--surface); border: 1px solid var(--line); }
-  .hero-video { display: block; height: min(78vh, 820px); width: auto; max-width: 100%; aspect-ratio: 9 / 16; object-fit: cover; }
+  .hero-grid { display: grid; grid-template-columns: 1fr auto; gap: 56px; align-items: center; }
+  .hero-grid h1 { margin-bottom: 0; }
+  .hero-frame { background: var(--surface); border: 1px solid var(--line); }
+  .hero-video { display: block; height: min(72vh, 640px); width: auto; aspect-ratio: 9 / 16; object-fit: cover; }
 
   /* Placeholders: swap each .ph for an <img> or <video> when media is ready */
   .ph { position: relative; background: var(--surface); border: 1px solid var(--line); display: grid; place-items: center; }
@@ -88,6 +89,8 @@
   footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 
   @media (max-width: 860px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+    .hero-video { width: 100%; height: auto; aspect-ratio: 4 / 5; object-position: 50% 55%; }
     .grid3 { grid-template-columns: 1fr; }
     .grid3 > div { padding: 28px 0; }
     .grid3 > div + div::before { display: none; }
@@ -99,7 +102,6 @@
     section { padding: 64px 0; }
     .gallery { grid-template-columns: 1fr; }
     .gallery .wide { grid-column: auto; grid-row: auto; aspect-ratio: 16 / 9; }
-    .hero-video { width: 100%; height: auto; }
     .pending.r21 { aspect-ratio: 4 / 3; }
   }
 </style>
@@ -115,9 +117,13 @@
 <main id="top">
   <section class="hero" style="border-bottom:1px solid var(--line)">
     <div class="wrap">
-      <div class="label"><span class="acc">&#9632;</span>&nbsp; Low-cost unmanned airframes</div>
-      <h1>Ships flat. Folds in minutes. Flies.</h1>
-      <div class="media hero-frame"><video class="hero-video" src="media/hero.mp4" poster="media/hero-poster.jpg" autoplay muted loop playsinline preload="auto" aria-label="Suho Industries cardboard flying-wing prototype"></video></div>
+      <div class="hero-grid">
+        <div>
+          <div class="label"><span class="acc">&#9632;</span>&nbsp; Low-cost unmanned airframes</div>
+          <h1>Ships flat. Folds in minutes. Flies.</h1>
+        </div>
+        <div class="media hero-frame"><video class="hero-video" src="media/hero.mp4" poster="media/hero-poster.jpg" autoplay muted loop playsinline preload="auto" aria-label="Suho Industries cardboard flying-wing prototype"></video></div>
+      </div>
     </div>
   </section>
 
