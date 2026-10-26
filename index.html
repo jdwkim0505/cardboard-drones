@@ -48,11 +48,8 @@
   h1 { font-size: clamp(38px, 6.4vw, 72px); line-height: 1.02; letter-spacing: -0.03em; font-weight: 600; margin: 20px 0 24px; max-width: 14ch; }
   .btn { display: inline-block; padding: 13px 22px; font: 500 12px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; text-decoration: none; border: 1px solid var(--ink); }
   .btn.primary { background: var(--ink); color: var(--bg); }
-  .hero-grid { display: grid; grid-template-columns: 1fr auto; gap: 56px; align-items: center; }
-  .hero-grid h1 { margin-bottom: 0; }
-  .hero-frame { background: var(--surface); border: 1px solid var(--line); }
-  .hero-video { display: block; height: min(60vh, 500px); width: auto; aspect-ratio: 9 / 16; object-fit: cover; }
-  .media-video { display: block; width: 100%; object-fit: cover; background: var(--surface); border: 1px solid var(--line); }
+  .hero .media { margin-top: 48px; }
+  .hero-video, .media-video { display: block; width: 100%; max-width: 760px; object-fit: cover; background: var(--surface); border: 1px solid var(--line); }
 
   /* Placeholders: swap each .ph for an <img> or <video> when media is ready */
   .ph { position: relative; background: var(--surface); border: 1px solid var(--line); display: grid; place-items: center; }
@@ -89,8 +86,6 @@
   footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 
   @media (max-width: 860px) {
-    .hero-grid { grid-template-columns: 1fr; gap: 32px; }
-    .hero-video { width: 100%; height: auto; aspect-ratio: 4 / 5; object-position: 50% 55%; }
     .grid3 { grid-template-columns: 1fr; }
     .grid3 > div { padding: 28px 0; }
     .grid3 > div + div::before { display: none; }
@@ -116,13 +111,9 @@
 <main id="top">
   <section class="hero" style="border-bottom:1px solid var(--line)">
     <div class="wrap">
-      <div class="hero-grid">
-        <div>
-          <div class="label"><span class="acc">&#9632;</span>&nbsp; Low-cost unmanned airframes</div>
-          <h1>Ships flat. Folds in minutes. Flies.</h1>
-        </div>
-        <div class="media hero-frame"><video class="hero-video" src="media/hero.mp4" poster="media/hero-poster.jpg" autoplay muted loop playsinline preload="auto" aria-label="Suho Industries cardboard flying-wing prototype"></video></div>
-      </div>
+      <div class="label"><span class="acc">&#9632;</span>&nbsp; Low-cost unmanned airframes</div>
+      <h1>Ships flat. Folds in minutes. Flies.</h1>
+      <video class="media hero-video r169" src="media/hero.mp4" poster="media/hero-poster.jpg" autoplay muted loop playsinline preload="auto" aria-label="Spin-around of the Suho Industries cardboard flying wing"></video>
     </div>
   </section>
 
