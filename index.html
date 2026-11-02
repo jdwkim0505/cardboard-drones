@@ -49,6 +49,11 @@
   .btn { display: inline-block; padding: 13px 22px; font: 500 12px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; text-decoration: none; border: 1px solid var(--ink); }
   .btn.primary { background: var(--ink); color: var(--bg); }
   .hero .media { margin-top: 48px; }
+  .hero-stage { position: relative; aspect-ratio: 16 / 9; width: 100%; border: 2px solid var(--ink); background: #0e100f; overflow: hidden; }
+  .hero-stage video, .hero-stage svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .hero-stage video { object-fit: cover; }
+  #hdrone path { vector-effect: non-scaling-stroke; }
+
   .hero-video, .media-video { display: block; width: 100%; max-width: 760px; object-fit: cover; background: var(--surface); border: 2px solid var(--ink); }
 
   /* Placeholders: swap each .ph for an <img> or <video> when media is ready */
@@ -141,7 +146,32 @@
     <div class="wrap">
       <div class="label"><span class="acc">&#9632;</span>&nbsp; Decentralized and despecialized defense manufacturing</div>
       <h1>Turn any garage into a weapons factory.</h1>
-      <video class="media hero-video r169" src="media/hero.mp4" poster="media/hero-poster.jpg" autoplay muted loop playsinline preload="auto" aria-label="Spin-around of the Suho Industries flat-pack flying wing"></video>
+      <div class="media hero-stage" role="img" aria-label="Animation: the flying wing's panels are cut on a CNC machine and assembled, and its outline match-cuts into real footage of the drone's first successful flight.">
+        <video id="heroVid" src="media/hero-flight.mp4" poster="media/hero-flight-poster.jpg" muted playsinline preload="auto"></video>
+        <svg id="heroFx" viewBox="0 0 1920 1080" aria-hidden="true">
+          <defs>
+            <pattern id="hg" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M60 0H0V60" fill="none" stroke="#1f2420" stroke-width="1.5"/></pattern>
+            <mask id="hmask"><rect width="1920" height="1080" fill="#fff"/><circle id="hhole" cx="975" cy="560" r="0" fill="#000"/></mask>
+            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <g id="hpanel" mask="url(#hmask)">
+            <rect width="1920" height="1080" fill="#0e100f"/>
+            <rect width="1920" height="1080" fill="url(#hg)"/>
+          </g>
+          <g id="hhud" fill="#8d928c" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="26" letter-spacing="4">
+            <path d="M40 90V40H90M1830 40H1880V90M1880 990V1040H1830M90 1040H40V990" stroke="#a3b46a" stroke-width="3" fill="none"/>
+            <text x="70" y="96">SUHO INDUSTRIES, INC.</text>
+            <text id="hstage" x="70" y="1004" fill="#a3b46a"></text>
+          </g>
+          <g id="hdrone" fill="none" stroke="#a3b46a" stroke-width="3" stroke-linejoin="round" filter="url(#glow)">
+            <rect id="hsheet" x="-300" y="-200" width="600" height="400" stroke="#5d6658" stroke-width="2" stroke-dasharray="10 8" filter="none"/>
+            <g class="hp" data-flat="0,-130,0"><path d="M0 -50L40 -22L40 40L0 56L-40 40L-40 -22Z"/></g>
+            <g class="hp" data-flat="-40,70,22"><path d="M-40 -22L-220 50L-220 74L-40 40Z"/></g>
+            <g class="hp" data-flat="40,70,-22"><path d="M40 -22L220 50L220 74L40 40Z"/></g>
+            <circle id="htool" r="7" fill="#e8e9e4" stroke="none"/>
+          </g>
+        </svg>
+      </div>
     </div>
   </section>
 
@@ -436,6 +466,75 @@
     render(((ts - t0) / 1000) % T);
     requestAnimationFrame(frame);
   }
+  requestAnimationFrame(frame);
+})();
+</script>
+
+<script>
+(function () {
+  var vid = document.getElementById('heroVid'), svg = document.getElementById('heroFx');
+  if (!vid || !svg) return;
+  function $(id) { return document.getElementById(id); }
+  function clamp(x) { return x < 0 ? 0 : x > 1 ? 1 : x; }
+  function seg(t, a, b) { return clamp((t - a) / (b - a)); }
+  function ease(x) { return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; }
+  function lerp(a, b, k) { return a + (b - a) * k; }
+  function op(e, v) { e.setAttribute('opacity', v.toFixed(3)); }
+  // Pose of the drone in the first frame of hero-flight.mp4 (1920x1080 space)
+  var START = { x: 960, y: 540, r: 0, sx: 1.6, sy: 1.6 }, END = { x: 975, y: 560, r: -34.1, sx: 0.926, sy: 0.12 };
+  var CUT = [[.5, 1.3], [1.3, 2.15], [2.15, 3.0]];
+  var parts = [].slice.call(svg.querySelectorAll('.hp')).map(function (g) {
+    var f = g.getAttribute('data-flat').split(',').map(Number), path = g.firstElementChild;
+    var pts = path.getAttribute('d').match(/-?\d+(\.\d+)?/g).map(Number), cx = 0, cy = 0;
+    for (var i = 0; i < pts.length; i += 2) { cx += pts[i]; cy += pts[i + 1]; }
+    var n = pts.length / 2, len = path.getTotalLength();
+    path.style.strokeDasharray = len; return { g: g, path: path, dx: f[0], dy: f[1], r: f[2], cx: cx / n, cy: cy / n, len: len };
+  });
+  var labels = ['CNC // CUTTING PANELS', 'ASSEMBLY // NO SPECIAL TOOLS', 'FIRST SUCCESSFUL FLIGHT // OCT 2026'];
+  var INTRO = 6.4, phase = 'intro', t0 = null, outT = null;
+
+  function render(t) {
+    var flat = 1 - ease(seg(t, 3.1, 4.2));
+    parts.forEach(function (p, i) {
+      var c = seg(t, CUT[i][0], CUT[i][1]);
+      p.path.style.strokeDashoffset = (p.len * (1 - c)).toFixed(1);
+      p.path.setAttribute('fill', 'rgba(163,180,106,' + (0.18 * seg(t, CUT[i][1], CUT[i][1] + .3) * (1 - seg(t, 4.4, 5.0))).toFixed(3) + ')');
+      p.g.setAttribute('transform', 'translate(' + p.dx * flat + ' ' + p.dy * flat + ') rotate(' + p.r * flat + ' ' + p.cx + ' ' + p.cy + ')');
+      if (c > 0 && c < 1) {
+        var pt = p.path.getPointAtLength(p.len * c), tr = p.g.getAttribute('transform');
+        $('htool').setAttribute('transform', tr + ' translate(' + pt.x + ' ' + pt.y + ')');
+      }
+    });
+    op($('htool'), t > CUT[0][0] && t < CUT[2][1] ? 1 : 0);
+    op($('hsheet'), ease(seg(t, .3, .7)) * (1 - seg(t, 3.0, 3.5)));
+    var k = ease(seg(t, 4.3, 5.3));
+    $('hdrone').setAttribute('transform', 'translate(' + lerp(START.x, END.x, k) + ' ' + lerp(START.y, END.y, k) + ') rotate(' + lerp(START.r, END.r, k) + ') scale(' + lerp(START.sx, END.sx, k) + ' ' + lerp(START.sy, END.sy, k) + ')');
+    op($('hdrone'), ease(seg(t, .2, .5)) * (1 - seg(t, 5.9, 6.4)));
+    $('hhole').setAttribute('r', (2300 * Math.pow(seg(t, 5.2, 6.0), 2)).toFixed(0));
+    op($('hpanel'), 1);
+    op($('hhud'), 1 - seg(t, 5.6, 6.2));
+    $('hstage').textContent = labels[t < 3.1 ? 0 : t < 4.3 ? 1 : 2];
+  }
+  function frame(ts) {
+    if (t0 === null) t0 = ts;
+    var t = (ts - t0) / 1000;
+    if (phase === 'intro') {
+      render(Math.min(t, INTRO));
+      if (t >= 5.8 && vid.paused && !vid.ended && vid.currentTime === 0) { var pr = vid.play(); if (pr && pr.catch) pr.catch(function () {}); }
+      if (t >= INTRO) { phase = 'video'; }
+    } else if (phase === 'video') {
+      if (vid.ended || vid.currentTime > vid.duration - 0.6) { phase = 'outro'; outT = ts; }
+    } else if (phase === 'outro') {
+      var k = seg((ts - outT) / 1000, 0, .6);
+      $('hhole').setAttribute('r', (2300 * (1 - k)).toFixed(0));
+      if (k >= 1) { vid.pause(); vid.currentTime = 0; phase = 'intro'; t0 = ts; }
+    }
+    requestAnimationFrame(frame);
+  }
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    svg.style.display = 'none'; vid.loop = true; return;
+  }
+  render(0);
   requestAnimationFrame(frame);
 })();
 </script>
