@@ -420,8 +420,18 @@
     var a = TRACK[i], b = TRACK[j];
     return { x: lerp(a[0], b[0], k), y: lerp(a[1], b[1], k), r: lerp(a[2], b[2], k), sx: lerp(a[3], b[3], k) / SPAN, sy: THICK };
   }
-  var START = { x: 960, y: 520, r: 0, sx: 1.7, sy: 1.7 }, END = poseAt(0);
-  var CUT = [[.15, .6], [.6, 1.05], [1.05, 1.5]], MATCH = [2.1, 2.9], FADE = [2.9, 3.3], INTRO = 3.3;
+  var START = { x: 960, y: 520, r: 0, sx: 1.7, sy: 1.7 };
+  // The outline takes off before the cut: it chases the drone's tracked flight path, the video starts
+  // underneath at PLAY with the drone already moving, and the panel crossfades to the real footage.
+  var CUT = [[.15, .6], [.6, 1.05], [1.05, 1.5]], MATCH = [1.9, 2.7], PLAY = 2.7, FADE = [2.75, 3.3], INTRO = 3.3, LEAD = .4;
+  var V0 = (function () { var a = TRACK[0], b = TRACK[2]; return [(b[0] - a[0]) * FPS / 2, (b[1] - a[1]) * FPS / 2, (b[2] - a[2]) * FPS / 2, (b[3] - a[3]) * FPS / 2]; })();
+  function flightAt(vt) { // tracked pose, extrapolated backwards (up to LEAD s) before the video starts
+    if (vt >= 0) return poseAt(vt);
+    vt = Math.max(vt, -LEAD); var a = TRACK[0];
+    return { x: a[0] + V0[0] * vt, y: a[1] + V0[1] * vt, r: a[2] + V0[2] * vt, sx: (a[3] + V0[3] * vt) / SPAN, sy: THICK };
+  }
+  var playing = false;
+  function startVideo() { if (playing) return; playing = true; var pr = vid.play(); if (pr && pr.catch) pr.catch(function () {}); }
   var parts = [].slice.call(svg.querySelectorAll('.hp')).map(function (g) {
     var f = g.getAttribute('data-flat').split(',').map(Number), path = g.firstElementChild;
     var pts = path.getAttribute('d').match(/-?\d+(\.\d+)?/g).map(Number), cx = 0, cy = 0;
@@ -446,6 +456,8 @@
     });
     op($('htool'), t > CUT[0][0] && t < CUT[2][1] ? 1 : 0);
     op($('hsheet'), ease(seg(t, 0, .2)) * (1 - seg(t, 1.5, 1.8)));
+    if (t >= PLAY) startVideo();
+    var END = flightAt(playing && vid.currentTime > 0 ? vid.currentTime : Math.min(t - PLAY, 0));
     var k = ease(seg(t, MATCH[0], MATCH[1]));
     pose({ x: lerp(START.x, END.x, k), y: lerp(START.y, END.y, k), r: lerp(START.r, END.r, k), sx: lerp(START.sx, END.sx, k), sy: lerp(START.sy, END.sy, k) });
     op($('hdrone'), ease(seg(t, 0, .15)));
@@ -455,7 +467,7 @@
   }
   function track(time) {
     pose(poseAt(time));
-    op($('hdrone'), 1 - seg(time, .25, (TRACK.length - 1) / FPS));
+    op($('hdrone'), 1 - seg(time, .5, (TRACK.length - 1) / FPS));
   }
   var phase = 'intro', t0 = null, outT = null;
   function frame(ts) {
@@ -463,14 +475,14 @@
     if (phase === 'intro') {
       var t = (ts - t0) / 1000;
       intro(Math.min(t, INTRO));
-      if (t >= INTRO) { phase = 'video'; var pr = vid.play(); if (pr && pr.catch) pr.catch(function () {}); }
+      if (t >= INTRO) { phase = 'video'; startVideo(); }
     } else if (phase === 'video') {
       track(vid.currentTime);
       if (vid.ended || (vid.duration && vid.currentTime > vid.duration - 0.5)) { phase = 'outro'; outT = ts; }
     } else if (phase === 'outro') {
       var k = ease(seg((ts - outT) / 1000, 0, .5));
       op($('hpanel'), k);
-      if (k >= 1) { vid.pause(); vid.currentTime = 0; phase = 'intro'; t0 = ts; }
+      if (k >= 1) { vid.pause(); vid.currentTime = 0; playing = false; phase = 'intro'; t0 = ts; }
     }
     requestAnimationFrame(frame);
   }
