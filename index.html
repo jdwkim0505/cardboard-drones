@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Suho Industries</title>
 <link rel="icon" type="image/svg+xml" href="media/favicon.svg">
-<meta name="description" content="Low-cost, flat-packed, field-assembled drone airframes.">
+<meta name="description" content="Turn any garage into a weapons factory. Suho Industries turns drones and other defense hardware into kits that any garage can build.">
 <style>
   :root {
     --bg: #f5f5f2;
@@ -65,38 +65,55 @@
   .head { display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 48px; }
   h2 { font-size: clamp(26px, 3.4vw, 36px); line-height: 1.15; letter-spacing: -0.02em; font-weight: 600; margin: 0; max-width: 22ch; }
 
-  .grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--line); }
-  .grid3 { column-gap: 56px; }
-  .grid3 > div { padding-top: 28px; position: relative; }
-  .grid3 > div + div::before { content: ""; position: absolute; top: 0; bottom: 0; left: -28px; border-left: 1px solid var(--line); }
-  .grid3 h3 { font-size: 18px; font-weight: 600; margin: 14px 0 8px; }
-  .grid3 p { margin: 0; color: var(--muted); font-size: 15px; }
-  .grid3 > div { display: flex; flex-direction: column; }
-  .grid3 .ph { order: -1; margin-bottom: 24px; }
-  .grid3 .step-img { order: -1; margin-bottom: 24px; display: block; width: 100%; height: auto; background: var(--surface); border: 1px solid var(--line); }
 
 
-  .gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
-  .gallery .ph { border: 0; }
-  .gallery .wide { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; }
   .caption { margin: 16px 0 0; }
+
+
+  .lede, .sub { font-size: 18px; color: var(--muted); max-width: 60ch; margin: 0; }
+  .lede { margin-bottom: 32px; }
+  .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn:not(.primary) { color: var(--ink); }
+
+  .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+  .card { border: 1px solid var(--ink); background: var(--bg); padding: 24px; display: flex; flex-direction: column; gap: 12px; }
+  .card h3 { font-size: 19px; line-height: 1.3; font-weight: 600; margin: 0; }
+  .card p { margin: 0; color: var(--muted); font-size: 15px; }
+  .card.hi { background: var(--surface); border-color: var(--accent); }
+
+  .flow { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 36px; }
+  .flow li { position: relative; }
+  .flow li + li::before { content: "\2192"; position: absolute; left: -28px; top: 50%; transform: translateY(-50%); color: var(--ink); font-size: 20px; }
+
+  .split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: center; }
+  .split.step { margin-top: 72px; padding-top: 72px; border-top: 1px solid var(--line); }
+  .photo { display: block; width: 100%; height: auto; border: 2px solid var(--ink); background: var(--surface); }
+  .photo.diagram { background: #fff; }
+  .photo.tall { max-height: 560px; object-fit: cover; }
+  .step-title { font-size: clamp(22px, 2.6vw, 28px); line-height: 1.2; letter-spacing: -0.01em; font-weight: 600; margin: 14px 0 20px; }
+  .facts { margin: 0; display: grid; gap: 16px; }
+  .facts dt { font-weight: 600; }
+  .facts dd { margin: 2px 0 0; color: var(--muted); }
+
+  .contact h2 { margin: 0; }
 
   .contact .wrap { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
   footer { padding: 28px 0; }
   footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 
   @media (max-width: 860px) {
-    .grid3 { grid-template-columns: 1fr; }
-    .grid3 > div { padding: 28px 0; }
-    .grid3 > div + div::before { display: none; }
-    .grid3 > div + div { border-top: 1px solid var(--line); }
+    .cards, .split { grid-template-columns: 1fr; }
+    .flow { grid-template-columns: 1fr 1fr; }
+    .flow li:nth-child(3)::before { display: none; }
   }
   @media (max-width: 560px) {
     .wrap { padding: 0 16px; }
     .hero { padding-top: 64px; }
     section { padding: 64px 0; }
-    .gallery { grid-template-columns: 1fr; }
-    .gallery .wide { grid-column: auto; grid-row: auto; aspect-ratio: 16 / 9; }
+    .flow { grid-template-columns: 1fr; gap: 36px; }
+    .flow li + li::before { content: "\2193"; left: 50%; top: -30px; transform: translateX(-50%); }
+    .flow li:nth-child(3)::before { display: block; }
+    .split.step { margin-top: 48px; padding-top: 48px; }
   }
 </style>
 </head>
@@ -109,38 +126,138 @@
 </header>
 
 <main id="top">
-  <section class="hero" style="border-bottom:1px solid var(--line)">
+  <section class="hero">
     <div class="wrap">
-      <div class="label"><span class="acc">&#9632;</span>&nbsp; Low-cost unmanned airframes</div>
-      <h1>Ships flat. Folds in minutes. Flies.</h1>
-      <video class="media hero-video r169" src="media/hero.mp4" poster="media/hero-poster.jpg" autoplay muted loop playsinline preload="auto" aria-label="Spin-around of the Suho Industries cardboard flying wing"></video>
+      <div class="label"><span class="acc">&#9632;</span>&nbsp; Decentralized defense manufacturing</div>
+      <h1>Turn any garage into a weapons factory.</h1>
+      <p class="lede">Suho turns drones and other defense hardware into kits that any garage can build, so production scales without new factories.</p>
+      <div class="actions">
+        <a class="btn primary" href="#contact">Bring us your hardware</a>
+        <a class="btn" href="#how">How it works</a>
+      </div>
+      <video class="media hero-video r169" src="media/hero.mp4" poster="media/hero-poster.jpg" autoplay muted loop playsinline preload="auto" aria-label="Spin-around of the Suho Industries flat-pack flying wing"></video>
     </div>
   </section>
 
-  <section id="concept">
+  <section id="overview">
     <div class="wrap">
       <div class="head">
-        <div class="label">01 / Concept</div>
-        <h2>From flat sheet to flight in three steps.</h2>
+        <div class="label">01 / Overview</div>
+        <h2>Kits, not factories.</h2>
       </div>
-      <div class="grid3">
-        <div>
-          <div class="label">Step 01</div>
-          <h3>Ship</h3>
-          <p>Airframes travel as flat, closely-packed sheets.</p>
-          <img class="step-img r43" src="media/step-1.svg" alt="Stack of flat cardboard sheets">
+      <div class="cards">
+        <div class="card">
+          <div class="label">Mission</div>
+          <h3>Decentralize and despecialize defense manufacturing.</h3>
         </div>
-        <div>
-          <div class="label">Step 02</div>
-          <h3>Fold</h3>
-          <p>Assembles by hand, anywhere. No special tools. No grid power.</p>
-          <img class="step-img r43" src="media/step-2.svg" alt="A cardboard sheet being folded">
+        <div class="card">
+          <div class="label">What we do</div>
+          <p>Turn drones and other defense hardware into kits. We help design and make those kits for companies.</p>
         </div>
+        <div class="card">
+          <div class="label">How we do it</div>
+          <p>A network of garage factories, each running the same few general-purpose machines. No welding, no precision machining, no specialized lines, so any garage can make any kit.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="head">
+        <div class="label">02 / How it works</div>
+        <h2>From your product to the field, without a new factory.</h2>
+      </div>
+      <ol class="flow">
+        <li class="card">
+          <div class="label">Clients</div>
+          <h3>Client hardware</h3>
+          <p>Drone makers and other defense hardware companies bring an existing product.</p>
+        </li>
+        <li class="card hi">
+          <div class="label">Suho</div>
+          <h3>Kit design</h3>
+          <p>We redesign the product into simple modules built on general-purpose machines.</p>
+        </li>
+        <li class="card">
+          <div class="label">Network</div>
+          <h3>Garage factories</h3>
+          <p>Design files go out to many garages. Each makes parts and packs kits.</p>
+        </li>
+        <li class="card">
+          <div class="label">Field</div>
+          <h3>Kits delivered</h3>
+          <p>Compact kits ship to where they&rsquo;re needed and are assembled without special tools.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="example">
+    <div class="wrap">
+      <div class="head">
+        <div class="label">03 / Example</div>
+        <h2>A drone company wants to scale up.</h2>
+      </div>
+      <div class="split">
+        <img class="photo" src="media/airframe.jpg" alt="Suho flat-pack flying wing airframe on a workbench" loading="lazy">
+        <dl class="facts">
+          <div><dt>The client</dt><dd>A drone company with a proven airframe and growing orders.</dd></div>
+          <div><dt>The problem</dt><dd>Scaling up means a bigger factory, specialized tooling, and skilled workers, which takes years and a lot of capital.</dd></div>
+          <div><dt>The ask</dt><dd>More drones, sooner, without building their own new production line.</dd></div>
+        </dl>
+      </div>
+
+      <div class="split step">
+        <img class="photo tall" src="media/kit-parts.jpg" alt="Flat airframe parts laid out as a kit" loading="lazy">
         <div>
-          <div class="label">Step 03</div>
-          <h3>Fly</h3>
-          <p>Install the electronics kit. Launch.</p>
-          <img class="step-img r43" src="media/step-3.svg" alt="Assembled flying wing with thick swept wings, round-nosed fuselage, upright winglets and rear propeller">
+          <div class="label"><span class="acc">Step 01</span></div>
+          <h3 class="step-title">Suho redesigns the drone as a kit.</h3>
+          <dl class="facts">
+            <div><dt>Break it into modules</dt><dd>Wings, fuselage, tail, and an electronics bay.</dd></div>
+            <div><dt>Design for simple machines</dt><dd>Every part can be cut, printed, or foam-formed on general-purpose machines. No welding or precision machining.</dd></div>
+            <div><dt>Build in the instructions</dt><dd>Parts only fit one way, with jigs and step-by-step guides, so assembly takes no special skills.</dd></div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="split step">
+        <img class="photo diagram" src="media/garage-network.jpg" alt="Diagram: Suho sends design files out to a network of garage factories" loading="lazy">
+        <div>
+          <div class="label"><span class="acc">Step 02</span></div>
+          <h3 class="step-title">Garage factories make the kits.</h3>
+          <dl class="facts">
+            <div><dt>Files go out</dt><dd>Suho sends the kit design files to garages across the network.</dd></div>
+            <div><dt>Same machines everywhere</dt><dd>Each garage runs the same cutter, 3D printers, and foam cutter, so any garage can make any kit.</dd></div>
+            <div><dt>Built-in checks</dt><dd>Go/no-go jigs and standard checks keep every garage&rsquo;s parts consistent.</dd></div>
+            <div><dt>Packed as kits</dt><dd>Parts are packed into compact kits, ready to ship.</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="why">
+    <div class="wrap">
+      <div class="head">
+        <div class="label">04 / Why it works</div>
+        <h2>What the client gets.</h2>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <div class="label"><span class="acc">01</span></div>
+          <h3>Cheaper to scale</h3>
+          <p>Adding a garage costs a fraction of a new production line, so capacity grows in small, affordable steps.</p>
+        </div>
+        <div class="card">
+          <div class="label"><span class="acc">02</span></div>
+          <h3>More resilient</h3>
+          <p>Production is spread across many sites. No single factory or supplier can stop it.</p>
+        </div>
+        <div class="card">
+          <div class="label"><span class="acc">03</span></div>
+          <h3>Faster to the field</h3>
+          <p>Kits are built close to where they&rsquo;re needed and assembled on arrival.</p>
         </div>
       </div>
     </div>
@@ -149,8 +266,9 @@
   <section id="media">
     <div class="wrap">
       <div class="head">
-        <div class="label">02 / Media</div>
-        <h2>Testing and flight footage.</h2>
+        <div class="label">05 / Proof</div>
+        <h2>Our first kit, in flight.</h2>
+        <p class="sub">We designed our own flying wing as a kit to prove the process. It ships flat, assembles without special tools, and flies once the electronics are installed.</p>
       </div>
       <video class="media-video r169" src="media/flight-montage.mp4" poster="media/flight-montage-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="First hand-launched flight tests, October 2026"></video>
       <p class="caption label">First flight tests · Oct 2026</p>
@@ -159,7 +277,9 @@
 
   <section class="contact" id="contact">
     <div class="wrap">
-      <div class="label">03 / Contact</div>
+      <div class="label">06 / Contact</div>
+      <h2>Bring us your hardware.</h2>
+      <p class="sub">Building drones or other defense hardware and need to scale? Let&rsquo;s talk about turning it into a kit.</p>
       <a class="btn primary" href="mailto:suhoindustries@gmail.com" target="_blank" rel="noopener">suhoindustries@gmail.com</a>
     </div>
   </section>
