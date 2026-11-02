@@ -47,7 +47,11 @@
   .links { display: flex; gap: 28px; }
   .links a { font: 500 12px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; text-decoration: none; color: var(--muted); }
   .links a:hover { color: var(--ink); }
-  section[id] { scroll-margin-top: 76px; }
+  section[id], .col[id] { scroll-margin-top: 100px; }
+  .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+  .duo .col { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
+  .duo .col + .col { border-left: 1px solid var(--line); padding-left: 56px; }
+  @media (max-width: 760px) { .duo { grid-template-columns: 1fr; gap: 48px; } .duo .col + .col { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); padding-top: 48px; } }
   .sub { font-size: 18px; color: var(--muted); max-width: 62ch; margin: 0; }
   .sub.small { font-size: 14px; }
   .newsletter .wrap { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
@@ -264,22 +268,21 @@
 
 
 
-  <section class="contact" id="contact">
-    <div class="wrap">
-      <div class="label">Contact</div>
-      <a class="btn primary" href="mailto:suhoindustries@gmail.com" target="_blank" rel="noopener">suhoindustries@gmail.com</a>
-    </div>
-  </section>
-
-  <section class="newsletter" id="newsletter">
-    <div class="wrap">
-      <div class="label">Newsletter</div>
-      <form class="signup" id="signup">
-        <label class="sr" for="nl-email">Email address</label>
-        <input id="nl-email" type="email" name="email" placeholder="you@example.com" required autocomplete="email">
-        <button class="btn primary" type="submit">Subscribe</button>
-      </form>
-      <p class="sub small" id="nl-note">Occasional updates on Suho Industries. No spam.</p>
+  <section class="reach">
+    <div class="wrap duo">
+      <div class="col" id="contact">
+        <div class="label">Contact</div>
+        <a class="btn primary" href="mailto:suhoindustries@gmail.com" target="_blank" rel="noopener">suhoindustries@gmail.com</a>
+      </div>
+      <div class="col" id="newsletter">
+        <div class="label">Newsletter</div>
+        <form class="signup" id="signup">
+          <label class="sr" for="nl-email">Email address</label>
+          <input id="nl-email" type="email" name="email" placeholder="you@example.com" required autocomplete="email">
+          <button class="btn primary" type="submit">Subscribe</button>
+        </form>
+        <p class="sub small" id="nl-note">Occasional updates on Suho Industries. No spam.</p>
+      </div>
     </div>
   </section>
 </main>
