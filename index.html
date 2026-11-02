@@ -475,9 +475,7 @@
   var f = document.getElementById('signup'); if (!f) return;
   f.addEventListener('submit', function (e) {
     e.preventDefault();
-    var email = document.getElementById('nl-email').value.trim(); if (!email) return;
-    window.location.href = 'mailto:suhoindustries@gmail.com?subject=' + encodeURIComponent('Newsletter signup') + '&body=' + encodeURIComponent('Please add ' + email + ' to the Suho Industries newsletter.');
-    document.getElementById('nl-note').textContent = 'Thanks! Your email app should open to confirm the signup.';
+    f.reset();
   });
 })();
 </script>
