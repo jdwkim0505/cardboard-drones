@@ -92,7 +92,7 @@
   .facts dd { margin: 2px 0 0; color: var(--muted); }
 
 
-  .pipeline { margin: 40px 0 0; }
+  .pipeline { margin: 0 0 40px; }
   #pipe { display: block; width: 100%; height: auto; border: 2px solid var(--ink); }
   #pipe .hud { font: 500 15px var(--mono); letter-spacing: .14em; fill: #8d928c; }
   #pipe .hud.acc { fill: #a3b46a; }
@@ -148,21 +148,7 @@
   <section id="overview">
     <div class="wrap">
       <div class="head">
-        <h2>Kits, not factories.</h2>
-      </div>
-      <div class="cards">
-        <div class="card">
-          <div class="label">Mission</div>
-          <h3>Decentralize and despecialize defense manufacturing.</h3>
-        </div>
-        <div class="card">
-          <div class="label">What we do</div>
-          <p>Turn drones and other defense hardware into kits. We help design and make those kits for companies.</p>
-        </div>
-        <div class="card">
-          <div class="label">How we do it</div>
-          <p>A network of garage factories, each running the same few general-purpose machines. No welding, no precision machining, no specialized lines, so any garage can make any kit.</p>
-        </div>
+        <h2>Our Process</h2>
       </div>
       <figure class="pipeline" aria-label="Animation: a client's drone is redesigned into flat kit parts, the design files go out to a network of garage factories, the garages ship compact kits to the field, and the kits are assembled into drones on arrival.">
         <svg id="pipe" viewBox="0 0 1200 600" role="img" aria-hidden="true">
@@ -176,7 +162,6 @@
             <path d="M20 50V20H50M1150 20H1180V50M1180 550V580H1150M50 580H20V550"/>
           </g>
           <text x="40" y="52" class="hud">SUHO // KIT PIPELINE</text>
-          <text id="clock" x="1160" y="52" class="hud" text-anchor="end">T+00.0</text>
           <text id="stage" x="40" y="566" class="hud acc"></text>
 
           <g id="links" stroke="#3a4136" stroke-width="1.5" stroke-dasharray="6 6"></g>
@@ -191,7 +176,7 @@
             <circle r="46" fill="none" stroke="#a3b46a" stroke-width="2" stroke-dasharray="4 6"/>
             <circle r="4" fill="#a3b46a"/>
             <path d="M-64 0H-52M52 0H64M0 -64V-52M0 52V64" stroke="#a3b46a" stroke-width="2"/>
-            <text y="96" class="hud acc" text-anchor="middle">FIELD</text>
+            <text y="96" class="hud acc" text-anchor="middle">POINT OF DELIVERY</text>
           </g>
           <g id="boxes"></g>
 
@@ -199,13 +184,13 @@
             <rect x="-300" y="-190" width="600" height="380"/>
           </g>
           <g id="drone">
-            <g class="part" data-flat="0,-125,90"><rect x="-16" y="-80" width="32" height="160" rx="14"/></g>
-            <g class="part" data-flat="-60,70,16"><polygon points="-16,-30 -210,40 -210,72 -16,30"/></g>
-            <g class="part" data-flat="60,70,-16"><polygon points="16,-30 210,40 210,72 16,30"/></g>
-            <g class="part" data-flat="-20,-170,90"><polygon points="-210,40 -222,22 -222,72 -210,72"/></g>
-            <g class="part" data-flat="20,-170,-90"><polygon points="210,40 222,22 222,72 210,72"/></g>
-            <g class="part bay" data-flat="0,130,0"><rect x="-11" y="-44" width="22" height="48" rx="2"/></g>
-            <g class="part prop" data-flat="0,-60,0"><path d="M-26 92H26"/><circle cx="0" cy="92" r="5"/></g>
+            <g class="part" data-flat="0,-130,0"><polygon points="0,-50 40,-22 40,40 0,56 -40,40 -40,-22"/></g>
+            <g class="part" data-flat="-40,70,22"><polygon points="-40,-22 -220,50 -220,74 -40,40"/></g>
+            <g class="part" data-flat="40,70,-22"><polygon points="40,-22 220,50 220,74 40,40"/></g>
+            <g class="part" data-flat="-16,-177,90"><polygon points="-220,50 -230,36 -230,74 -220,74"/></g>
+            <g class="part" data-flat="16,-177,-90"><polygon points="220,50 230,36 230,74 220,74"/></g>
+            <g class="part bay" data-flat="0,112,0"><rect x="-12" y="-22" width="24" height="38" rx="2"/></g>
+            <g class="part prop" data-flat="0,-24,0"><g id="propblade"><path d="M-24 64H24"/></g><circle cx="0" cy="64" r="5"/></g>
           </g>
           <rect id="scanbar" x="0" y="140" width="60" height="320" fill="url(#scan)"/>
         </svg>
@@ -216,6 +201,20 @@
           <li data-s="3"><span class="label">04</span><b>Kits delivered</b></li>
         </ol>
       </figure>
+      <div class="cards">
+        <div class="card">
+          <div class="label">Mission</div>
+          <h3>Decentralize and despecialize defense manufacturing.</h3>
+        </div>
+        <div class="card">
+          <div class="label">What we do</div>
+          <p>Turn drones and other defense hardware into kits. We help design and make those kits for companies.</p>
+        </div>
+        <div class="card">
+          <div class="label">How we do it</div>
+          <p>A network of garage factories, each running the same few general-purpose machines. No welding, no precision machining, no specialized lines, so any garage can make any kit.</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -374,7 +373,7 @@
     return { el: p, dx: f[0], dy: f[1], r: f[2], cx: b.x + b.width / 2, cy: b.y + b.height / 2 };
   });
   var steps = [].slice.call(document.querySelectorAll('.pipe-steps li'));
-  var labels = ['01 // CLIENT BRINGS A PROVEN DRONE', '02 // REDESIGNED AS FLAT MODULES FOR GENERAL-PURPOSE MACHINES', '03 // FILES GO OUT TO GARAGE FACTORIES', '04 // COMPACT KITS SHIP TO THE FIELD', '04 // ASSEMBLED ON ARRIVAL. NO SPECIAL TOOLS.'];
+  var labels = ['01 // CLIENT BRINGS A PROVEN DRONE', '02 // REDESIGNED INTO MODULES FOR GENERAL-PURPOSE MACHINES', '03 // FILES GO OUT TO GARAGE FACTORIES', '04 // COMPACT KITS SHIP TO THE POINT OF DELIVERY', '04 // ASSEMBLED ON ARRIVAL. NO SPECIAL TOOLS. READY TO FLY.'];
 
   function op(e, v) { e.setAttribute('opacity', v.toFixed(3)); }
   function render(t) {
@@ -384,13 +383,16 @@
     else if (t < 15.8) { var k = ease(seg(t, 7.5, 8.3)); o = 1 - k; sc = lerp(1, .15, k); flat = 1; }
     else {
       dx = FIELD[0]; dy = FIELD[1]; sc = .72; o = ease(seg(t, 15.8, 16.4)); flat = 1 - ease(seg(t, 16.6, 17.8));
-      var f = seg(t, 18.4, 19.6); f = f * f * f;
-      dx = lerp(FIELD[0], 1500, f); dy = lerp(FIELD[1], -150, f); rot = 50 * f;
-      o *= 1 - seg(t, 19.3, 19.6);
+      var k2 = ease(seg(t, 17.9, 18.7)), th = (t - 17.9) * 1.5 - Math.PI / 2, rr = 70 * k2;
+      dx = FIELD[0] + rr * Math.cos(th); dy = FIELD[1] + rr * Math.sin(th) + 70 * k2 * (t > 17.9 ? 1 : 0);
+      sc = lerp(.72, .5, k2);
+      rot = k2 * (Math.atan2(Math.cos(th), -Math.sin(th)) * 180 / Math.PI + 90);
+      o *= 1 - seg(t, 19.4, 19.9);
     }
     $('drone').setAttribute('transform', 'translate(' + dx + ' ' + dy + ') rotate(' + rot + ') scale(' + sc + ')');
     op($('drone'), o);
     $('drone').classList.toggle('flat', flat > .5);
+    $('propblade').setAttribute('transform', 'translate(0 64) scale(' + (flat < .05 ? Math.cos(t * 40).toFixed(2) : 1) + ' 1) translate(0 -64)');
     parts.forEach(function (p) {
       p.el.setAttribute('transform', 'translate(' + p.dx * flat + ' ' + p.dy * flat + ') rotate(' + p.r * flat + ' ' + p.cx + ' ' + p.cy + ')');
     });
@@ -428,7 +430,6 @@
     var sc5 = t < 3.5 ? 0 : t < 7.5 ? 1 : t < 12 ? 2 : t < 15.6 ? 3 : 4;
     $('stage').textContent = labels[sc5];
     steps.forEach(function (li, i) { li.classList.toggle('on', i === Math.min(sc5, 3)); });
-    $('clock').textContent = 'T+' + (t < 10 ? '0' : '') + t.toFixed(1);
   }
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduce) { render(11); return; }
