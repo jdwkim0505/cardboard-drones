@@ -27,23 +27,17 @@
     font: 16px/1.6 "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
-  /* Static blueprint grid background */
-  body {
-    background-image:
-      linear-gradient(rgba(10,31,68,.11) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(10,31,68,.11) 1px, transparent 1px),
-      linear-gradient(rgba(10,31,68,.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(10,31,68,.05) 1px, transparent 1px);
-    background-size: 220px 220px, 220px 220px, 44px 44px, 44px 44px;
-    background-position: -1px -1px;
-  }
+  /* Static blueprint grid: one uniform grid pinned to the viewport, so it lines up everywhere (header included) */
+  :root { --grid: linear-gradient(rgba(10,31,68,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(10,31,68,.07) 1px, transparent 1px); }
+  body::before { content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none; background-image: var(--grid); background-size: 44px 44px; }
+  main, footer { position: relative; z-index: 1; }
   .pipe-steps { background: var(--bg); }
   a { color: inherit; }
   .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
   .label { font: 500 12px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
   .label .acc { color: var(--accent); }
 
-  header.nav { position: sticky; top: 0; z-index: 10; background: var(--bg); border-bottom: 1px solid var(--line); }
+  header.nav { position: sticky; top: 0; z-index: 10; background-color: var(--bg); background-image: var(--grid); background-size: 44px 44px; border-bottom: 1px solid var(--line); }
   header.nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 76px; }
   .brand { display: flex; align-items: center; }
   .brand img { height: 40px; width: auto; display: block; }
@@ -72,7 +66,7 @@
   .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
   @media (max-width: 560px) { .links { gap: 16px; } .links a { font-size: 11px; letter-spacing: .08em; } .brand img { height: 32px; } }
 
-  .hero { padding: 72px 0; border-bottom: 1px solid var(--line); }
+  .hero { padding: 72px 0; }
   h1 { font-size: clamp(38px, 6.4vw, 72px); line-height: 1.02; letter-spacing: -0.03em; font-weight: 600; margin: 20px 0 24px; max-width: 14ch; }
   .btn { display: inline-block; padding: 13px 22px; font: 500 12px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; text-decoration: none; border: 1px solid var(--ink); }
   .btn.primary { background: var(--ink); color: var(--bg); }
@@ -94,7 +88,7 @@
   .r169 { aspect-ratio: 16 / 9; }
   .r43 { aspect-ratio: 4 / 3; }
 
-  section { padding: 88px 0; border-bottom: 1px solid var(--line); }
+  section { padding: 88px 0; }
   .head { display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 48px; }
   h2 { font-size: clamp(26px, 3.4vw, 36px); line-height: 1.15; letter-spacing: -0.02em; font-weight: 600; margin: 0; max-width: 22ch; }
 
@@ -136,11 +130,9 @@
   .pipe-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 2px solid var(--ink); border-top: 0; }
   .pipe-steps li { padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: var(--muted); position: relative; transition: color .3s; }
   .pipe-steps li + li { border-left: 1px solid var(--line); }
-  .pipe-steps li::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .4s; }
   .pipe-steps li { transition: color .3s, background .3s; }
   .pipe-steps li.on { color: #ffffff; background: var(--ink); }
   .pipe-steps li.on .label { color: #c9d4ea; }
-  .pipe-steps li.on::after { transform: scaleX(1); }
   @media (max-width: 560px) { .pipe-steps { grid-template-columns: 1fr 1fr; } .pipe-steps li:nth-child(3) { border-left: 0; } .pipe-steps li:nth-child(n+3) { border-top: 1px solid var(--line); } }
 
   .contact .wrap { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
