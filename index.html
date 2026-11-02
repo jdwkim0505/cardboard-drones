@@ -205,7 +205,7 @@
             <circle r="46" fill="none" stroke="#a3b46a" stroke-width="2" stroke-dasharray="4 6"/>
             <circle r="4" fill="#a3b46a"/>
             <path d="M-64 0H-52M52 0H64M0 -64V-52M0 52V64" stroke="#a3b46a" stroke-width="2"/>
-            <text y="96" class="hud acc" text-anchor="middle">POINT OF DELIVERY</text>
+            <text y="96" class="hud acc" text-anchor="middle">POINT OF NEED</text>
           </g>
           <g id="boxes"></g>
 
@@ -400,7 +400,7 @@
     return { el: p, dx: f[0], dy: f[1], r: f[2], cx: b.x + b.width / 2, cy: b.y + b.height / 2 };
   });
   var steps = [].slice.call(document.querySelectorAll('.pipe-steps li'));
-  var labels = ['01 // CLIENT BRINGS A PLATFORM', '02 // REDESIGNED INTO MODULES FOR GENERAL-PURPOSE MACHINING', '03 // FILES GO OUT TO GARAGE FACTORIES', '04 // COMPACT KITS SHIP TO THE POINT OF DELIVERY', '04 // ASSEMBLED ON ARRIVAL. NO SPECIAL TOOLS. READY TO FLY.'];
+  var labels = ['01 // CLIENT BRINGS A PLATFORM', '02 // REDESIGNED INTO MODULES FOR GENERAL-PURPOSE MACHINING', '03 // FILES GO OUT TO GARAGE FACTORIES', '04 // COMPACT KITS SHIP TO THE POINT OF NEED', '04 // ASSEMBLED ON ARRIVAL. NO SPECIAL TOOLS. READY TO FLY.'];
 
   function op(e, v) { e.setAttribute('opacity', v.toFixed(3)); }
   function render(t) {
