@@ -70,10 +70,6 @@
   .caption { margin: 16px 0 0; }
 
 
-  .lede, .sub { font-size: 18px; color: var(--muted); max-width: 60ch; margin: 0; }
-  .lede { margin-bottom: 32px; }
-  .actions { display: flex; gap: 12px; flex-wrap: wrap; }
-  .btn:not(.primary) { color: var(--ink); }
 
   .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
   .card { border: 1px solid var(--ink); background: var(--bg); padding: 24px; display: flex; flex-direction: column; gap: 12px; }
@@ -95,7 +91,6 @@
   .facts dt { font-weight: 600; }
   .facts dd { margin: 2px 0 0; color: var(--muted); }
 
-  .contact h2 { margin: 0; }
 
   .contact .wrap { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
   footer { padding: 28px 0; }
@@ -130,11 +125,6 @@
     <div class="wrap">
       <div class="label"><span class="acc">&#9632;</span>&nbsp; Decentralized and despecialized defense manufacturing</div>
       <h1>Turn any garage into a weapons factory.</h1>
-      <p class="lede">Suho turns drones and other defense hardware into kits that any garage can build, so production scales without new factories.</p>
-      <div class="actions">
-        <a class="btn primary" href="#contact">Bring us your hardware</a>
-        <a class="btn" href="#how">How it works</a>
-      </div>
       <video class="media hero-video r169" src="media/hero.mp4" poster="media/hero-poster.jpg" autoplay muted loop playsinline preload="auto" aria-label="Spin-around of the Suho Industries flat-pack flying wing"></video>
     </div>
   </section>
@@ -268,7 +258,6 @@
       <div class="head">
         <div class="label">05 / Proof</div>
         <h2>Our first kit, in flight.</h2>
-        <p class="sub">We designed our own flying wing as a kit to prove the process. It ships flat, assembles without special tools, and flies once the electronics are installed.</p>
       </div>
       <video class="media-video r169" src="media/flight-montage.mp4" poster="media/flight-montage-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="First hand-launched flight tests, October 2026"></video>
       <p class="caption label">First flight tests · Oct 2026</p>
@@ -278,8 +267,6 @@
   <section class="contact" id="contact">
     <div class="wrap">
       <div class="label">06 / Contact</div>
-      <h2>Bring us your hardware.</h2>
-      <p class="sub">Building drones or other defense hardware and need to scale? Let&rsquo;s talk about turning it into a kit.</p>
       <a class="btn primary" href="mailto:suhoindustries@gmail.com" target="_blank" rel="noopener">suhoindustries@gmail.com</a>
     </div>
   </section>
