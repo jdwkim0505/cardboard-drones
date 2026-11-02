@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,22 +8,17 @@
 <meta name="description" content="Turn any garage into a weapons factory. Suho Industries turns drones and other defense hardware into kits that any garage can build.">
 <style>
   :root {
-    --bg: #f5f5f2;
-    --surface: #ecece7;
-    --ink: #111312;
-    --muted: #5d625e;
-    --line: #cfd1cb;
-    --accent: #6b7a3c;
+    --bg: #ffffff; --surface: #f2f5fa; --ink: #0a1f44; --muted: #4a5a78; --line: #d5dce8; --accent: #0a1f44;
     --max: 1120px;
     --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --bg: #0e100f; --surface: #151816; --ink: #e8e9e4; --muted: #8d928c; --line: #262a27; --accent: #a3b46a;
+      --bg: #ffffff; --surface: #f2f5fa; --ink: #0a1f44; --muted: #4a5a78; --line: #d5dce8; --accent: #0a1f44;
     }
   }
   :root[data-theme="dark"] {
-    --bg: #0e100f; --surface: #151816; --ink: #e8e9e4; --muted: #8d928c; --line: #262a27; --accent: #a3b46a;
+    --bg: #ffffff; --surface: #f2f5fa; --ink: #0a1f44; --muted: #4a5a78; --line: #d5dce8; --accent: #0a1f44;
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -41,8 +36,6 @@
   header.nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 76px; }
   .brand { display: flex; align-items: center; }
   .brand img { height: 40px; width: auto; display: block; }
-  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .brand img { filter: invert(1); } }
-  :root[data-theme="dark"] .brand img { filter: invert(1); }
 
   .links { display: flex; gap: 28px; }
   .links a { font: 500 12px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; text-decoration: none; color: var(--muted); }
@@ -73,7 +66,7 @@
   .btn { display: inline-block; padding: 13px 22px; font: 500 12px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; text-decoration: none; border: 1px solid var(--ink); }
   .btn.primary { background: var(--ink); color: var(--bg); }
   .hero .media { margin-top: 48px; }
-  .hero-stage { position: relative; aspect-ratio: 16 / 9; width: 100%; border: 2px solid var(--ink); background: #0e100f; overflow: hidden; }
+  .hero-stage { position: relative; aspect-ratio: 16 / 9; width: 100%; border: 2px solid var(--ink); background: #0a1f44; overflow: hidden; }
   .hero-stage video, .hero-stage svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
   .hero-stage video { object-fit: cover; }
   #hdrone path { vector-effect: non-scaling-stroke; }
@@ -124,16 +117,18 @@
   .pipeline { margin: 0; }
   #pipe { display: block; width: 100%; height: auto; border: 2px solid var(--ink); }
   #pipe .hud { font: 500 15px var(--mono); letter-spacing: .14em; fill: #8d928c; }
-  #pipe .hud.acc { fill: #a3b46a; }
-  #pipe .part > * { fill: #2a2f2a; stroke: #e8e9e4; stroke-width: 2; vector-effect: non-scaling-stroke; }
-  #pipe .part.bay > * { fill: #a3b46a; stroke: #a3b46a; }
+  #pipe .hud.acc { fill: #ffffff; }
+  #pipe .part > * { fill: #1a3566; stroke: #e8e9e4; stroke-width: 2; vector-effect: non-scaling-stroke; }
+  #pipe .part.bay > * { fill: #ffffff; stroke: #ffffff; }
   #pipe .part.prop path { fill: none; stroke-width: 4; }
   #pipe .flat .part:not(.bay) > * { stroke-dasharray: 7 5; }
   .pipe-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 2px solid var(--ink); border-top: 0; }
   .pipe-steps li { padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: var(--muted); position: relative; transition: color .3s; }
   .pipe-steps li + li { border-left: 1px solid var(--line); }
   .pipe-steps li::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .4s; }
-  .pipe-steps li.on { color: var(--ink); }
+  .pipe-steps li { transition: color .3s, background .3s; }
+  .pipe-steps li.on { color: #ffffff; background: var(--ink); }
+  .pipe-steps li.on .label { color: #c9d4ea; }
   .pipe-steps li.on::after { transform: scaleX(1); }
   @media (max-width: 560px) { .pipe-steps { grid-template-columns: 1fr 1fr; } .pipe-steps li:nth-child(3) { border-left: 0; } .pipe-steps li:nth-child(n+3) { border-top: 1px solid var(--line); } }
 
@@ -179,20 +174,20 @@
         <video id="heroVid" src="media/hero-flight.mp4" poster="media/hero-flight-poster.jpg" muted playsinline preload="auto"></video>
         <svg id="heroFx" viewBox="0 0 1920 1080" aria-hidden="true">
           <defs>
-            <pattern id="hg" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M60 0H0V60" fill="none" stroke="#1f2420" stroke-width="1.5"/></pattern>
+            <pattern id="hg" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M60 0H0V60" fill="none" stroke="#163061" stroke-width="1.5"/></pattern>
             <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
           </defs>
           <g id="hpanel">
-            <rect width="1920" height="1080" fill="#0e100f"/>
+            <rect width="1920" height="1080" fill="#0a1f44"/>
             <rect width="1920" height="1080" fill="url(#hg)"/>
           </g>
           <g id="hhud" fill="#8d928c" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="26" letter-spacing="4">
-            <path d="M40 90V40H90M1830 40H1880V90M1880 990V1040H1830M90 1040H40V990" stroke="#a3b46a" stroke-width="3" fill="none"/>
-            <text x="70" y="96">SUHO INDUSTRIES, INC.</text>
-            <text id="hstage" x="70" y="1004" fill="#a3b46a"></text>
+            <path d="M40 90V40H90M1830 40H1880V90M1880 990V1040H1830M90 1040H40V990" stroke="#ffffff" stroke-width="3" fill="none"/>
+            <text x="70" y="96" fill="#ffffff">SUHO INDUSTRIES, INC.</text>
+            <text id="hstage" x="70" y="1004" fill="#ffffff"></text>
           </g>
-          <g id="hdrone" fill="none" stroke="#a3b46a" stroke-width="3" stroke-linejoin="round" filter="url(#glow)">
-            <rect id="hsheet" x="-300" y="-200" width="600" height="400" stroke="#5d6658" stroke-width="2" stroke-dasharray="10 8" filter="none"/>
+          <g id="hdrone" fill="none" stroke="#ffffff" stroke-width="3" stroke-linejoin="round" filter="url(#glow)">
+            <rect id="hsheet" x="-300" y="-200" width="600" height="400" stroke="#6a85b5" stroke-width="2" stroke-dasharray="10 8" filter="none"/>
             <g class="hp" data-flat="0,-130,0"><path d="M0 -50L40 -22L40 40L0 56L-40 40L-40 -22Z"/></g>
             <g class="hp" data-flat="-40,70,22"><path d="M-40 -22L-220 50L-220 74L-40 40Z"/></g>
             <g class="hp" data-flat="40,70,-22"><path d="M40 -22L220 50L220 74L40 40Z"/></g>
@@ -221,34 +216,34 @@
       <figure class="pipeline" aria-label="Animation: a client's drone is redesigned into flat kit parts, the design files go out to a network of garage factories, the garages ship compact kits to the field, and the kits are assembled into drones on arrival.">
         <svg id="pipe" viewBox="0 0 1200 600" role="img" aria-hidden="true">
           <defs>
-            <pattern id="pg" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#1f2420" stroke-width="1"/></pattern>
-            <linearGradient id="scan" x1="0" x2="1"><stop offset="0" stop-color="#a3b46a" stop-opacity="0"/><stop offset="1" stop-color="#a3b46a" stop-opacity=".55"/></linearGradient>
+            <pattern id="pg" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#163061" stroke-width="1"/></pattern>
+            <linearGradient id="scan" x1="0" x2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="0"/><stop offset="1" stop-color="#ffffff" stop-opacity=".55"/></linearGradient>
           </defs>
-          <rect width="1200" height="600" fill="#0e100f"/>
+          <rect width="1200" height="600" fill="#0a1f44"/>
           <rect width="1200" height="600" fill="url(#pg)"/>
-          <g stroke="#a3b46a" stroke-width="2" fill="none">
+          <g stroke="#ffffff" stroke-width="2" fill="none">
             <path d="M20 50V20H50M1150 20H1180V50M1180 550V580H1150M50 580H20V550"/>
           </g>
-          <text x="40" y="52" class="hud">SUHO INDUSTRIES, INC.</text>
+          <text x="40" y="52" class="hud acc">SUHO INDUSTRIES, INC.</text>
           <text id="stage" x="40" y="566" class="hud acc"></text>
 
-          <g id="links" stroke="#3a4136" stroke-width="1.5" stroke-dasharray="6 6"></g>
+          <g id="links" stroke="#3a5a94" stroke-width="1.5" stroke-dasharray="6 6"></g>
           <g id="garages"></g>
           <g id="hub">
-            <rect x="-26" y="-32" width="52" height="64" fill="#151816" stroke="#a3b46a" stroke-width="2"/>
-            <path d="M-14 -16H14M-14 -4H14M-14 8H6" stroke="#a3b46a" stroke-width="2"/>
+            <rect x="-26" y="-32" width="52" height="64" fill="#0f2650" stroke="#ffffff" stroke-width="2"/>
+            <path d="M-14 -16H14M-14 -4H14M-14 8H6" stroke="#ffffff" stroke-width="2"/>
             <text y="56" class="hud acc" text-anchor="middle">DESIGN FILES</text>
           </g>
-          <g id="packets" fill="#a3b46a"></g>
+          <g id="packets" fill="#ffffff"></g>
           <g id="field">
-            <circle r="46" fill="none" stroke="#a3b46a" stroke-width="2" stroke-dasharray="4 6"/>
-            <circle r="4" fill="#a3b46a"/>
-            <path d="M-64 0H-52M52 0H64M0 -64V-52M0 52V64" stroke="#a3b46a" stroke-width="2"/>
+            <circle r="46" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="4 6"/>
+            <circle r="4" fill="#ffffff"/>
+            <path d="M-64 0H-52M52 0H64M0 -64V-52M0 52V64" stroke="#ffffff" stroke-width="2"/>
             <text y="96" class="hud acc" text-anchor="middle">POINT OF NEED</text>
           </g>
           <g id="boxes"></g>
 
-          <g id="sheet" fill="none" stroke="#5d6658" stroke-width="1.5" stroke-dasharray="8 6">
+          <g id="sheet" fill="none" stroke="#6a85b5" stroke-width="1.5" stroke-dasharray="8 6">
             <rect x="-300" y="-190" width="600" height="380"/>
           </g>
           <g id="drone">
@@ -317,11 +312,11 @@
     var a = -Math.PI / 2 + i * Math.PI / 3, x = HUB[0] + R * Math.cos(a), y = HUB[1] + R * Math.sin(a);
     links.push(el('line', { x1: HUB[0], y1: HUB[1], x2: x, y2: y }, $('links')));
     var g = el('g', {}, $('garages'));
-    el('path', { d: 'M-24 -6L0 -26L24 -6V20H-24Z', fill: '#151816', stroke: '#8d928c', 'stroke-width': 2 }, g);
+    el('path', { d: 'M-24 -6L0 -26L24 -6V20H-24Z', fill: '#0f2650', stroke: '#8d928c', 'stroke-width': 2 }, g);
     el('rect', { x: -10, y: 2, width: 20, height: 18, fill: 'none', stroke: '#8d928c', 'stroke-width': 2 }, g);
     gar.push({ g: g, x: x, y: y });
     packets.push(el('rect', { width: 8, height: 8, x: -4, y: -4 }, $('packets')));
-    boxes.push(el('rect', { width: 18, height: 12, x: -9, y: -6, fill: '#a3b46a' }, $('boxes')));
+    boxes.push(el('rect', { width: 18, height: 12, x: -9, y: -6, fill: '#ffffff' }, $('boxes')));
   }
   var parts = [].slice.call(svg.querySelectorAll('.part')).map(function (p) {
     var f = p.getAttribute('data-flat').split(',').map(Number), b = p.firstElementChild.getBBox();
@@ -365,7 +360,7 @@
       g.g.setAttribute('transform', 'translate(' + g.x + ' ' + g.y + ') scale(' + (.6 + .4 * pop) + ')');
       op(g.g, pop * gOut);
       var lit = t > 10.4 + i * .12 && t < 15.4;
-      [].forEach.call(g.g.children, function (c) { c.setAttribute('stroke', lit ? '#a3b46a' : '#8d928c'); });
+      [].forEach.call(g.g.children, function (c) { c.setAttribute('stroke', lit ? '#ffffff' : '#8d928c'); });
       var ln = links[i], d = ease(seg(t, 8.8 + i * .1, 9.6 + i * .1));
       ln.setAttribute('x2', lerp(HUB[0], g.x, d)); ln.setAttribute('y2', lerp(HUB[1], g.y, d));
       op(ln, (d > 0 ? 1 : 0) * (1 - seg(t, 14.2, 15)));
@@ -431,7 +426,7 @@
     parts.forEach(function (p, i) {
       var c = seg(t, CUT[i][0], CUT[i][1]);
       p.path.style.strokeDashoffset = (p.len * (1 - c)).toFixed(1);
-      p.path.setAttribute('fill', 'rgba(163,180,106,' + (0.2 * seg(t, CUT[i][1], CUT[i][1] + .2) * (1 - seg(t, MATCH[0], MATCH[0] + .4))).toFixed(3) + ')');
+      p.path.setAttribute('fill', 'rgba(200,220,255,' + (0.2 * seg(t, CUT[i][1], CUT[i][1] + .2) * (1 - seg(t, MATCH[0], MATCH[0] + .4))).toFixed(3) + ')');
       p.g.setAttribute('transform', 'translate(' + p.dx * flat + ' ' + p.dy * flat + ') rotate(' + p.r * flat + ' ' + p.cx + ' ' + p.cy + ')');
       if (c > 0 && c < 1) {
         var pt = p.path.getPointAtLength(p.len * c);
