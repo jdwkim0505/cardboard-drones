@@ -92,6 +92,22 @@
   .facts dd { margin: 2px 0 0; color: var(--muted); }
 
 
+  .pipeline { margin: 40px 0 0; }
+  #pipe { display: block; width: 100%; height: auto; border: 2px solid var(--ink); }
+  #pipe .hud { font: 500 15px var(--mono); letter-spacing: .14em; fill: #8d928c; }
+  #pipe .hud.acc { fill: #a3b46a; }
+  #pipe .part > * { fill: #2a2f2a; stroke: #e8e9e4; stroke-width: 2; vector-effect: non-scaling-stroke; }
+  #pipe .part.bay > * { fill: #a3b46a; stroke: #a3b46a; }
+  #pipe .part.prop path { fill: none; stroke-width: 4; }
+  #pipe .flat .part:not(.bay) > * { stroke-dasharray: 7 5; }
+  .pipe-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 2px solid var(--ink); border-top: 0; }
+  .pipe-steps li { padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: var(--muted); position: relative; transition: color .3s; }
+  .pipe-steps li + li { border-left: 1px solid var(--line); }
+  .pipe-steps li::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .4s; }
+  .pipe-steps li.on { color: var(--ink); }
+  .pipe-steps li.on::after { transform: scaleX(1); }
+  @media (max-width: 560px) { .pipe-steps { grid-template-columns: 1fr 1fr; } .pipe-steps li:nth-child(3) { border-left: 0; } .pipe-steps li:nth-child(n+3) { border-top: 1px solid var(--line); } }
+
   .contact .wrap { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
   footer { padding: 28px 0; }
   footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
@@ -132,7 +148,6 @@
   <section id="overview">
     <div class="wrap">
       <div class="head">
-        <div class="label">01 / Overview</div>
         <h2>Kits, not factories.</h2>
       </div>
       <div class="cards">
@@ -149,13 +164,65 @@
           <p>A network of garage factories, each running the same few general-purpose machines. No welding, no precision machining, no specialized lines, so any garage can make any kit.</p>
         </div>
       </div>
+      <figure class="pipeline" aria-label="Animation: a client's drone is redesigned into flat kit parts, the design files go out to a network of garage factories, the garages ship compact kits to the field, and the kits are assembled into drones on arrival.">
+        <svg id="pipe" viewBox="0 0 1200 600" role="img" aria-hidden="true">
+          <defs>
+            <pattern id="pg" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#1f2420" stroke-width="1"/></pattern>
+            <linearGradient id="scan" x1="0" x2="1"><stop offset="0" stop-color="#a3b46a" stop-opacity="0"/><stop offset="1" stop-color="#a3b46a" stop-opacity=".55"/></linearGradient>
+          </defs>
+          <rect width="1200" height="600" fill="#0e100f"/>
+          <rect width="1200" height="600" fill="url(#pg)"/>
+          <g stroke="#a3b46a" stroke-width="2" fill="none">
+            <path d="M20 50V20H50M1150 20H1180V50M1180 550V580H1150M50 580H20V550"/>
+          </g>
+          <text x="40" y="52" class="hud">SUHO // KIT PIPELINE</text>
+          <text id="clock" x="1160" y="52" class="hud" text-anchor="end">T+00.0</text>
+          <text id="stage" x="40" y="566" class="hud acc"></text>
+
+          <g id="links" stroke="#3a4136" stroke-width="1.5" stroke-dasharray="6 6"></g>
+          <g id="garages"></g>
+          <g id="hub">
+            <rect x="-26" y="-32" width="52" height="64" fill="#151816" stroke="#a3b46a" stroke-width="2"/>
+            <path d="M-14 -16H14M-14 -4H14M-14 8H6" stroke="#a3b46a" stroke-width="2"/>
+            <text y="56" class="hud acc" text-anchor="middle">DESIGN FILES</text>
+          </g>
+          <g id="packets" fill="#a3b46a"></g>
+          <g id="field">
+            <circle r="46" fill="none" stroke="#a3b46a" stroke-width="2" stroke-dasharray="4 6"/>
+            <circle r="4" fill="#a3b46a"/>
+            <path d="M-64 0H-52M52 0H64M0 -64V-52M0 52V64" stroke="#a3b46a" stroke-width="2"/>
+            <text y="96" class="hud acc" text-anchor="middle">FIELD</text>
+          </g>
+          <g id="boxes"></g>
+
+          <g id="sheet" fill="none" stroke="#5d6658" stroke-width="1.5" stroke-dasharray="8 6">
+            <rect x="-300" y="-190" width="600" height="380"/>
+          </g>
+          <g id="drone">
+            <g class="part" data-flat="0,-125,90"><rect x="-16" y="-80" width="32" height="160" rx="14"/></g>
+            <g class="part" data-flat="-60,70,16"><polygon points="-16,-30 -210,40 -210,72 -16,30"/></g>
+            <g class="part" data-flat="60,70,-16"><polygon points="16,-30 210,40 210,72 16,30"/></g>
+            <g class="part" data-flat="-20,-170,90"><polygon points="-210,40 -222,22 -222,72 -210,72"/></g>
+            <g class="part" data-flat="20,-170,-90"><polygon points="210,40 222,22 222,72 210,72"/></g>
+            <g class="part bay" data-flat="0,130,0"><rect x="-11" y="-44" width="22" height="48" rx="2"/></g>
+            <g class="part prop" data-flat="0,-60,0"><path d="M-26 92H26"/><circle cx="0" cy="92" r="5"/></g>
+          </g>
+          <rect id="scanbar" x="0" y="140" width="60" height="320" fill="url(#scan)"/>
+        </svg>
+        <ol class="pipe-steps">
+          <li data-s="0"><span class="label">01</span><b>Client hardware</b></li>
+          <li data-s="1"><span class="label">02</span><b>Kit design</b></li>
+          <li data-s="2"><span class="label">03</span><b>Garage factories</b></li>
+          <li data-s="3"><span class="label">04</span><b>Kits delivered</b></li>
+        </ol>
+      </figure>
     </div>
   </section>
 
   <section id="how">
     <div class="wrap">
       <div class="head">
-        <div class="label">02 / How it works</div>
+        <div class="label">01 / How it works</div>
         <h2>From your product to the field, without a new factory.</h2>
       </div>
       <ol class="flow">
@@ -186,7 +253,7 @@
   <section id="example">
     <div class="wrap">
       <div class="head">
-        <div class="label">03 / Example</div>
+        <div class="label">02 / Example</div>
         <h2>A drone company wants to scale up.</h2>
       </div>
       <div class="split">
@@ -230,7 +297,7 @@
   <section id="why">
     <div class="wrap">
       <div class="head">
-        <div class="label">04 / Why it works</div>
+        <div class="label">03 / Why it works</div>
         <h2>What the client gets.</h2>
       </div>
       <div class="cards">
@@ -256,7 +323,7 @@
   <section id="media">
     <div class="wrap">
       <div class="head">
-        <div class="label">05 / Proof</div>
+        <div class="label">04 / Proof</div>
         <h2>Our first kit, in flight.</h2>
       </div>
       <video class="media-video r169" src="media/flight-montage.mp4" poster="media/flight-montage-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="First hand-launched flight tests, October 2026"></video>
@@ -266,7 +333,7 @@
 
   <section class="contact" id="contact">
     <div class="wrap">
-      <div class="label">06 / Contact</div>
+      <div class="label">05 / Contact</div>
       <a class="btn primary" href="mailto:suhoindustries@gmail.com" target="_blank" rel="noopener">suhoindustries@gmail.com</a>
     </div>
   </section>
@@ -278,5 +345,102 @@
   </div>
 </footer>
 
+
+<script>
+(function () {
+  var svg = document.getElementById('pipe'); if (!svg) return;
+  var NS = 'http://www.w3.org/2000/svg', T = 20;
+  var HUB = [360, 300], FIELD = [940, 300], R = 175;
+  function $(id) { return document.getElementById(id); }
+  function el(tag, attrs, parent) { var e = document.createElementNS(NS, tag); for (var k in attrs) e.setAttribute(k, attrs[k]); parent.appendChild(e); return e; }
+  function clamp(x) { return x < 0 ? 0 : x > 1 ? 1 : x; }
+  function seg(t, a, b) { return clamp((t - a) / (b - a)); }
+  function ease(x) { return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; }
+  function lerp(a, b, k) { return a + (b - a) * k; }
+
+  var gar = [], links = [], packets = [], boxes = [];
+  for (var i = 0; i < 6; i++) {
+    var a = -Math.PI / 2 + i * Math.PI / 3, x = HUB[0] + R * Math.cos(a), y = HUB[1] + R * Math.sin(a);
+    links.push(el('line', { x1: HUB[0], y1: HUB[1], x2: x, y2: y }, $('links')));
+    var g = el('g', {}, $('garages'));
+    el('path', { d: 'M-24 -6L0 -26L24 -6V20H-24Z', fill: '#151816', stroke: '#8d928c', 'stroke-width': 2 }, g);
+    el('rect', { x: -10, y: 2, width: 20, height: 18, fill: 'none', stroke: '#8d928c', 'stroke-width': 2 }, g);
+    gar.push({ g: g, x: x, y: y });
+    packets.push(el('rect', { width: 8, height: 8, x: -4, y: -4 }, $('packets')));
+    boxes.push(el('rect', { width: 18, height: 12, x: -9, y: -6, fill: '#a3b46a' }, $('boxes')));
+  }
+  var parts = [].slice.call(svg.querySelectorAll('.part')).map(function (p) {
+    var f = p.getAttribute('data-flat').split(',').map(Number), b = p.firstElementChild.getBBox();
+    return { el: p, dx: f[0], dy: f[1], r: f[2], cx: b.x + b.width / 2, cy: b.y + b.height / 2 };
+  });
+  var steps = [].slice.call(document.querySelectorAll('.pipe-steps li'));
+  var labels = ['01 // CLIENT BRINGS A PROVEN DRONE', '02 // REDESIGNED AS FLAT MODULES FOR GENERAL-PURPOSE MACHINES', '03 // FILES GO OUT TO GARAGE FACTORIES', '04 // COMPACT KITS SHIP TO THE FIELD', '04 // ASSEMBLED ON ARRIVAL. NO SPECIAL TOOLS.'];
+
+  function op(e, v) { e.setAttribute('opacity', v.toFixed(3)); }
+  function render(t) {
+    // drone / kit parts
+    var dx = HUB[0], dy = HUB[1], sc = 1, o = 1, flat = 0, rot = 0;
+    if (t < 7.5) { o = ease(seg(t, 0, .8)); flat = ease(seg(t, 3.8, 5.2)); }
+    else if (t < 15.8) { var k = ease(seg(t, 7.5, 8.3)); o = 1 - k; sc = lerp(1, .15, k); flat = 1; }
+    else {
+      dx = FIELD[0]; dy = FIELD[1]; sc = .72; o = ease(seg(t, 15.8, 16.4)); flat = 1 - ease(seg(t, 16.6, 17.8));
+      var f = seg(t, 18.4, 19.6); f = f * f * f;
+      dx = lerp(FIELD[0], 1500, f); dy = lerp(FIELD[1], -150, f); rot = 50 * f;
+      o *= 1 - seg(t, 19.3, 19.6);
+    }
+    $('drone').setAttribute('transform', 'translate(' + dx + ' ' + dy + ') rotate(' + rot + ') scale(' + sc + ')');
+    op($('drone'), o);
+    $('drone').classList.toggle('flat', flat > .5);
+    parts.forEach(function (p) {
+      p.el.setAttribute('transform', 'translate(' + p.dx * flat + ' ' + p.dy * flat + ') rotate(' + p.r * flat + ' ' + p.cx + ' ' + p.cy + ')');
+    });
+    $('sheet').setAttribute('transform', 'translate(' + HUB[0] + ' ' + HUB[1] + ')');
+    op($('sheet'), ease(seg(t, 4.6, 5.4)) * (1 - seg(t, 7.3, 7.8)));
+    // scan line
+    var s = seg(t, .9, 2.9);
+    $('scanbar').setAttribute('x', lerp(130, 530, ease(s)));
+    op($('scanbar'), s > 0 && s < 1 ? Math.sin(s * Math.PI) : 0);
+    // hub
+    $('hub').setAttribute('transform', 'translate(' + HUB[0] + ' ' + HUB[1] + ')');
+    op($('hub'), ease(seg(t, 8.0, 8.6)) * (1 - seg(t, 14.2, 15)));
+    // garages, links, packets, boxes
+    var gOut = 1 - seg(t, 15.4, 16);
+    gar.forEach(function (g, i) {
+      var pop = ease(seg(t, 8.4 + i * .15, 8.9 + i * .15));
+      g.g.setAttribute('transform', 'translate(' + g.x + ' ' + g.y + ') scale(' + (.6 + .4 * pop) + ')');
+      op(g.g, pop * gOut);
+      var lit = t > 10.4 + i * .12 && t < 15.4;
+      [].forEach.call(g.g.children, function (c) { c.setAttribute('stroke', lit ? '#a3b46a' : '#8d928c'); });
+      var ln = links[i], d = ease(seg(t, 8.8 + i * .1, 9.6 + i * .1));
+      ln.setAttribute('x2', lerp(HUB[0], g.x, d)); ln.setAttribute('y2', lerp(HUB[1], g.y, d));
+      op(ln, (d > 0 ? 1 : 0) * (1 - seg(t, 14.2, 15)));
+      var pk = seg(t, 9.6 + i * .12, 10.4 + i * .12);
+      packets[i].setAttribute('transform', 'translate(' + lerp(HUB[0], g.x, ease(pk)) + ' ' + lerp(HUB[1], g.y, ease(pk)) + ')');
+      op(packets[i], pk > 0 && pk < 1 ? 1 : 0);
+      var bx = ease(seg(t, 12.6 + i * .25, 14.2 + i * .25));
+      var tx = FIELD[0] - 20 + (i % 3) * 20, ty = FIELD[1] + 6 - Math.floor(i / 3) * 14;
+      boxes[i].setAttribute('transform', 'translate(' + lerp(g.x, tx, bx) + ' ' + (lerp(g.y, ty, bx) - Math.sin(bx * Math.PI) * 40) + ')');
+      op(boxes[i], (bx > 0 ? 1 : 0) * (1 - seg(t, 15.8, 16.3)));
+    });
+    $('field').setAttribute('transform', 'translate(' + FIELD[0] + ' ' + FIELD[1] + ')');
+    op($('field'), ease(seg(t, 12, 12.6)) * (1 - seg(t, 16.2, 16.8)));
+    // captions
+    var sc5 = t < 3.5 ? 0 : t < 7.5 ? 1 : t < 12 ? 2 : t < 15.6 ? 3 : 4;
+    $('stage').textContent = labels[sc5];
+    steps.forEach(function (li, i) { li.classList.toggle('on', i === Math.min(sc5, 3)); });
+    $('clock').textContent = 'T+' + (t < 10 ? '0' : '') + t.toFixed(1);
+  }
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) { render(11); return; }
+  var t0 = null, visible = true;
+  if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { visible = e[0].isIntersecting; }).observe(svg);
+  function frame(ts) {
+    if (t0 === null) t0 = ts;
+    if (visible) render(((ts - t0) / 1000) % T); else t0 += 16;
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
 </body>
 </html>
