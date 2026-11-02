@@ -44,6 +44,20 @@
   @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .brand img { filter: invert(1); } }
   :root[data-theme="dark"] .brand img { filter: invert(1); }
 
+  .links { display: flex; gap: 28px; }
+  .links a { font: 500 12px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; text-decoration: none; color: var(--muted); }
+  .links a:hover { color: var(--ink); }
+  section[id] { scroll-margin-top: 76px; }
+  .sub { font-size: 18px; color: var(--muted); max-width: 62ch; margin: 0; }
+  .sub.small { font-size: 14px; }
+  .newsletter .wrap { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
+  .signup { display: flex; gap: 0; width: 100%; max-width: 520px; }
+  .signup input { flex: 1; min-width: 0; padding: 12px 14px; font: 15px/1.2 inherit; font-family: inherit; color: var(--ink); background: var(--bg); border: 1px solid var(--ink); border-right: 0; border-radius: 0; }
+  .signup input:focus { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .signup .btn { cursor: pointer; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  @media (max-width: 560px) { .links { gap: 16px; } .links a { font-size: 11px; letter-spacing: .08em; } .brand img { height: 32px; } }
+
   .hero { padding: 72px 0; border-bottom: 1px solid var(--line); }
   h1 { font-size: clamp(38px, 6.4vw, 72px); line-height: 1.02; letter-spacing: -0.03em; font-weight: 600; margin: 20px 0 24px; max-width: 14ch; }
   .btn { display: inline-block; padding: 13px 22px; font: 500 12px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; text-decoration: none; border: 1px solid var(--ink); }
@@ -138,6 +152,11 @@
 <header class="nav">
   <div class="wrap">
     <a class="brand" href="#top"><img src="media/logo.svg" alt="Suho Industries"></a>
+    <nav class="links" aria-label="Sections">
+      <a href="#mission">Mission</a>
+      <a href="#contact">Contact</a>
+      <a href="#newsletter">Newsletter</a>
+    </nav>
   </div>
 </header>
 
@@ -171,6 +190,16 @@
           </g>
         </svg>
       </div>
+    </div>
+  </section>
+
+  <section id="mission">
+    <div class="wrap">
+      <div class="head">
+        <div class="label">Mission</div>
+        <h2>Decentralize and despecialize defense manufacturing.</h2>
+      </div>
+      <p class="sub">We turn drones and other defense hardware into kits, and make them through a network of garage factories running the same few general-purpose machines. No welding, no precision machining, no specialized lines, so any garage can make any kit.</p>
     </div>
   </section>
 
@@ -239,6 +268,18 @@
     <div class="wrap">
       <div class="label">Contact</div>
       <a class="btn primary" href="mailto:suhoindustries@gmail.com" target="_blank" rel="noopener">suhoindustries@gmail.com</a>
+    </div>
+  </section>
+
+  <section class="newsletter" id="newsletter">
+    <div class="wrap">
+      <div class="label">Newsletter</div>
+      <form class="signup" id="signup">
+        <label class="sr" for="nl-email">Email address</label>
+        <input id="nl-email" type="email" name="email" placeholder="you@example.com" required autocomplete="email">
+        <button class="btn primary" type="submit">Subscribe</button>
+      </form>
+      <p class="sub small" id="nl-note">Occasional updates on Suho Industries. No spam.</p>
     </div>
   </section>
 </main>
@@ -423,6 +464,18 @@
   }
   intro(0);
   requestAnimationFrame(frame);
+})();
+</script>
+
+<script>
+(function () {
+  var f = document.getElementById('signup'); if (!f) return;
+  f.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var email = document.getElementById('nl-email').value.trim(); if (!email) return;
+    window.location.href = 'mailto:suhoindustries@gmail.com?subject=' + encodeURIComponent('Newsletter signup') + '&body=' + encodeURIComponent('Please add ' + email + ' to the Suho Industries newsletter.');
+    document.getElementById('nl-note').textContent = 'Thanks! Your email app should open to confirm the signup.';
+  });
 })();
 </script>
 </body>
