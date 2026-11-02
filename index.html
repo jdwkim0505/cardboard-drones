@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Suho Industries</title>
 <link rel="icon" type="image/svg+xml" href="media/favicon.svg">
-<meta name="description" content="Low-cost, flat-packed, field-assembled drone airframes.">
+<meta name="description" content="Turn any garage into a weapons factory. Suho Industries turns drones and other defense hardware into kits that any garage can build.">
 <style>
   :root {
     --bg: #f5f5f2;
@@ -49,6 +49,11 @@
   .btn { display: inline-block; padding: 13px 22px; font: 500 12px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; text-decoration: none; border: 1px solid var(--ink); }
   .btn.primary { background: var(--ink); color: var(--bg); }
   .hero .media { margin-top: 48px; }
+  .hero-stage { position: relative; aspect-ratio: 16 / 9; width: 100%; border: 2px solid var(--ink); background: #0e100f; overflow: hidden; }
+  .hero-stage video, .hero-stage svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .hero-stage video { object-fit: cover; }
+  #hdrone path { vector-effect: non-scaling-stroke; }
+
   .hero-video, .media-video { display: block; width: 100%; max-width: 760px; object-fit: cover; background: var(--surface); border: 2px solid var(--ink); }
 
   /* Placeholders: swap each .ph for an <img> or <video> when media is ready */
@@ -65,38 +70,66 @@
   .head { display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 48px; }
   h2 { font-size: clamp(26px, 3.4vw, 36px); line-height: 1.15; letter-spacing: -0.02em; font-weight: 600; margin: 0; max-width: 22ch; }
 
-  .grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--line); }
-  .grid3 { column-gap: 56px; }
-  .grid3 > div { padding-top: 28px; position: relative; }
-  .grid3 > div + div::before { content: ""; position: absolute; top: 0; bottom: 0; left: -28px; border-left: 1px solid var(--line); }
-  .grid3 h3 { font-size: 18px; font-weight: 600; margin: 14px 0 8px; }
-  .grid3 p { margin: 0; color: var(--muted); font-size: 15px; }
-  .grid3 > div { display: flex; flex-direction: column; }
-  .grid3 .ph { order: -1; margin-bottom: 24px; }
-  .grid3 .step-img { order: -1; margin-bottom: 24px; display: block; width: 100%; height: auto; background: var(--surface); border: 1px solid var(--line); }
 
 
-  .gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
-  .gallery .ph { border: 0; }
-  .gallery .wide { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; }
   .caption { margin: 16px 0 0; }
+
+
+
+  .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+  .card { border: 1px solid var(--ink); background: var(--bg); padding: 24px; display: flex; flex-direction: column; gap: 12px; }
+  .card h3 { font-size: 19px; line-height: 1.3; font-weight: 600; margin: 0; }
+  .card p { margin: 0; color: var(--muted); font-size: 15px; }
+  .card.hi { background: var(--surface); border-color: var(--accent); }
+
+  .flow { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 36px; }
+  .flow li { position: relative; }
+  .flow li + li::before { content: "\2192"; position: absolute; left: -28px; top: 50%; transform: translateY(-50%); color: var(--ink); font-size: 20px; }
+
+  .split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: center; }
+  .split.step { margin-top: 72px; padding-top: 72px; border-top: 1px solid var(--line); }
+  .photo { display: block; width: 100%; height: auto; border: 2px solid var(--ink); background: var(--surface); }
+  .photo.diagram { background: #fff; }
+  .photo.tall { max-height: 560px; object-fit: cover; }
+  .step-title { font-size: clamp(22px, 2.6vw, 28px); line-height: 1.2; letter-spacing: -0.01em; font-weight: 600; margin: 14px 0 20px; }
+  .facts { margin: 0; display: grid; gap: 16px; }
+  .facts dt { font-weight: 600; }
+  .facts dd { margin: 2px 0 0; color: var(--muted); }
+
+
+  .pipeline { margin: 0; }
+  #pipe { display: block; width: 100%; height: auto; border: 2px solid var(--ink); }
+  #pipe .hud { font: 500 15px var(--mono); letter-spacing: .14em; fill: #8d928c; }
+  #pipe .hud.acc { fill: #a3b46a; }
+  #pipe .part > * { fill: #2a2f2a; stroke: #e8e9e4; stroke-width: 2; vector-effect: non-scaling-stroke; }
+  #pipe .part.bay > * { fill: #a3b46a; stroke: #a3b46a; }
+  #pipe .part.prop path { fill: none; stroke-width: 4; }
+  #pipe .flat .part:not(.bay) > * { stroke-dasharray: 7 5; }
+  .pipe-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 2px solid var(--ink); border-top: 0; }
+  .pipe-steps li { padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: var(--muted); position: relative; transition: color .3s; }
+  .pipe-steps li + li { border-left: 1px solid var(--line); }
+  .pipe-steps li::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .4s; }
+  .pipe-steps li.on { color: var(--ink); }
+  .pipe-steps li.on::after { transform: scaleX(1); }
+  @media (max-width: 560px) { .pipe-steps { grid-template-columns: 1fr 1fr; } .pipe-steps li:nth-child(3) { border-left: 0; } .pipe-steps li:nth-child(n+3) { border-top: 1px solid var(--line); } }
 
   .contact .wrap { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
   footer { padding: 28px 0; }
   footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 
   @media (max-width: 860px) {
-    .grid3 { grid-template-columns: 1fr; }
-    .grid3 > div { padding: 28px 0; }
-    .grid3 > div + div::before { display: none; }
-    .grid3 > div + div { border-top: 1px solid var(--line); }
+    .cards, .split { grid-template-columns: 1fr; }
+    .flow { grid-template-columns: 1fr 1fr; }
+    .flow li:nth-child(3)::before { display: none; }
   }
   @media (max-width: 560px) {
     .wrap { padding: 0 16px; }
     .hero { padding-top: 64px; }
     section { padding: 64px 0; }
-    .gallery { grid-template-columns: 1fr; }
-    .gallery .wide { grid-column: auto; grid-row: auto; aspect-ratio: 16 / 9; }
+    .flow { grid-template-columns: 1fr; gap: 36px; }
+    .flow li + li::before { content: "\2193"; left: 50%; top: -30px; transform: translateX(-50%); }
+    .flow li:nth-child(3)::before { display: block; }
+    .split.step { margin-top: 48px; padding-top: 48px; }
   }
 </style>
 </head>
@@ -109,57 +142,102 @@
 </header>
 
 <main id="top">
-  <section class="hero" style="border-bottom:1px solid var(--line)">
+  <section class="hero">
     <div class="wrap">
-      <div class="label"><span class="acc">&#9632;</span>&nbsp; Low-cost unmanned airframes</div>
-      <h1>Ships flat. Folds in minutes. Flies.</h1>
-      <video class="media hero-video r169" src="media/hero.mp4" poster="media/hero-poster.jpg" autoplay muted loop playsinline preload="auto" aria-label="Spin-around of the Suho Industries cardboard flying wing"></video>
-    </div>
-  </section>
-
-  <section id="concept">
-    <div class="wrap">
-      <div class="head">
-        <div class="label">01 / Concept</div>
-        <h2>From flat sheet to flight in three steps.</h2>
-      </div>
-      <div class="grid3">
-        <div>
-          <div class="label">Step 01</div>
-          <h3>Ship</h3>
-          <p>Airframes travel as flat, closely-packed sheets.</p>
-          <img class="step-img r43" src="media/step-1.svg" alt="Stack of flat cardboard sheets">
-        </div>
-        <div>
-          <div class="label">Step 02</div>
-          <h3>Fold</h3>
-          <p>Assembles by hand, anywhere. No special tools. No grid power.</p>
-          <img class="step-img r43" src="media/step-2.svg" alt="A cardboard sheet being folded">
-        </div>
-        <div>
-          <div class="label">Step 03</div>
-          <h3>Fly</h3>
-          <p>Install the electronics kit. Launch.</p>
-          <img class="step-img r43" src="media/step-3.svg" alt="Assembled flying wing with thick swept wings, round-nosed fuselage, upright winglets and rear propeller">
-        </div>
+      <div class="label"><span class="acc">&#9632;</span>&nbsp; Decentralized and despecialized defense manufacturing</div>
+      <h1>Turn any garage into a weapons factory.</h1>
+      <div class="media hero-stage" role="img" aria-label="Animation: the flying wing's panels are cut on a CNC machine and assembled, and its outline match-cuts into real footage of the drone's first successful flight.">
+        <video id="heroVid" src="media/hero-flight.mp4" poster="media/hero-flight-poster.jpg" muted playsinline preload="auto"></video>
+        <svg id="heroFx" viewBox="0 0 1920 1080" aria-hidden="true">
+          <defs>
+            <pattern id="hg" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M60 0H0V60" fill="none" stroke="#1f2420" stroke-width="1.5"/></pattern>
+            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <g id="hpanel">
+            <rect width="1920" height="1080" fill="#0e100f"/>
+            <rect width="1920" height="1080" fill="url(#hg)"/>
+          </g>
+          <g id="hhud" fill="#8d928c" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="26" letter-spacing="4">
+            <path d="M40 90V40H90M1830 40H1880V90M1880 990V1040H1830M90 1040H40V990" stroke="#a3b46a" stroke-width="3" fill="none"/>
+            <text x="70" y="96">SUHO INDUSTRIES, INC.</text>
+            <text id="hstage" x="70" y="1004" fill="#a3b46a"></text>
+          </g>
+          <g id="hdrone" fill="none" stroke="#a3b46a" stroke-width="3" stroke-linejoin="round" filter="url(#glow)">
+            <rect id="hsheet" x="-300" y="-200" width="600" height="400" stroke="#5d6658" stroke-width="2" stroke-dasharray="10 8" filter="none"/>
+            <g class="hp" data-flat="0,-130,0"><path d="M0 -50L40 -22L40 40L0 56L-40 40L-40 -22Z"/></g>
+            <g class="hp" data-flat="-40,70,22"><path d="M-40 -22L-220 50L-220 74L-40 40Z"/></g>
+            <g class="hp" data-flat="40,70,-22"><path d="M40 -22L220 50L220 74L40 40Z"/></g>
+            <circle id="htool" r="7" fill="#e8e9e4" stroke="none"/>
+          </g>
+        </svg>
       </div>
     </div>
   </section>
 
-  <section id="media">
+  <section id="overview">
     <div class="wrap">
       <div class="head">
-        <div class="label">02 / Media</div>
-        <h2>Testing and flight footage.</h2>
+        <div class="label">How it works</div>
       </div>
-      <video class="media-video r169" src="media/flight-montage.mp4" poster="media/flight-montage-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="First hand-launched flight tests, October 2026"></video>
-      <p class="caption label">First flight tests · Oct 2026</p>
+      <figure class="pipeline" aria-label="Animation: a client's drone is redesigned into flat kit parts, the design files go out to a network of garage factories, the garages ship compact kits to the field, and the kits are assembled into drones on arrival.">
+        <svg id="pipe" viewBox="0 0 1200 600" role="img" aria-hidden="true">
+          <defs>
+            <pattern id="pg" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#1f2420" stroke-width="1"/></pattern>
+            <linearGradient id="scan" x1="0" x2="1"><stop offset="0" stop-color="#a3b46a" stop-opacity="0"/><stop offset="1" stop-color="#a3b46a" stop-opacity=".55"/></linearGradient>
+          </defs>
+          <rect width="1200" height="600" fill="#0e100f"/>
+          <rect width="1200" height="600" fill="url(#pg)"/>
+          <g stroke="#a3b46a" stroke-width="2" fill="none">
+            <path d="M20 50V20H50M1150 20H1180V50M1180 550V580H1150M50 580H20V550"/>
+          </g>
+          <text x="40" y="52" class="hud">SUHO INDUSTRIES, INC.</text>
+          <text id="stage" x="40" y="566" class="hud acc"></text>
+
+          <g id="links" stroke="#3a4136" stroke-width="1.5" stroke-dasharray="6 6"></g>
+          <g id="garages"></g>
+          <g id="hub">
+            <rect x="-26" y="-32" width="52" height="64" fill="#151816" stroke="#a3b46a" stroke-width="2"/>
+            <path d="M-14 -16H14M-14 -4H14M-14 8H6" stroke="#a3b46a" stroke-width="2"/>
+            <text y="56" class="hud acc" text-anchor="middle">DESIGN FILES</text>
+          </g>
+          <g id="packets" fill="#a3b46a"></g>
+          <g id="field">
+            <circle r="46" fill="none" stroke="#a3b46a" stroke-width="2" stroke-dasharray="4 6"/>
+            <circle r="4" fill="#a3b46a"/>
+            <path d="M-64 0H-52M52 0H64M0 -64V-52M0 52V64" stroke="#a3b46a" stroke-width="2"/>
+            <text y="96" class="hud acc" text-anchor="middle">POINT OF NEED</text>
+          </g>
+          <g id="boxes"></g>
+
+          <g id="sheet" fill="none" stroke="#5d6658" stroke-width="1.5" stroke-dasharray="8 6">
+            <rect x="-300" y="-190" width="600" height="380"/>
+          </g>
+          <g id="drone">
+            <g class="part" data-flat="0,-130,0"><polygon points="0,-50 40,-22 40,40 0,56 -40,40 -40,-22"/></g>
+            <g class="part" data-flat="-40,70,22"><polygon points="-40,-22 -220,50 -220,74 -40,40"/></g>
+            <g class="part" data-flat="40,70,-22"><polygon points="40,-22 220,50 220,74 40,40"/></g>
+            <g class="part bay" data-flat="0,112,0"><rect x="-12" y="-22" width="24" height="38" rx="2"/></g>
+            <g class="part prop" data-flat="0,-24,0"><g id="propblade"><path d="M-24 64H24"/></g><circle cx="0" cy="64" r="5"/></g>
+          </g>
+          <rect id="scanbar" x="0" y="140" width="60" height="320" fill="url(#scan)"/>
+        </svg>
+        <ol class="pipe-steps">
+          <li data-s="0"><span class="label">01</span><b>Client hardware</b></li>
+          <li data-s="1"><span class="label">02</span><b>Kit design</b></li>
+          <li data-s="2"><span class="label">03</span><b>Garage factories</b></li>
+          <li data-s="3"><span class="label">04</span><b>Kits delivered</b></li>
+        </ol>
+      </figure>
     </div>
   </section>
+
+
+
+
 
   <section class="contact" id="contact">
     <div class="wrap">
-      <div class="label">03 / Contact</div>
+      <div class="label">Contact</div>
       <a class="btn primary" href="mailto:suhoindustries@gmail.com" target="_blank" rel="noopener">suhoindustries@gmail.com</a>
     </div>
   </section>
@@ -167,9 +245,185 @@
 
 <footer>
   <div class="wrap label">
-    <span>&copy; 2026 Suho Industries</span>
+    <span>&copy; 2026 Suho Industries, Inc.</span>
   </div>
 </footer>
 
+
+<script>
+(function () {
+  var svg = document.getElementById('pipe'); if (!svg) return;
+  var NS = 'http://www.w3.org/2000/svg', T = 20;
+  var HUB = [360, 300], FIELD = [940, 300], R = 175;
+  function $(id) { return document.getElementById(id); }
+  function el(tag, attrs, parent) { var e = document.createElementNS(NS, tag); for (var k in attrs) e.setAttribute(k, attrs[k]); parent.appendChild(e); return e; }
+  function clamp(x) { return x < 0 ? 0 : x > 1 ? 1 : x; }
+  function seg(t, a, b) { return clamp((t - a) / (b - a)); }
+  function ease(x) { return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; }
+  function lerp(a, b, k) { return a + (b - a) * k; }
+
+  var gar = [], links = [], packets = [], boxes = [];
+  for (var i = 0; i < 6; i++) {
+    var a = -Math.PI / 2 + i * Math.PI / 3, x = HUB[0] + R * Math.cos(a), y = HUB[1] + R * Math.sin(a);
+    links.push(el('line', { x1: HUB[0], y1: HUB[1], x2: x, y2: y }, $('links')));
+    var g = el('g', {}, $('garages'));
+    el('path', { d: 'M-24 -6L0 -26L24 -6V20H-24Z', fill: '#151816', stroke: '#8d928c', 'stroke-width': 2 }, g);
+    el('rect', { x: -10, y: 2, width: 20, height: 18, fill: 'none', stroke: '#8d928c', 'stroke-width': 2 }, g);
+    gar.push({ g: g, x: x, y: y });
+    packets.push(el('rect', { width: 8, height: 8, x: -4, y: -4 }, $('packets')));
+    boxes.push(el('rect', { width: 18, height: 12, x: -9, y: -6, fill: '#a3b46a' }, $('boxes')));
+  }
+  var parts = [].slice.call(svg.querySelectorAll('.part')).map(function (p) {
+    var f = p.getAttribute('data-flat').split(',').map(Number), b = p.firstElementChild.getBBox();
+    return { el: p, dx: f[0], dy: f[1], r: f[2], cx: b.x + b.width / 2, cy: b.y + b.height / 2 };
+  });
+  var steps = [].slice.call(document.querySelectorAll('.pipe-steps li'));
+  var labels = ['01 // CLIENT BRINGS A PLATFORM', '02 // REDESIGNED INTO MODULES FOR GENERAL-PURPOSE MACHINING', '03 // FILES GO OUT TO GARAGE FACTORIES', '04 // COMPACT KITS SHIP TO THE POINT OF NEED', '04 // ASSEMBLED ON ARRIVAL. NO SPECIAL TOOLS. READY TO FLY.'];
+
+  function op(e, v) { e.setAttribute('opacity', v.toFixed(3)); }
+  function render(t) {
+    // drone / kit parts
+    var dx = HUB[0], dy = HUB[1], sc = 1, o = 1, flat = 0, rot = 0;
+    if (t < 7.5) { o = ease(seg(t, 0, .8)); flat = ease(seg(t, 3.8, 5.2)); }
+    else if (t < 16.0) { var k = ease(seg(t, 7.5, 8.3)); o = 1 - k; sc = lerp(1, .15, k); flat = 1; }
+    else {
+      dx = FIELD[0]; dy = FIELD[1]; sc = .72; o = ease(seg(t, 16.0, 16.5)); flat = 1 - ease(seg(t, 16.6, 17.8));
+      var k2 = ease(seg(t, 17.9, 19.2));
+      sc = lerp(.72, .56, k2); dy = FIELD[1] - 50 * k2 + Math.sin(t * 3) * 4 * k2; dx = FIELD[0] + Math.sin(t * 1.7) * 6 * k2;
+      o *= 1 - seg(t, 19.4, 19.9);
+    }
+    $('drone').setAttribute('transform', 'translate(' + dx + ' ' + dy + ') rotate(' + rot + ') scale(' + sc + ')');
+    op($('drone'), o);
+    $('drone').classList.toggle('flat', flat > .5);
+    $('propblade').setAttribute('transform', 'translate(0 64) scale(' + (flat < .05 ? Math.cos(t * 40).toFixed(2) : 1) + ' 1) translate(0 -64)');
+    parts.forEach(function (p) {
+      p.el.setAttribute('transform', 'translate(' + p.dx * flat + ' ' + p.dy * flat + ') rotate(' + p.r * flat + ' ' + p.cx + ' ' + p.cy + ')');
+    });
+    $('sheet').setAttribute('transform', 'translate(' + HUB[0] + ' ' + HUB[1] + ')');
+    op($('sheet'), ease(seg(t, 4.6, 5.4)) * (1 - seg(t, 7.3, 7.8)));
+    // scan line
+    var s = seg(t, .9, 2.9);
+    $('scanbar').setAttribute('x', lerp(130, 530, ease(s)));
+    op($('scanbar'), s > 0 && s < 1 ? Math.sin(s * Math.PI) : 0);
+    // hub
+    $('hub').setAttribute('transform', 'translate(' + HUB[0] + ' ' + HUB[1] + ')');
+    op($('hub'), ease(seg(t, 8.0, 8.6)) * (1 - seg(t, 14.2, 15)));
+    // garages, links, packets, boxes
+    var gOut = 1 - seg(t, 15.4, 16);
+    gar.forEach(function (g, i) {
+      var pop = ease(seg(t, 8.4 + i * .15, 8.9 + i * .15));
+      g.g.setAttribute('transform', 'translate(' + g.x + ' ' + g.y + ') scale(' + (.6 + .4 * pop) + ')');
+      op(g.g, pop * gOut);
+      var lit = t > 10.4 + i * .12 && t < 15.4;
+      [].forEach.call(g.g.children, function (c) { c.setAttribute('stroke', lit ? '#a3b46a' : '#8d928c'); });
+      var ln = links[i], d = ease(seg(t, 8.8 + i * .1, 9.6 + i * .1));
+      ln.setAttribute('x2', lerp(HUB[0], g.x, d)); ln.setAttribute('y2', lerp(HUB[1], g.y, d));
+      op(ln, (d > 0 ? 1 : 0) * (1 - seg(t, 14.2, 15)));
+      var pk = seg(t, 9.6 + i * .12, 10.4 + i * .12);
+      packets[i].setAttribute('transform', 'translate(' + lerp(HUB[0], g.x, ease(pk)) + ' ' + lerp(HUB[1], g.y, ease(pk)) + ')');
+      op(packets[i], pk > 0 && pk < 1 ? 1 : 0);
+      var bx = ease(seg(t, 12.6 + i * .25, 14.2 + i * .25));
+      var tx = FIELD[0] - 20 + (i % 3) * 20, ty = FIELD[1] + 6 - Math.floor(i / 3) * 14;
+      boxes[i].setAttribute('transform', 'translate(' + lerp(g.x, tx, bx) + ' ' + (lerp(g.y, ty, bx) - Math.sin(bx * Math.PI) * 40) + ')');
+      op(boxes[i], (bx > 0 ? 1 : 0) * (1 - seg(t, 15.5, 16.0)));
+    });
+    $('field').setAttribute('transform', 'translate(' + FIELD[0] + ' ' + FIELD[1] + ')');
+    op($('field'), ease(seg(t, 12, 12.6)) * (1 - seg(t, 15.5, 16.0)));
+    // captions
+    var sc5 = t < 3.5 ? 0 : t < 7.5 ? 1 : t < 12 ? 2 : t < 15.6 ? 3 : 4;
+    $('stage').textContent = labels[sc5];
+    steps.forEach(function (li, i) { li.classList.toggle('on', i === Math.min(sc5, 3)); });
+  }
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) { render(11); return; }
+  render(0);
+  var t0 = null;
+  function frame(ts) {
+    if (t0 === null) t0 = ts;
+    render(((ts - t0) / 1000) % T);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+
+<script>
+(function () {
+  var vid = document.getElementById('heroVid'), svg = document.getElementById('heroFx');
+  if (!vid || !svg) return;
+  function $(id) { return document.getElementById(id); }
+  function clamp(x) { return x < 0 ? 0 : x > 1 ? 1 : x; }
+  function seg(t, a, b) { return clamp((t - a) / (b - a)); }
+  function ease(x) { return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; }
+  function lerp(a, b, k) { return a + (b - a) * k; }
+  function op(e, v) { e.setAttribute('opacity', v.toFixed(3)); }
+  // Drone pose tracked in each of the first frames of hero-flight.mp4 (24 fps): [x, y, angle, span] in 1920x1080 space
+  var TRACK = [[976.8,559.4,-34.1,423.5],[1022.4,564.1,-36.7,426.9],[1068.1,570.1,-39.3,430.1],[1118.1,580.1,-41.3,428.4],[1153.5,592.5,-43.1,427.2],[1178.2,609.5,-44.5,423.5],[1175.9,638.6,-45.5,410.8],[1134.7,653.2,-45.8,391.1],[1076.3,687.3,-45.5,367.6],[1007.1,708.0,-44.8,343.7],[948.3,725.8,-43.5,322.7],[896.4,742.7,-42.5,304.7],[856.6,754.2,-41.8,289.0],[831.9,762.8,-41.2,279.6],[814.0,765.6,-40.9,270.5],[806.0,768.3,-40.3,263.8],[799.0,765.9,-39.9,257.6],[793.6,764.8,-40.1,252.1],[799.5,761.5,-40.9,248.4],[800.1,759.4,-42.1,243.9],[804.0,755.7,-43.4,240.5],[811.1,747.1,-45.1,239.0],[822.1,742.4,-47.0,236.2]], FPS = 24, SPAN = 440, THICK = 0.14;
+  function poseAt(time) {
+    var f = Math.max(0, time * FPS), i = Math.min(Math.floor(f), TRACK.length - 1), j = Math.min(i + 1, TRACK.length - 1), k = f - Math.floor(f);
+    var a = TRACK[i], b = TRACK[j];
+    return { x: lerp(a[0], b[0], k), y: lerp(a[1], b[1], k), r: lerp(a[2], b[2], k), sx: lerp(a[3], b[3], k) / SPAN, sy: THICK };
+  }
+  var START = { x: 960, y: 520, r: 0, sx: 1.7, sy: 1.7 }, END = poseAt(0);
+  var CUT = [[.15, .6], [.6, 1.05], [1.05, 1.5]], MATCH = [2.1, 2.9], FADE = [2.9, 3.3], INTRO = 3.3;
+  var parts = [].slice.call(svg.querySelectorAll('.hp')).map(function (g) {
+    var f = g.getAttribute('data-flat').split(',').map(Number), path = g.firstElementChild;
+    var pts = path.getAttribute('d').match(/-?\d+(\.\d+)?/g).map(Number), cx = 0, cy = 0;
+    for (var i = 0; i < pts.length; i += 2) { cx += pts[i]; cy += pts[i + 1]; }
+    var n = pts.length / 2, len = path.getTotalLength();
+    path.style.strokeDasharray = len; return { g: g, path: path, dx: f[0], dy: f[1], r: f[2], cx: cx / n, cy: cy / n, len: len };
+  });
+  var labels = ['CNC // CUTTING PANELS', 'ASSEMBLY // NO SPECIAL TOOLS', 'FIRST SUCCESSFUL FLIGHT // NOV 2026'];
+  function pose(q) { $('hdrone').setAttribute('transform', 'translate(' + q.x.toFixed(1) + ' ' + q.y.toFixed(1) + ') rotate(' + q.r.toFixed(2) + ') scale(' + q.sx.toFixed(4) + ' ' + q.sy.toFixed(4) + ')'); }
+
+  function intro(t) {
+    var flat = 1 - ease(seg(t, 1.5, 2.1));
+    parts.forEach(function (p, i) {
+      var c = seg(t, CUT[i][0], CUT[i][1]);
+      p.path.style.strokeDashoffset = (p.len * (1 - c)).toFixed(1);
+      p.path.setAttribute('fill', 'rgba(163,180,106,' + (0.2 * seg(t, CUT[i][1], CUT[i][1] + .2) * (1 - seg(t, MATCH[0], MATCH[0] + .4))).toFixed(3) + ')');
+      p.g.setAttribute('transform', 'translate(' + p.dx * flat + ' ' + p.dy * flat + ') rotate(' + p.r * flat + ' ' + p.cx + ' ' + p.cy + ')');
+      if (c > 0 && c < 1) {
+        var pt = p.path.getPointAtLength(p.len * c);
+        $('htool').setAttribute('transform', p.g.getAttribute('transform') + ' translate(' + pt.x + ' ' + pt.y + ')');
+      }
+    });
+    op($('htool'), t > CUT[0][0] && t < CUT[2][1] ? 1 : 0);
+    op($('hsheet'), ease(seg(t, 0, .2)) * (1 - seg(t, 1.5, 1.8)));
+    var k = ease(seg(t, MATCH[0], MATCH[1]));
+    pose({ x: lerp(START.x, END.x, k), y: lerp(START.y, END.y, k), r: lerp(START.r, END.r, k), sx: lerp(START.sx, END.sx, k), sy: lerp(START.sy, END.sy, k) });
+    op($('hdrone'), ease(seg(t, 0, .15)));
+    var bg = 1 - ease(seg(t, FADE[0], FADE[1]));
+    op($('hpanel'), bg); op($('hhud'), bg);
+    $('hstage').textContent = labels[t < 1.5 ? 0 : t < MATCH[0] ? 1 : 2];
+  }
+  function track(time) {
+    pose(poseAt(time));
+    op($('hdrone'), 1 - seg(time, .25, (TRACK.length - 1) / FPS));
+  }
+  var phase = 'intro', t0 = null, outT = null;
+  function frame(ts) {
+    if (t0 === null) t0 = ts;
+    if (phase === 'intro') {
+      var t = (ts - t0) / 1000;
+      intro(Math.min(t, INTRO));
+      if (t >= INTRO) { phase = 'video'; var pr = vid.play(); if (pr && pr.catch) pr.catch(function () {}); }
+    } else if (phase === 'video') {
+      track(vid.currentTime);
+      if (vid.ended || (vid.duration && vid.currentTime > vid.duration - 0.5)) { phase = 'outro'; outT = ts; }
+    } else if (phase === 'outro') {
+      var k = ease(seg((ts - outT) / 1000, 0, .5));
+      op($('hpanel'), k);
+      if (k >= 1) { vid.pause(); vid.currentTime = 0; phase = 'intro'; t0 = ts; }
+    }
+    requestAnimationFrame(frame);
+  }
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    svg.style.display = 'none'; vid.loop = true; vid.autoplay = true; return;
+  }
+  intro(0);
+  requestAnimationFrame(frame);
+})();
+</script>
 </body>
 </html>
