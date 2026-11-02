@@ -59,6 +59,12 @@
   .signup input { flex: 1; min-width: 0; padding: 12px 14px; font: 15px/1.2 inherit; font-family: inherit; color: var(--ink); background: var(--bg); border: 1px solid var(--ink); border-right: 0; border-radius: 0; }
   .signup input:focus { outline: 2px solid var(--accent); outline-offset: -2px; }
   .signup .btn { cursor: pointer; }
+  .btn.slide { position: relative; overflow: hidden; }
+  .btn.slide span { display: block; transition: transform .45s cubic-bezier(.65,0,.35,1), opacity .45s; }
+  .btn.slide .b { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; transform: translateY(100%); opacity: 0; white-space: nowrap; }
+  .btn.slide.on .a { transform: translateY(-100%); opacity: 0; }
+  .btn.slide.on .b { transform: translateY(0); opacity: 1; }
+
   .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
   @media (max-width: 560px) { .links { gap: 16px; } .links a { font-size: 11px; letter-spacing: .08em; } .brand img { height: 32px; } }
 
@@ -279,7 +285,7 @@
         <form class="signup" id="signup">
           <label class="sr" for="nl-email">Email address</label>
           <input id="nl-email" type="email" name="email" placeholder="you@example.com" required autocomplete="email">
-          <button class="btn primary" type="submit">Subscribe</button>
+          <button class="btn primary slide" type="submit"><span class="a">Subscribe</span><span class="b" aria-hidden="true">Coming soon</span></button>
         </form>
         <p class="sub small" id="nl-note">Occasional updates on Suho Industries. No spam.</p>
       </div>
@@ -476,6 +482,8 @@
   f.addEventListener('submit', function (e) {
     e.preventDefault();
     f.reset();
+    var b = f.querySelector('.btn.slide'); b.classList.add('on'); b.setAttribute('aria-label', 'Coming soon');
+    clearTimeout(f._t); f._t = setTimeout(function () { b.classList.remove('on'); b.removeAttribute('aria-label'); }, 2600);
   });
 })();
 </script>
