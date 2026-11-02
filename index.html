@@ -27,9 +27,9 @@
     font: 16px/1.6 "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
-  /* Static blueprint grid: one uniform grid pinned to the viewport, so it lines up everywhere (header included) */
+  /* Static blueprint grid: scrolls with the page and is aligned so a grid line lands exactly on the footer's top border */
   :root { --grid: linear-gradient(rgba(10,31,68,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(10,31,68,.07) 1px, transparent 1px); }
-  body::before { content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none; background-image: var(--grid); background-size: 44px 44px; }
+  main { background-image: var(--grid); background-size: 44px 44px; background-position: 0 var(--grid-y, 0px); }
   main, footer { position: relative; z-index: 1; }
   .pipe-steps { background: var(--bg); }
   a { color: inherit; }
@@ -503,6 +503,15 @@
     var b = f.querySelector('.btn.slide'); b.classList.add('on'); b.setAttribute('aria-label', 'Coming soon');
     clearTimeout(f._t); f._t = setTimeout(function () { b.classList.remove('on'); b.removeAttribute('aria-label'); }, 2600);
   });
+})();
+</script>
+<script>
+(function () {
+  // Shift the grid so its lines meet the footer border exactly instead of leaving a thin sliver above it
+  var main = document.querySelector('main'), reach = document.querySelector('section.reach');
+  if (!main || !reach) return;
+  function align() { main.style.setProperty('--grid-y', (Math.round(reach.getBoundingClientRect().top - main.getBoundingClientRect().top) % 44) + 'px'); }
+  addEventListener('resize', align); addEventListener('load', align); align();
 })();
 </script>
 </body>
