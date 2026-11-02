@@ -495,7 +495,7 @@
     var n = pts.length / 2, len = path.getTotalLength();
     path.style.strokeDasharray = len; return { g: g, path: path, dx: f[0], dy: f[1], r: f[2], cx: cx / n, cy: cy / n, len: len };
   });
-  var labels = ['CNC // CUTTING PANELS', 'ASSEMBLY // NO SPECIAL TOOLS', 'FIRST SUCCESSFUL FLIGHT // OCT 2026'];
+  var labels = ['CNC // CUTTING PANELS', 'ASSEMBLY // NO SPECIAL TOOLS', 'FIRST SUCCESSFUL FLIGHT // NOV 2026'];
   function pose(q) { $('hdrone').setAttribute('transform', 'translate(' + q.x.toFixed(1) + ' ' + q.y.toFixed(1) + ') rotate(' + q.r.toFixed(2) + ') scale(' + q.sx.toFixed(4) + ' ' + q.sy.toFixed(4) + ')'); }
 
   function intro(t) {
