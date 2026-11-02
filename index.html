@@ -27,6 +27,11 @@
     font: 16px/1.6 "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
+  /* Static blueprint grid: scrolls with the page and is aligned so a grid line lands exactly on the footer's top border */
+  :root { --grid: linear-gradient(rgba(10,31,68,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(10,31,68,.07) 1px, transparent 1px); }
+  main { background-image: var(--grid); background-size: 44px 44px; background-position: 0 var(--grid-y, 0px); }
+  main, footer { position: relative; z-index: 1; }
+  .pipe-steps { background: var(--bg); }
   a { color: inherit; }
   .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
   .label { font: 500 12px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
@@ -44,7 +49,7 @@
   .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
   .duo .col { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
   .duo .col + .col { border-left: 1px solid var(--line); padding-left: 56px; }
-  @media (max-width: 760px) { .duo { grid-template-columns: 1fr; gap: 48px; } .duo .col + .col { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); padding-top: 48px; } }
+  @media (max-width: 760px) { .duo { grid-template-columns: 1fr; gap: 28px; } .duo .col + .col { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); padding-top: 20px; } }
   .sub { font-size: 18px; color: var(--muted); max-width: 62ch; margin: 0; }
   .sub.small { font-size: 14px; }
   .newsletter .wrap { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
@@ -61,7 +66,7 @@
   .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
   @media (max-width: 560px) { .links { gap: 16px; } .links a { font-size: 11px; letter-spacing: .08em; } .brand img { height: 32px; } }
 
-  .hero { padding: 72px 0; border-bottom: 1px solid var(--line); }
+  .hero { padding: 72px 0; }
   h1 { font-size: clamp(38px, 6.4vw, 72px); line-height: 1.02; letter-spacing: -0.03em; font-weight: 600; margin: 20px 0 24px; max-width: 14ch; }
   .btn { display: inline-block; padding: 13px 22px; font: 500 12px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; text-decoration: none; border: 1px solid var(--ink); }
   .btn.primary { background: var(--ink); color: var(--bg); }
@@ -83,7 +88,7 @@
   .r169 { aspect-ratio: 16 / 9; }
   .r43 { aspect-ratio: 4 / 3; }
 
-  section { padding: 88px 0; border-bottom: 1px solid var(--line); }
+  section { padding: 88px 0; }
   .head { display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 48px; }
   h2 { font-size: clamp(26px, 3.4vw, 36px); line-height: 1.15; letter-spacing: -0.02em; font-weight: 600; margin: 0; max-width: 22ch; }
 
@@ -125,15 +130,21 @@
   .pipe-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 2px solid var(--ink); border-top: 0; }
   .pipe-steps li { padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: var(--muted); position: relative; transition: color .3s; }
   .pipe-steps li + li { border-left: 1px solid var(--line); }
-  .pipe-steps li::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .4s; }
   .pipe-steps li { transition: color .3s, background .3s; }
   .pipe-steps li.on { color: #ffffff; background: var(--ink); }
   .pipe-steps li.on .label { color: #c9d4ea; }
-  .pipe-steps li.on::after { transform: scaleX(1); }
   @media (max-width: 560px) { .pipe-steps { grid-template-columns: 1fr 1fr; } .pipe-steps li:nth-child(3) { border-left: 0; } .pipe-steps li:nth-child(n+3) { border-top: 1px solid var(--line); } }
 
   .contact .wrap { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
-  footer { padding: 28px 0; }
+  section.reach { background: var(--bg); border-top: 1px solid var(--line); padding: 24px 0 16px; }
+  section.reach .duo .col { gap: 10px; }
+  section.reach .duo { gap: 40px; }
+  section.reach .duo .col + .col { padding-left: 40px; }
+  section.reach .btn, section.reach .signup input { padding-top: 10px; padding-bottom: 10px; }
+  section.reach #nl-note { font-size: 13px; }
+  @media (max-width: 760px) { section.reach .duo { gap: 20px; } section.reach .duo .col + .col { padding-left: 0; } }
+  section.reach .signup + p, section.reach .col p { margin: 0; }
+  footer { padding: 0 0 16px; background: var(--bg); }
   footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 
   @media (max-width: 860px) {
@@ -409,8 +420,18 @@
     var a = TRACK[i], b = TRACK[j];
     return { x: lerp(a[0], b[0], k), y: lerp(a[1], b[1], k), r: lerp(a[2], b[2], k), sx: lerp(a[3], b[3], k) / SPAN, sy: THICK };
   }
-  var START = { x: 960, y: 520, r: 0, sx: 1.7, sy: 1.7 }, END = poseAt(0);
-  var CUT = [[.15, .6], [.6, 1.05], [1.05, 1.5]], MATCH = [2.1, 2.9], FADE = [2.9, 3.3], INTRO = 3.3;
+  var START = { x: 960, y: 520, r: 0, sx: 1.7, sy: 1.7 };
+  // The outline takes off before the cut: it chases the drone's tracked flight path, the video starts
+  // underneath at PLAY with the drone already moving, and the panel crossfades to the real footage.
+  var CUT = [[.15, .6], [.6, 1.05], [1.05, 1.5]], MATCH = [1.9, 2.7], PLAY = 2.7, FADE = [2.75, 3.3], INTRO = 3.3, LEAD = .4;
+  var V0 = (function () { var a = TRACK[0], b = TRACK[2]; return [(b[0] - a[0]) * FPS / 2, (b[1] - a[1]) * FPS / 2, (b[2] - a[2]) * FPS / 2, (b[3] - a[3]) * FPS / 2]; })();
+  function flightAt(vt) { // tracked pose, extrapolated backwards (up to LEAD s) before the video starts
+    if (vt >= 0) return poseAt(vt);
+    vt = Math.max(vt, -LEAD); var a = TRACK[0];
+    return { x: a[0] + V0[0] * vt, y: a[1] + V0[1] * vt, r: a[2] + V0[2] * vt, sx: (a[3] + V0[3] * vt) / SPAN, sy: THICK };
+  }
+  var playing = false;
+  function startVideo() { if (playing) return; playing = true; var pr = vid.play(); if (pr && pr.catch) pr.catch(function () {}); }
   var parts = [].slice.call(svg.querySelectorAll('.hp')).map(function (g) {
     var f = g.getAttribute('data-flat').split(',').map(Number), path = g.firstElementChild;
     var pts = path.getAttribute('d').match(/-?\d+(\.\d+)?/g).map(Number), cx = 0, cy = 0;
@@ -435,6 +456,8 @@
     });
     op($('htool'), t > CUT[0][0] && t < CUT[2][1] ? 1 : 0);
     op($('hsheet'), ease(seg(t, 0, .2)) * (1 - seg(t, 1.5, 1.8)));
+    if (t >= PLAY) startVideo();
+    var END = flightAt(playing && vid.currentTime > 0 ? vid.currentTime : Math.min(t - PLAY, 0));
     var k = ease(seg(t, MATCH[0], MATCH[1]));
     pose({ x: lerp(START.x, END.x, k), y: lerp(START.y, END.y, k), r: lerp(START.r, END.r, k), sx: lerp(START.sx, END.sx, k), sy: lerp(START.sy, END.sy, k) });
     op($('hdrone'), ease(seg(t, 0, .15)));
@@ -444,7 +467,7 @@
   }
   function track(time) {
     pose(poseAt(time));
-    op($('hdrone'), 1 - seg(time, .25, (TRACK.length - 1) / FPS));
+    op($('hdrone'), 1 - seg(time, .5, (TRACK.length - 1) / FPS));
   }
   var phase = 'intro', t0 = null, outT = null;
   function frame(ts) {
@@ -452,14 +475,14 @@
     if (phase === 'intro') {
       var t = (ts - t0) / 1000;
       intro(Math.min(t, INTRO));
-      if (t >= INTRO) { phase = 'video'; var pr = vid.play(); if (pr && pr.catch) pr.catch(function () {}); }
+      if (t >= INTRO) { phase = 'video'; startVideo(); }
     } else if (phase === 'video') {
       track(vid.currentTime);
       if (vid.ended || (vid.duration && vid.currentTime > vid.duration - 0.5)) { phase = 'outro'; outT = ts; }
     } else if (phase === 'outro') {
       var k = ease(seg((ts - outT) / 1000, 0, .5));
       op($('hpanel'), k);
-      if (k >= 1) { vid.pause(); vid.currentTime = 0; phase = 'intro'; t0 = ts; }
+      if (k >= 1) { vid.pause(); vid.currentTime = 0; playing = false; phase = 'intro'; t0 = ts; }
     }
     requestAnimationFrame(frame);
   }
@@ -480,6 +503,15 @@
     var b = f.querySelector('.btn.slide'); b.classList.add('on'); b.setAttribute('aria-label', 'Coming soon');
     clearTimeout(f._t); f._t = setTimeout(function () { b.classList.remove('on'); b.removeAttribute('aria-label'); }, 2600);
   });
+})();
+</script>
+<script>
+(function () {
+  // Shift the grid so its lines meet the footer border exactly instead of leaving a thin sliver above it
+  var main = document.querySelector('main'), reach = document.querySelector('section.reach');
+  if (!main || !reach) return;
+  function align() { main.style.setProperty('--grid-y', (Math.round(reach.getBoundingClientRect().top - main.getBoundingClientRect().top) % 44) + 'px'); }
+  addEventListener('resize', align); addEventListener('load', align); align();
 })();
 </script>
 </body>
