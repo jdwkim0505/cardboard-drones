@@ -97,7 +97,7 @@
 
   footer { background:var(--ivory); color:var(--midnight); overflow:hidden; border-top:1px solid var(--rule); }
   footer .base { display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; padding-block:16px; color:var(--ink-soft); }
-  footer .giant { font-family:var(--display); font-size:40vw; line-height:.7; text-align:center; letter-spacing:-.005em; color:var(--midnight); white-space:nowrap; margin:clamp(16px,3vw,40px) 0 0; padding-top:.04em; user-select:none; }
+  footer .giant { font-family:var(--display); font-size:40vw; line-height:.7; text-align:center; letter-spacing:-.005em; color:rgba(24,47,59,.06); -webkit-text-stroke:1px rgba(24,47,59,.28); -webkit-mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.35) 100%); mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.35) 100%); white-space:nowrap; margin:clamp(16px,3vw,40px) 0 0; padding-top:.04em; user-select:none; }
 
   @media (max-width: 860px) {
     .part .grid { grid-template-columns:1fr 1fr; }
