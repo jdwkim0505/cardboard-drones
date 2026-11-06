@@ -33,7 +33,7 @@ Not yet set up for controlled data: don't store ITAR drawings or CUI here.
    users can sign in.
 4. **Authentication → URL Configuration**: set Site URL to `https://suhoindustries.com`
    and add `https://suhoindustries.com/dashboard.html` to Redirect URLs.
-5. **Project Settings → API**: copy the Project URL and the `anon` `public` key into
+5. **Project Settings → API Keys**: copy the Project URL and the publishable key (`sb_publishable_…`) into
    `js/config.js`, commit and push. (The anon key is safe to publish; the database's
    row-level security keeps everything private to the team.)
 

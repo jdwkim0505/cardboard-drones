@@ -3,5 +3,5 @@
 // (supabase/schema.sql) is what keeps the data private.
 window.SUHO_CONFIG = {
   supabaseUrl: '',      // e.g. 'https://abcdefgh.supabase.co'
-  supabaseAnonKey: ''   // the "anon public" key
+  supabaseAnonKey: ''   // the publishable key (sb_publishable_...) or legacy anon key
 };
