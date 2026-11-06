@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Request a Quote · Suho Industries</title>
+<link rel="icon" type="image/svg+xml" href="media/favicon.svg?v=2">
+<meta name="description" content="Send Suho Industries your parts list. We source compliant components from vetted NDAA-compliant US and allied suppliers, from prototype to production volumes.">
+<style>
+  :root {
+    --bg: #ffffff; --surface: #f2f5fa; --ink: #0a1f44; --muted: #4a5a78; --line: #d5dce8; --accent: #0a1f44;
+    --max: 1120px;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 16px/1.6 "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  main { background-image: linear-gradient(rgba(10,31,68,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(10,31,68,.07) 1px, transparent 1px); background-size: 44px 44px; }
+  a { color: inherit; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+  .label { font: 500 12px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  header.nav { position: sticky; top: 0; z-index: 10; background: var(--bg); border-bottom: 1px solid var(--line); }
+  header.nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+  .brand img { height: 40px; width: auto; display: block; }
+  .links { display: flex; gap: 28px; }
+  .links a { font: 500 12px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; text-decoration: none; color: var(--muted); }
+  .links a:hover, .links a[aria-current] { color: var(--ink); }
+  h1 { font-size: clamp(34px, 5.4vw, 60px); line-height: 1.04; letter-spacing: -0.03em; font-weight: 600; margin: 20px 0 20px; max-width: 18ch; }
+  h2 { font-size: 20px; line-height: 1.3; font-weight: 600; margin: 0 0 6px; }
+  .sub { font-size: 18px; color: var(--muted); max-width: 62ch; margin: 0; }
+  .hero { padding: 64px 0 40px; }
+  .steps { list-style: none; margin: 36px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 2px solid var(--ink); background: var(--bg); }
+  .steps li { padding: 16px 18px; display: flex; flex-direction: column; gap: 6px; font-size: 15px; color: var(--muted); }
+  .steps li + li { border-left: 1px solid var(--line); }
+  .steps b { color: var(--ink); font-weight: 600; }
+
+  form { padding: 0 0 88px; }
+  fieldset { border: 2px solid var(--ink); background: var(--bg); margin: 0 0 24px; padding: 24px; min-width: 0; }
+  legend { padding: 0 8px; margin-left: -8px; }
+  .hint { color: var(--muted); font-size: 14px; margin: 0 0 18px; }
+  .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 20px; }
+  .field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  .field.full { grid-column: 1 / -1; }
+  label, .flabel { font-size: 14px; font-weight: 600; }
+  label .opt { font-weight: 400; color: var(--muted); }
+  input[type=text], input[type=email], input[type=number], input[type=date], select, textarea {
+    width: 100%; padding: 10px 12px; font: 15px/1.3 inherit; font-family: inherit; color: var(--ink);
+    background: var(--bg); border: 1px solid var(--ink); border-radius: 0;
+  }
+  textarea { min-height: 96px; resize: vertical; }
+  input:focus, select:focus, textarea:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+  .checks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 20px; }
+  .checks label { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; font-size: 15px; }
+  .checks input { margin-top: 4px; accent-color: var(--ink); }
+
+  .part { border: 1px solid var(--line); background: var(--surface); padding: 16px; margin-bottom: 14px; position: relative; }
+  .part .grid { grid-template-columns: 2fr 1.4fr 1.2fr 0.8fr 1fr; gap: 12px; }
+  .part-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .rm { background: none; border: 0; color: var(--muted); font: 500 11px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; cursor: pointer; padding: 4px; }
+  .rm:hover { color: var(--ink); }
+
+  .btn { display: inline-block; padding: 13px 22px; font: 500 12px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; text-decoration: none; border: 1px solid var(--ink); background: var(--bg); color: var(--ink); cursor: pointer; }
+  .btn.primary { background: var(--ink); color: var(--bg); }
+  .actions { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+  .warn { border-left: 4px solid var(--ink); background: var(--surface); padding: 14px 16px; font-size: 14px; color: var(--ink); margin: 0 0 18px; }
+  .done { display: none; border: 2px solid var(--ink); background: var(--bg); padding: 24px; margin-bottom: 24px; }
+  .done.on { display: block; }
+  .done p { margin: 8px 0 0; color: var(--muted); }
+
+  footer { padding: 16px 0; background: var(--bg); border-top: 1px solid var(--line); }
+
+  @media (max-width: 860px) {
+    .part .grid { grid-template-columns: 1fr 1fr; }
+    .part .grid .field:first-child { grid-column: 1 / -1; }
+  }
+  @media (max-width: 640px) {
+    .wrap { padding: 0 16px; }
+    .grid, .checks, .steps { grid-template-columns: 1fr; }
+    .steps li + li { border-left: 0; border-top: 1px solid var(--line); }
+    fieldset { padding: 18px 16px; }
+    .links { gap: 16px; } .links a { font-size: 11px; letter-spacing: .08em; } .brand img { height: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html"><img src="media/logo.svg?v=2" alt="Suho Industries"></a>
+    <nav class="links" aria-label="Site">
+      <a href="index.html">Home</a>
+      <a href="quote.html" aria-current="page">Get a quote</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div class="label">Request a quote</div>
+      <h1>Send us your parts list. We handle the sourcing.</h1>
+      <p class="sub">Suho sources compliant components for defense hardware teams through vetted NDAA-compliant US and allied suppliers, from prototype quantities to production volumes. You focus on the platform.</p>
+      <ol class="steps">
+        <li><span class="label">01</span><b>Tell us what you need</b>Parts, quantities, timeline and compliance requirements.</li>
+        <li><span class="label">02</span><b>We quote within 48 hours</b>We match each part to qualified suppliers and send one consolidated quote.</li>
+        <li><span class="label">03</span><b>Parts arrive with paperwork</b>Inspected, with certificates of conformance and the documentation you ask for.</li>
+      </ol>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="done" id="done" role="status" tabindex="-1">
+      <h2>Your email app should now be open with the request filled in.</h2>
+      <p>Press send and we'll reply within 48 hours. If nothing opened, email <a href="mailto:suhoindustries@gmail.com">suhoindustries@gmail.com</a> and paste the summary below, or <button type="button" class="rm" id="copy">copy the summary</button>.</p>
+    </div>
+
+    <form id="rfq" novalidate>
+      <fieldset>
+        <legend class="label">About you</legend>
+        <div class="grid">
+          <div class="field"><label for="name">Name</label><input id="name" name="Name" type="text" required autocomplete="name"></div>
+          <div class="field"><label for="email">Work email</label><input id="email" name="Email" type="email" required autocomplete="email"></div>
+          <div class="field"><label for="company">Company</label><input id="company" name="Company" type="text" required autocomplete="organization"></div>
+          <div class="field"><label for="role">Role <span class="opt">(optional)</span></label><input id="role" name="Role" type="text" autocomplete="organization-title"></div>
+          <div class="field full"><label for="platform">What are you building? <span class="opt">(optional)</span></label><input id="platform" name="Platform" type="text" placeholder="e.g. Group 2 fixed-wing UAS, counter-UAS interceptor, USV"></div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend class="label">Parts</legend>
+        <p class="hint">One row per part. Rough is fine; we'll follow up on details.</p>
+        <div id="parts"></div>
+        <button type="button" class="btn" id="add">+ Add another part</button>
+      </fieldset>
+
+      <fieldset>
+        <legend class="label">Program</legend>
+        <div class="grid">
+          <div class="field">
+            <label for="stage">Stage</label>
+            <select id="stage" name="Stage">
+              <option>Prototype (1 to 50 units)</option>
+              <option>Low-rate production (50 to 1,000)</option>
+              <option>Production (1,000+)</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+          <div class="field"><label for="need">Need parts by <span class="opt">(optional)</span></label><input id="need" name="Need by" type="date"></div>
+          <div class="field full">
+            <label for="sourcing">Sourcing preference</label>
+            <select id="sourcing" name="Sourcing">
+              <option>US or allied suppliers are fine</option>
+              <option>US-made only</option>
+              <option>Not sure, advise us</option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend class="label">Compliance</legend>
+        <p class="hint">Check everything that applies. If you're unsure, leave it blank and we'll ask.</p>
+        <div class="checks" id="compliance">
+          <label><input type="checkbox" value="NDAA-compliant (no covered foreign components)"> NDAA-compliant parts</label>
+          <label><input type="checkbox" value="Blue UAS framework components"> Blue UAS framework components</label>
+          <label><input type="checkbox" value="Some parts are ITAR-controlled"> Some parts are ITAR-controlled</label>
+          <label><input type="checkbox" value="Drawings contain CUI"> Drawings contain CUI</label>
+          <label><input type="checkbox" value="AS9100 or ISO 9001 supplier required"> AS9100 / ISO 9001 supplier required</label>
+          <label><input type="checkbox" value="DFARS specialty metals"> DFARS specialty metals</label>
+        </div>
+        <div class="flabel" style="margin-top:20px">Paperwork you need with delivery</div>
+        <div class="checks" id="docs" style="margin-top:10px">
+          <label><input type="checkbox" value="Certificate of conformance"> Certificate of conformance</label>
+          <label><input type="checkbox" value="First article inspection report"> First article inspection (FAI)</label>
+          <label><input type="checkbox" value="Material certifications"> Material certifications</label>
+          <label><input type="checkbox" value="Country-of-origin documentation"> Country-of-origin documentation</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend class="label">Files and notes</legend>
+        <p class="warn"><b>Don't attach ITAR-controlled or CUI drawings to email.</b> Send the request first. For controlled files, we'll set up a secure transfer and confirm export-control handling before anything is shared. Non-controlled files (STEP, PDF drawings, BOM spreadsheets) can be attached to the email this form opens.</p>
+        <div class="field full"><label for="notes">Anything else <span class="opt">(optional)</span></label><textarea id="notes" name="Notes" placeholder="Tolerances, finishes, target unit cost, current supplier problems, links to non-controlled files"></textarea></div>
+      </fieldset>
+
+      <div class="actions">
+        <button type="submit" class="btn primary">Send request</button>
+        <span class="hint" id="err" style="margin:0" role="alert"></span>
+      </div>
+    </form>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap label"><span>&copy; 2026 Suho Industries, Inc.</span></div>
+</footer>
+
+<template id="part-tpl">
+  <div class="part">
+    <div class="part-head"><span class="label">Part <span class="n"></span></span><button type="button" class="rm">Remove</button></div>
+    <div class="grid">
+      <div class="field"><label>Part name or number</label><input type="text" data-k="Part" placeholder="e.g. Motor mount, BL4416 motor"></div>
+      <div class="field"><label>Type / process</label>
+        <select data-k="Type">
+          <option>CNC machined</option>
+          <option>Sheet metal</option>
+          <option>Laser / waterjet cut</option>
+          <option>3D printed</option>
+          <option>Injection molded</option>
+          <option>Composite</option>
+          <option>PCB / PCBA</option>
+          <option>Cable / harness</option>
+          <option>Off-the-shelf component (motor, ESC, GPS, battery...)</option>
+          <option>Other / not sure</option>
+        </select>
+      </div>
+      <div class="field"><label>Material <span class="opt">(optional)</span></label><input type="text" data-k="Material" placeholder="e.g. 6061-T6"></div>
+      <div class="field"><label>Quantity</label><input type="number" min="1" data-k="Qty" placeholder="100"></div>
+      <div class="field"><label>Repeat?</label>
+        <select data-k="Repeat"><option>One-time</option><option>Monthly</option><option>Quarterly</option><option>Not sure</option></select>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+(function () {
+  var TO = 'suhoindustries@gmail.com';
+  var parts = document.getElementById('parts'), tpl = document.getElementById('part-tpl');
+  var form = document.getElementById('rfq'), err = document.getElementById('err'), done = document.getElementById('done');
+  var lastSummary = '';
+
+  function renumber() {
+    var rows = parts.querySelectorAll('.part');
+    rows.forEach(function (r, i) {
+      r.querySelector('.n').textContent = i + 1;
+      r.querySelector('.rm').style.visibility = rows.length > 1 ? 'visible' : 'hidden';
+    });
+  }
+  function addPart() {
+    var node = tpl.content.firstElementChild.cloneNode(true);
+    node.querySelector('.rm').addEventListener('click', function () { node.remove(); renumber(); });
+    parts.appendChild(node); renumber();
+    return node;
+  }
+  document.getElementById('add').addEventListener('click', function () { addPart().querySelector('input').focus(); });
+  addPart();
+
+  function val(id) { return document.getElementById(id).value.trim(); }
+  function checked(id) { return Array.prototype.map.call(document.querySelectorAll('#' + id + ' input:checked'), function (c) { return c.value; }); }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    err.textContent = '';
+    var missing = ['name', 'email', 'company'].filter(function (id) { return !val(id); });
+    if (missing.length) { err.textContent = 'Please fill in your name, email and company.'; document.getElementById(missing[0]).focus(); return; }
+    if (!document.getElementById('email').checkValidity()) { err.textContent = 'Please check your email address.'; document.getElementById('email').focus(); return; }
+
+    var rows = Array.prototype.map.call(parts.querySelectorAll('.part'), function (r) {
+      var o = {}; r.querySelectorAll('[data-k]').forEach(function (f) { o[f.dataset.k] = f.value.trim(); }); return o;
+    }).filter(function (o) { return o.Part || o.Qty; });
+    if (!rows.length) { err.textContent = 'Add at least one part with a name or quantity.'; parts.querySelector('input').focus(); return; }
+
+    var L = [];
+    L.push('REQUEST FOR QUOTE');
+    L.push('');
+    L.push('Name: ' + val('name'));
+    L.push('Email: ' + val('email'));
+    L.push('Company: ' + val('company'));
+    if (val('role')) L.push('Role: ' + val('role'));
+    if (val('platform')) L.push('Building: ' + val('platform'));
+    L.push('');
+    L.push('PARTS');
+    rows.forEach(function (o, i) {
+      L.push((i + 1) + '. ' + (o.Part || '(unnamed)') + ' | ' + o.Type + (o.Material ? ' | ' + o.Material : '') + ' | Qty ' + (o.Qty || '?') + ' | ' + o.Repeat);
+    });
+    L.push('');
+    L.push('Stage: ' + val('stage'));
+    if (val('need')) L.push('Need by: ' + val('need'));
+    L.push('Sourcing: ' + val('sourcing'));
+    var comp = checked('compliance'), docs = checked('docs');
+    L.push('Compliance: ' + (comp.length ? comp.join('; ') : 'not specified'));
+    L.push('Paperwork: ' + (docs.length ? docs.join('; ') : 'not specified'));
+    if (val('notes')) { L.push(''); L.push('Notes: ' + val('notes')); }
+    L.push('');
+    L.push('(Do not attach ITAR-controlled or CUI drawings. Suho will arrange a secure transfer.)');
+
+    lastSummary = L.join('\n');
+    var subject = 'RFQ: ' + val('company') + ' (' + rows.length + ' part' + (rows.length > 1 ? 's' : '') + ')';
+    window.location.href = 'mailto:' + TO + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lastSummary);
+    done.classList.add('on'); done.focus();
+  });
+
+  document.getElementById('copy').addEventListener('click', function () {
+    var b = this;
+    try { navigator.clipboard.writeText(lastSummary).then(function () { b.textContent = 'copied'; }); } catch (e) { b.textContent = 'copy failed'; }
+  });
+})();
+</script>
+</body>
+</html>
