@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Dashboard · Suho Industries</title>
+<link rel="icon" type="image/svg+xml" href="media/favicon.svg?v=2">
+<style>
+  :root {
+    --bg: #ffffff; --surface: #f2f5fa; --ink: #0a1f44; --muted: #4a5a78; --line: #d5dce8;
+    --good: #1f7a4d; --warn: #a15c00; --bad: #a3242f; --info: #2b5aa8;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.5 var(--sans); -webkit-font-smoothing: antialiased; }
+  header.nav { border-bottom: 1px solid var(--line); }
+  header.nav .in { max-width: 1180px; margin: 0 auto; padding: 0 24px; height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  header.nav img { height: 34px; display: block; }
+  .who { display: flex; gap: 12px; align-items: center; font-size: 13px; color: var(--muted); min-width: 0; }
+  .who span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 28px 24px 64px; display: flex; flex-direction: column; gap: 20px; }
+  .label { font: 500 11px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  h1 { font-size: 26px; line-height: 1.15; letter-spacing: -.02em; margin: 8px 0 0; }
+  .top { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
+  .tabs { display: flex; border: 1px solid var(--ink); }
+  .tabs button { font: 500 12px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; padding: 11px 16px; background: var(--bg); color: var(--ink); border: 0; cursor: pointer; }
+  .tabs button + button { border-left: 1px solid var(--ink); }
+  .tabs button[aria-selected="true"] { background: var(--ink); color: var(--bg); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { display: inline-flex; gap: 8px; align-items: baseline; border: 1px solid var(--line); background: var(--surface); padding: 6px 10px; font: 13px var(--sans); cursor: pointer; color: var(--ink); }
+  .chip b { font-variant-numeric: tabular-nums; }
+  .chip[aria-pressed="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+  .bar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .bar input[type=search] { flex: 1; min-width: 0; max-width: 360px; }
+  input, select, textarea { font: 14px/1.3 var(--sans); color: var(--ink); background: var(--bg); border: 1px solid var(--muted); border-radius: 0; padding: 8px 10px; width: 100%; }
+  textarea { min-height: 70px; resize: vertical; }
+  input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible { outline: 2px solid var(--info); outline-offset: 1px; }
+  .btn { font: 500 12px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; padding: 11px 16px; border: 1px solid var(--ink); background: var(--bg); color: var(--ink); cursor: pointer; white-space: nowrap; }
+  .btn.primary { background: var(--ink); color: var(--bg); }
+  .btn.danger { border-color: var(--bad); color: var(--bad); }
+  .btn.small { padding: 8px 10px; font-size: 11px; }
+  .btn:disabled { opacity: .45; cursor: not-allowed; }
+  .note { font-size: 13px; color: var(--muted); margin: 0; }
+  .note.err { color: var(--bad); }
+  .panel { border: 2px solid var(--ink); background: var(--bg); padding: 18px; display: flex; flex-direction: column; gap: 14px; }
+  .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 16px; }
+  .f { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+  .f.wide { grid-column: span 2; } .f.full { grid-column: 1 / -1; }
+  .f > span { font-size: 13px; font-weight: 600; }
+  .checks { display: flex; flex-wrap: wrap; gap: 6px 16px; }
+  .checks label { display: flex; gap: 6px; align-items: center; font-size: 14px; }
+  .checks input { width: auto; accent-color: var(--ink); }
+  .row-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  pre.details { margin: 0; padding: 12px; background: var(--surface); border: 1px solid var(--line); font: 12px/1.5 var(--mono); white-space: pre-wrap; overflow-x: auto; }
+  .tablebox { overflow-x: auto; border: 1px solid var(--line); }
+  table { border-collapse: collapse; width: 100%; min-width: 760px; font-size: 14px; }
+  th { text-align: left; font: 500 11px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); padding: 12px; border-bottom: 1px solid var(--line); background: var(--surface); }
+  td { padding: 11px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr.click { cursor: pointer; } tr.click:hover td { background: var(--surface); }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .sub { color: var(--muted); font-size: 13px; }
+  .pill { display: inline-block; font: 500 11px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; padding: 5px 7px; border: 1px solid currentColor; white-space: nowrap; }
+  .s-good { color: var(--good); } .s-warn { color: var(--warn); } .s-bad { color: var(--bad); } .s-info { color: var(--info); } .s-mute { color: var(--muted); }
+  .tags { display: flex; flex-wrap: wrap; gap: 4px; }
+  .tag { font-size: 12px; padding: 2px 6px; background: var(--surface); border: 1px solid var(--line); white-space: nowrap; }
+  .tag.ctrl { border-color: var(--bad); color: var(--bad); }
+  .tag.web { border-color: var(--info); color: var(--info); }
+  .empty { padding: 36px 18px; text-align: center; color: var(--muted); }
+  .empty b { color: var(--ink); display: block; margin-bottom: 4px; font-size: 16px; }
+  .gate { max-width: 420px; margin: 72px auto; padding: 0 24px; display: flex; flex-direction: column; gap: 16px; }
+  .gate form { display: flex; flex-direction: column; gap: 12px; }
+  [hidden] { display: none !important; }
+  @media (max-width: 760px) { .grid { grid-template-columns: 1fr 1fr; } .f.wide { grid-column: 1 / -1; } }
+  @media (max-width: 480px) { .grid { grid-template-columns: 1fr; } .tabs { width: 100%; } .tabs button { flex: 1; } .wrap, header.nav .in { padding-left: 16px; padding-right: 16px; } .who span { display: none; } }
+</style>
+</head>
+<body>
+
+<header class="nav"><div class="in">
+  <a href="index.html"><img src="media/logo.svg?v=2" alt="Suho Industries"></a>
+  <div class="who" id="who" hidden><span id="who-email"></span><button class="btn small" id="signout">Sign out</button></div>
+</div></header>
+
+<!-- Signed out -->
+<section class="gate" id="gate" hidden>
+  <div class="label">Team dashboard</div>
+  <h1>Sign in</h1>
+  <p class="note">Enter your team email and we'll send a one-time sign-in link.</p>
+  <form id="login">
+    <label class="f"><span>Email</span><input id="login-email" type="email" required autocomplete="email"></label>
+    <button class="btn primary" type="submit">Email me a sign-in link</button>
+    <p class="note" id="login-msg" role="status"></p>
+  </form>
+</section>
+
+<!-- Not configured / not on team -->
+<section class="gate" id="blocked" hidden>
+  <div class="label">Team dashboard</div>
+  <h1 id="blocked-title"></h1>
+  <p class="note" id="blocked-msg"></p>
+</section>
+
+<!-- Signed in -->
+<div class="wrap" id="app" hidden>
+  <div class="top">
+    <div><div class="label">Suho Industries · team only</div><h1>Sourcing dashboard</h1></div>
+    <div class="tabs" role="tablist">
+      <button role="tab" id="tab-requests" aria-selected="true">Quote requests</button>
+      <button role="tab" id="tab-suppliers" aria-selected="false">Suppliers</button>
+    </div>
+  </div>
+  <div class="chips" id="chips"></div>
+  <div class="bar">
+    <input type="search" id="q" placeholder="Search" aria-label="Search">
+    <button class="btn primary" id="new">+ New request</button>
+    <span class="note" id="status"></span>
+  </div>
+  <div class="panel" id="panel" hidden></div>
+  <div class="tablebox"><table><thead id="thead"></thead><tbody id="tbody"></tbody></table></div>
+  <p class="note">Don't store ITAR-controlled drawings or CUI here. This dashboard is not yet set up for controlled data; note where controlled files live instead.</p>
+</div>
+
+<script src="js/config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"></script>
+<script>
+(function () {
+  var REQ_STAGES = [['New','s-info'],['Quoting','s-warn'],['Quoted','s-warn'],['Won','s-good'],['In production','s-good'],['Delivered','s-mute'],['Lost','s-bad']];
+  var SUP_STATUS = [['Prospect','s-mute'],['Contacted','s-info'],['Trial job','s-warn'],['Approved','s-good'],['Paused','s-bad']];
+  var PROCESSES = ['CNC machining','Sheet metal','Laser/waterjet','3D printing','Injection molding','Composites','PCB/PCBA','Cable/harness','Motors/ESCs','GNSS/RF','Batteries','Assembly'];
+  var CERTS = ['ITAR registered','AS9100','ISO 9001','CMMC L2','NDAA-compliant','US persons only'];
+  var REQ_FLAGS = ['NDAA','Blue UAS','ITAR','CUI','AS9100 needed','US-made only'];
+
+  var $ = function (id) { return document.getElementById(id); };
+  var state = { tab: 'requests', filter: null, q: '', requests: [], suppliers: [], editing: null };
+  var sb = null;
+
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]; }); }
+  function cls(list, v) { for (var i = 0; i < list.length; i++) if (list[i][0] === v) return list[i][1]; return 's-mute'; }
+  function money(n) { return n ? '$' + Number(n).toLocaleString('en-US', { maximumFractionDigits: 0 }) : ''; }
+  function show(id) { ['gate', 'blocked', 'app'].forEach(function (s) { $(s).hidden = s !== id; }); }
+  function block(title, msg) { $('blocked-title').textContent = title; $('blocked-msg').textContent = msg; show('blocked'); }
+  function setStatus(t, err) { $('status').textContent = t; $('status').className = 'note' + (err ? ' err' : ''); }
+
+  var cfg = window.SUHO_CONFIG || {};
+  if (!cfg.supabaseUrl || !cfg.supabaseAnonKey || !window.supabase) {
+    block('Not set up yet', 'Add your Supabase project URL and anon key to js/config.js. See the README for the setup steps.');
+    return;
+  }
+  sb = window.supabase.createClient(cfg.supabaseUrl, cfg.supabaseAnonKey);
+
+  // ---- auth
+  $('login').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var email = $('login-email').value.trim(), msg = $('login-msg');
+    if (!email) return;
+    msg.className = 'note'; msg.textContent = 'Sending…';
+    sb.auth.signInWithOtp({ email: email, options: { emailRedirectTo: location.origin + location.pathname, shouldCreateUser: false } })
+      .then(function (r) {
+        if (r.error) { msg.className = 'note err'; msg.textContent = /signups|not allowed|not found/i.test(r.error.message) ? 'That email isn\'t on the team. Ask a founder to invite it in Supabase.' : r.error.message; }
+        else msg.textContent = 'Check ' + email + ' for a sign-in link. It works once.';
+      });
+  });
+  $('signout').onclick = function () { sb.auth.signOut(); };
+
+  var started = false;
+  function onSession(session) {
+    if (!session) { started = false; $('who').hidden = true; show('gate'); return; }
+    $('who').hidden = false; $('who-email').textContent = session.user.email;
+    if (started) return; started = true;
+    sb.from('team').select('email').then(function (r) {
+      if (r.error || !r.data || !r.data.length) {
+        block('No access', session.user.email + ' is not on the team list. Ask a founder to add it in Supabase.');
+        return;
+      }
+      show('app'); route(); load();
+      sb.channel('suho').on('postgres_changes', { event: '*', schema: 'public' }, function () { load(); }).subscribe();
+    });
+  }
+  sb.auth.getSession().then(function (r) { onSession(r.data.session); });
+  sb.auth.onAuthStateChange(function (_e, session) { onSession(session); });
+
+  // ---- data
+  function load() {
+    setStatus('Loading…');
+    Promise.all([
+      sb.from('requests').select('*').order('created_at', { ascending: false }),
+      sb.from('suppliers').select('*').order('updated_at', { ascending: false })
+    ]).then(function (res) {
+      if (res[0].error || res[1].error) { setStatus('Couldn\'t load data: ' + (res[0].error || res[1].error).message, true); return; }
+      state.requests = res[0].data; state.suppliers = res[1].data;
+      setStatus('Up to date'); render();
+    });
+  }
+
+  // ---- tabs
+  function showTab(t) {
+    state.tab = t; state.filter = null; closeEditor();
+    $('tab-requests').setAttribute('aria-selected', t === 'requests');
+    $('tab-suppliers').setAttribute('aria-selected', t === 'suppliers');
+    $('new').textContent = t === 'requests' ? '+ New request' : '+ Add supplier';
+    render();
+  }
+  function route() { showTab(location.hash === '#suppliers' ? 'suppliers' : 'requests'); }
+  $('tab-requests').onclick = function () { location.hash = 'requests'; };
+  $('tab-suppliers').onclick = function () { location.hash = 'suppliers'; };
+  addEventListener('hashchange', function () { if (!$('app').hidden) route(); });
+  $('q').addEventListener('input', function () { state.q = this.value.toLowerCase(); render(); });
+  $('new').onclick = function () { openEditor(null); };
+
+  function supplierName(id) { for (var i = 0; i < state.suppliers.length; i++) if (state.suppliers[i].id === id) return state.suppliers[i].name; return ''; }
+  function tagList(arr, fn) { return '<div class="tags">' + (arr || []).map(fn).join('') + '</div>'; }
+
+  function render() {
+    var isReq = state.tab === 'requests', list = isReq ? state.requests : state.suppliers;
+    var defs = isReq ? REQ_STAGES : SUP_STATUS, key = isReq ? 'stage' : 'status';
+    var chips = '<button class="chip" data-f="" aria-pressed="' + !state.filter + '">All <b>' + list.length + '</b></button>';
+    defs.forEach(function (d) {
+      var n = list.filter(function (r) { return r[key] === d[0]; }).length;
+      chips += '<button class="chip" data-f="' + esc(d[0]) + '" aria-pressed="' + (state.filter === d[0]) + '"><span class="' + d[1] + '">●</span>' + esc(d[0]) + ' <b>' + n + '</b></button>';
+    });
+    if (isReq) {
+      var open = state.requests.filter(function (r) { return ['New', 'Quoting', 'Quoted'].indexOf(r.stage) !== -1; }).reduce(function (s, r) { return s + (Number(r.value) || 0); }, 0);
+      if (open) chips += '<span class="chip" style="cursor:default">Open pipeline <b>' + money(open) + '</b></span>';
+    }
+    $('chips').innerHTML = chips;
+    Array.prototype.forEach.call($('chips').querySelectorAll('button'), function (b) { b.onclick = function () { state.filter = b.dataset.f || null; render(); }; });
+
+    $('thead').innerHTML = isReq
+      ? '<tr><th>Company</th><th>Parts</th><th>Qty</th><th>Stage</th><th>Compliance</th><th>Supplier</th><th>Quote</th><th>Due</th></tr>'
+      : '<tr><th>Supplier</th><th>Location</th><th>Processes</th><th>Certifications</th><th>Status</th><th>Last contact</th></tr>';
+    var rows = list.filter(function (r) {
+      if (state.filter && r[key] !== state.filter) return false;
+      return !state.q || JSON.stringify(r).toLowerCase().indexOf(state.q) !== -1;
+    });
+    var html = rows.map(function (x) {
+      if (isReq) return '<tr class="click" data-id="' + esc(x.id) + '"><td><b>' + esc(x.company) + '</b>' + (x.source === 'quote-form' ? ' <span class="tag web">web</span>' : '') + '<div class="sub">' + esc(x.contact) + (x.email ? ' · ' + esc(x.email) : '') + '</div></td>' +
+        '<td>' + esc(x.parts) + '</td><td class="num">' + esc(x.qty) + '</td><td><span class="pill ' + cls(REQ_STAGES, x.stage) + '">' + esc(x.stage) + '</span></td>' +
+        '<td>' + tagList(x.flags, function (f) { return '<span class="tag' + (f === 'ITAR' || f === 'CUI' ? ' ctrl' : '') + '">' + esc(f) + '</span>'; }) + '</td>' +
+        '<td>' + esc(supplierName(x.supplier_id)) + '</td><td class="num">' + money(x.value) + '</td><td class="num">' + esc(x.due) + '</td></tr>';
+      return '<tr class="click" data-id="' + esc(x.id) + '"><td><b>' + esc(x.name) + '</b><div class="sub">' + esc(x.contact) + '</div></td><td>' + esc(x.location) + '</td>' +
+        '<td>' + tagList(x.processes, function (p) { return '<span class="tag">' + esc(p) + '</span>'; }) + '</td>' +
+        '<td>' + tagList(x.certs, function (c) { return '<span class="tag">' + esc(c) + '</span>'; }) + '</td>' +
+        '<td><span class="pill ' + cls(SUP_STATUS, x.status) + '">' + esc(x.status) + '</span></td><td class="num">' + esc(x.last_contact) + '</td></tr>';
+    }).join('');
+    if (!html) {
+      var none = list.length === 0;
+      html = '<tr><td colspan="' + (isReq ? 8 : 6) + '" class="empty"><b>' + (none ? (isReq ? 'No quote requests yet' : 'No suppliers yet') : 'Nothing matches') + '</b>' +
+        (none ? (isReq ? 'Requests from the website\'s quote page appear here automatically. Add ones from email with + New request.' : 'Add shops you visit or call with + Add supplier, then move them to Approved after a trial job.') : 'Clear the search or pick another filter.') + '</td></tr>';
+    }
+    $('tbody').innerHTML = html;
+    Array.prototype.forEach.call($('tbody').querySelectorAll('tr.click'), function (tr) { tr.onclick = function () { openEditor(tr.dataset.id); }; });
+  }
+
+  // ---- editor
+  function checks(name, opts, chosen) {
+    return '<div class="checks">' + opts.map(function (o, i) { return '<label><input type="checkbox" id="' + name + i + '" data-g="' + name + '" value="' + esc(o) + '"' + ((chosen || []).indexOf(o) !== -1 ? ' checked' : '') + '>' + esc(o) + '</label>'; }).join('') + '</div>';
+  }
+  function sel(id, opts, v) { return '<select id="' + id + '">' + opts.map(function (o) { o = Array.isArray(o) ? o : [o, o]; return '<option value="' + esc(o[0]) + '"' + (o[0] === v ? ' selected' : '') + '>' + esc(o[1]) + '</option>'; }).join('') + '</select>'; }
+  function inp(id, v, type, ph) { return '<input id="' + id + '" type="' + (type || 'text') + '" value="' + esc(v) + '"' + (ph ? ' placeholder="' + esc(ph) + '"' : '') + '>'; }
+  function group(name) { return Array.prototype.map.call(document.querySelectorAll('[data-g="' + name + '"]:checked'), function (c) { return c.value; }); }
+  function v(id) { return ($(id).value || '').trim(); }
+
+  function openEditor(id) {
+    var isReq = state.tab === 'requests', list = isReq ? state.requests : state.suppliers;
+    var x = (id && list.filter(function (r) { return r.id === id; })[0]) || {};
+    state.editing = id;
+    var h = '<div class="label">' + (id ? 'Edit' : 'New') + ' ' + (isReq ? 'quote request' : 'supplier') + '</div><div class="grid">';
+    if (isReq) {
+      h += '<label class="f"><span>Company</span>' + inp('e-company', x.company) + '</label>' +
+        '<label class="f"><span>Contact</span>' + inp('e-contact', x.contact, 'text', 'Name, role') + '</label>' +
+        '<label class="f"><span>Email</span>' + inp('e-email', x.email, 'email') + '</label>' +
+        '<label class="f wide"><span>Parts</span>' + inp('e-parts', x.parts, 'text', 'e.g. 4x CNC motor mounts, BL4416 motors') + '</label>' +
+        '<label class="f"><span>Stage</span>' + sel('e-stage', REQ_STAGES.map(function (s) { return s[0]; }), x.stage || 'New') + '</label>' +
+        '<label class="f"><span>Quantity</span>' + inp('e-qty', x.qty, 'text', 'e.g. 200') + '</label>' +
+        '<label class="f"><span>Supplier</span>' + sel('e-supplier', [['', '(none yet)']].concat(state.suppliers.map(function (s) { return [s.id, s.name]; })), x.supplier_id || '') + '</label>' +
+        '<label class="f"><span>Quote value (USD)</span>' + inp('e-value', x.value, 'number') + '</label>' +
+        '<label class="f"><span>Due</span>' + inp('e-due', x.due, 'date') + '</label>' +
+        '<div class="f full"><span>Compliance</span>' + checks('flags', REQ_FLAGS, x.flags) + '</div>' +
+        '<label class="f full"><span>Notes</span><textarea id="e-notes">' + esc(x.notes) + '</textarea></label>' +
+        (x.details ? '<div class="f full"><span>Submitted from the website</span><pre class="details">' + esc(x.details.summary || JSON.stringify(x.details, null, 2)) + '</pre></div>' : '');
+    } else {
+      h += '<label class="f"><span>Supplier</span>' + inp('e-name', x.name) + '</label>' +
+        '<label class="f"><span>Location</span>' + inp('e-location', x.location, 'text', 'City, state or country') + '</label>' +
+        '<label class="f"><span>Status</span>' + sel('e-status', SUP_STATUS.map(function (s) { return s[0]; }), x.status || 'Prospect') + '</label>' +
+        '<label class="f wide"><span>Contact</span>' + inp('e-contact', x.contact, 'text', 'Name, email, phone') + '</label>' +
+        '<label class="f"><span>Last contact</span>' + inp('e-last', x.last_contact, 'date') + '</label>' +
+        '<div class="f full"><span>Processes</span>' + checks('proc', PROCESSES, x.processes) + '</div>' +
+        '<div class="f full"><span>Certifications</span>' + checks('cert', CERTS, x.certs) + '</div>' +
+        '<label class="f full"><span>Notes</span><textarea id="e-notes" placeholder="Capacity, lead times, pricing, trial job result">' + esc(x.notes) + '</textarea></label>';
+    }
+    h += '</div><div class="row-actions"><button class="btn primary" id="e-save">Save</button><button class="btn" id="e-cancel">Cancel</button>' +
+      (id ? '<button class="btn danger" id="e-del">Delete</button>' : '') + '<span class="note" id="e-msg"></span></div>';
+    var p = $('panel'); p.innerHTML = h; p.hidden = false;
+    $('e-cancel').onclick = closeEditor;
+    $('e-save').onclick = function () { save(isReq, id); };
+    if (id) $('e-del').onclick = function () { del(isReq, id); };
+    p.querySelector('input,select').focus();
+  }
+  function closeEditor() { $('panel').hidden = true; state.editing = null; }
+  function fail(msg) { var m = $('e-msg'); m.className = 'note err'; m.textContent = msg; }
+
+  function save(isReq, id) {
+    var body;
+    if (isReq) {
+      if (!v('e-company')) return fail('Add the company name.');
+      body = { company: v('e-company'), contact: v('e-contact'), email: v('e-email') || null, stage: v('e-stage'), parts: v('e-parts'), qty: v('e-qty'),
+        supplier_id: v('e-supplier') || null, value: v('e-value') ? Number(v('e-value')) : null, due: v('e-due') || null, flags: group('flags'), notes: v('e-notes') };
+    } else {
+      if (!v('e-name')) return fail('Add the supplier name.');
+      body = { name: v('e-name'), location: v('e-location'), status: v('e-status'), contact: v('e-contact'), last_contact: v('e-last') || null,
+        processes: group('proc'), certs: group('cert'), notes: v('e-notes') };
+    }
+    var t = sb.from(isReq ? 'requests' : 'suppliers');
+    $('e-save').disabled = true; $('e-msg').className = 'note'; $('e-msg').textContent = 'Saving…';
+    (id ? t.update(body).eq('id', id) : t.insert(body)).then(function (r) {
+      if (r.error) { $('e-save').disabled = false; return fail('Couldn\'t save: ' + r.error.message); }
+      closeEditor(); load();
+    });
+  }
+  function del(isReq, id) {
+    var b = $('e-del');
+    if (!b.dataset.armed) { b.dataset.armed = '1'; b.textContent = 'Confirm delete'; return; }
+    b.disabled = true;
+    sb.from(isReq ? 'requests' : 'suppliers').delete().eq('id', id).then(function (r) {
+      if (r.error) { b.disabled = false; return fail('Couldn\'t delete: ' + r.error.message); }
+      closeEditor(); load();
+    });
+  }
+})();
+</script>
+</body>
+</html>
