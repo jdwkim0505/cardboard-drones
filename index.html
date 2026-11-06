@@ -31,7 +31,6 @@
   :root { --grid: linear-gradient(rgba(10,31,68,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(10,31,68,.07) 1px, transparent 1px); }
   main { background-image: var(--grid); background-size: 44px 44px; background-position: 0 var(--grid-y, 0px); }
   main, footer { position: relative; z-index: 1; }
-  .pipe-steps { background: var(--bg); }
   a { color: inherit; }
   .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
   .label { font: 500 12px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
@@ -134,21 +133,6 @@
   .facts dd { margin: 2px 0 0; color: var(--muted); }
 
 
-  .pipeline { margin: 0; }
-  #pipe { display: block; width: 100%; height: auto; border: 2px solid var(--ink); }
-  #pipe .hud { font: 500 15px var(--mono); letter-spacing: .14em; fill: #8d928c; }
-  #pipe .hud.acc { fill: #ffffff; }
-  #pipe .part > * { fill: #1a3566; stroke: #e8e9e4; stroke-width: 2; vector-effect: non-scaling-stroke; }
-  #pipe .part.bay > * { fill: #ffffff; stroke: #ffffff; }
-  #pipe .part.prop path { fill: none; stroke-width: 4; }
-  #pipe .flat .part:not(.bay) > * { stroke-dasharray: 7 5; }
-  .pipe-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 2px solid var(--ink); border-top: 0; }
-  .pipe-steps li { padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: var(--muted); position: relative; transition: color .3s; }
-  .pipe-steps li + li { border-left: 1px solid var(--line); }
-  .pipe-steps li { transition: color .3s, background .3s; }
-  .pipe-steps li.on { color: #ffffff; background: var(--ink); }
-  .pipe-steps li.on .label { color: #c9d4ea; }
-  @media (max-width: 560px) { .pipe-steps { grid-template-columns: 1fr 1fr; } .pipe-steps li:nth-child(3) { border-left: 0; } .pipe-steps li:nth-child(n+3) { border-top: 1px solid var(--line); } }
 
   .contact .wrap { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
   section.reach { background: var(--bg); border-top: 1px solid var(--line); padding: 24px 0 16px; }
@@ -200,7 +184,7 @@
       <p class="sub">Suho sources parts and assemblies for defense companies from a vetted network of NDAA-compliant US and allied suppliers. Supply chain management at scale.</p>
       <div class="ctas">
         <a class="btn primary" href="quote.html">Get a quote</a>
-        <a class="btn ghost" href="#overview">How it works</a>
+        <a class="btn ghost" href="#services">What we do</a>
       </div>
     </div>
   </section>
@@ -214,67 +198,6 @@
       <p class="sub">Managing suppliers shouldn't stand between defense companies and great platforms. Suho handles sourcing and compliance at every stage, turning dozens of relationships into one.</p>
     </div>
   </section>
-
-  <section id="overview">
-    <div class="wrap">
-      <div class="head">
-        <div class="label">How it works</div>
-      </div>
-      <figure class="pipeline" aria-label="Animation: a client's drone is broken down into its parts, the parts list goes out to a network of vetted suppliers, the suppliers ship compliant parts to the client's line, and the parts come together into finished drones.">
-        <svg id="pipe" viewBox="0 0 1200 600" role="img" aria-hidden="true">
-          <defs>
-            <pattern id="pg" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#163061" stroke-width="1"/></pattern>
-            <linearGradient id="scan" x1="0" x2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="0"/><stop offset="1" stop-color="#ffffff" stop-opacity=".55"/></linearGradient>
-          </defs>
-          <rect width="1200" height="600" fill="#0a1f44"/>
-          <rect width="1200" height="600" fill="url(#pg)"/>
-          <g stroke="#ffffff" stroke-width="2" fill="none">
-            <path d="M20 50V20H50M1150 20H1180V50M1180 550V580H1150M50 580H20V550"/>
-          </g>
-          <text x="40" y="52" class="hud acc">SUHO INDUSTRIES, INC.</text>
-          <text id="stage" x="40" y="566" class="hud acc"></text>
-
-          <g id="links" stroke="#3a5a94" stroke-width="1.5" stroke-dasharray="6 6"></g>
-          <g id="garages"></g>
-          <g id="hub">
-            <rect x="-26" y="-32" width="52" height="64" fill="#0f2650" stroke="#ffffff" stroke-width="2"/>
-            <path d="M-14 -16H14M-14 -4H14M-14 8H6" stroke="#ffffff" stroke-width="2"/>
-            <text y="56" class="hud acc" text-anchor="middle">PARTS LIST</text>
-          </g>
-          <g id="packets" fill="#ffffff"></g>
-          <g id="field">
-            <circle r="46" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="4 6"/>
-            <circle r="4" fill="#ffffff"/>
-            <path d="M-64 0H-52M52 0H64M0 -64V-52M0 52V64" stroke="#ffffff" stroke-width="2"/>
-            <text y="96" class="hud acc" text-anchor="middle">YOUR LINE</text>
-          </g>
-          <g id="boxes"></g>
-
-          <g id="sheet" fill="none" stroke="#6a85b5" stroke-width="1.5" stroke-dasharray="8 6">
-            <rect x="-300" y="-190" width="600" height="380"/>
-          </g>
-          <g id="drone">
-            <g class="part" data-flat="0,-130,0"><polygon points="0,-50 40,-22 40,40 0,56 -40,40 -40,-22"/></g>
-            <g class="part" data-flat="-40,70,22"><polygon points="-40,-22 -220,50 -220,74 -40,40"/></g>
-            <g class="part" data-flat="40,70,-22"><polygon points="40,-22 220,50 220,74 40,40"/></g>
-            <g class="part bay" data-flat="0,112,0"><rect x="-12" y="-22" width="24" height="38" rx="2"/></g>
-            <g class="part prop" data-flat="0,-24,0"><g id="propblade"><path d="M-24 64H24"/></g><circle cx="0" cy="64" r="5"/></g>
-          </g>
-          <rect id="scanbar" x="0" y="140" width="60" height="320" fill="url(#scan)"/>
-        </svg>
-        <ol class="pipe-steps">
-          <li data-s="0"><span class="label">01</span><b>Your platform</b></li>
-          <li data-s="1"><span class="label">02</span><b>Parts breakdown</b></li>
-          <li data-s="2"><span class="label">03</span><b>Supplier match</b></li>
-          <li data-s="3"><span class="label">04</span><b>Compliant delivery</b></li>
-        </ol>
-      </figure>
-    </div>
-  </section>
-
-
-
-
 
   <section id="services">
     <div class="wrap">
@@ -348,104 +271,6 @@
     <span>&copy; 2026 Suho Industries, Inc.</span>
   </div>
 </footer>
-
-
-<script>
-(function () {
-  var svg = document.getElementById('pipe'); if (!svg) return;
-  var NS = 'http://www.w3.org/2000/svg', T = 20;
-  var HUB = [360, 300], FIELD = [940, 300], R = 175;
-  function $(id) { return document.getElementById(id); }
-  function el(tag, attrs, parent) { var e = document.createElementNS(NS, tag); for (var k in attrs) e.setAttribute(k, attrs[k]); parent.appendChild(e); return e; }
-  function clamp(x) { return x < 0 ? 0 : x > 1 ? 1 : x; }
-  function seg(t, a, b) { return clamp((t - a) / (b - a)); }
-  function ease(x) { return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; }
-  function lerp(a, b, k) { return a + (b - a) * k; }
-
-  var gar = [], links = [], packets = [], boxes = [];
-  for (var i = 0; i < 6; i++) {
-    var a = -Math.PI / 2 + i * Math.PI / 3, x = HUB[0] + R * Math.cos(a), y = HUB[1] + R * Math.sin(a);
-    links.push(el('line', { x1: HUB[0], y1: HUB[1], x2: x, y2: y }, $('links')));
-    var g = el('g', {}, $('garages'));
-    el('path', { d: 'M-24 20V-8L-12 -20V-8L0 -20V-8L12 -20V-8L24 -20V20Z', fill: '#0f2650', stroke: '#8d928c', 'stroke-width': 2 }, g);
-    el('rect', { x: -6, y: 6, width: 12, height: 14, fill: 'none', stroke: '#8d928c', 'stroke-width': 2 }, g);
-    gar.push({ g: g, x: x, y: y });
-    packets.push(el('rect', { width: 8, height: 8, x: -4, y: -4 }, $('packets')));
-    boxes.push(el('rect', { width: 18, height: 12, x: -9, y: -6, fill: '#ffffff' }, $('boxes')));
-  }
-  var parts = [].slice.call(svg.querySelectorAll('.part')).map(function (p) {
-    var f = p.getAttribute('data-flat').split(',').map(Number), b = p.firstElementChild.getBBox();
-    return { el: p, dx: f[0], dy: f[1], r: f[2], cx: b.x + b.width / 2, cy: b.y + b.height / 2 };
-  });
-  var steps = [].slice.call(document.querySelectorAll('.pipe-steps li'));
-  var labels = ['01 // YOU BRING A PLATFORM', '02 // BROKEN DOWN BY PART, PROCESS AND MATERIAL', '03 // MATCHED TO VETTED NDAA-COMPLIANT SUPPLIERS', '04 // PARTS SHIP WITH COMPLIANCE PAPERWORK', '04 // DELIVERED TO YOUR LINE. PROTOTYPE TO PRODUCTION.'];
-
-  function op(e, v) { e.setAttribute('opacity', v.toFixed(3)); }
-  function render(t) {
-    // drone / kit parts
-    var dx = HUB[0], dy = HUB[1], sc = 1, o = 1, flat = 0, rot = 0;
-    if (t < 7.5) { o = ease(seg(t, 0, .8)); flat = ease(seg(t, 3.8, 5.2)); }
-    else if (t < 16.0) { var k = ease(seg(t, 7.5, 8.3)); o = 1 - k; sc = lerp(1, .15, k); flat = 1; }
-    else {
-      dx = FIELD[0]; dy = FIELD[1]; sc = .72; o = ease(seg(t, 16.0, 16.5)); flat = 1 - ease(seg(t, 16.6, 17.8));
-      var k2 = ease(seg(t, 17.9, 19.2));
-      sc = lerp(.72, .56, k2); dy = FIELD[1] - 50 * k2 + Math.sin(t * 3) * 4 * k2; dx = FIELD[0] + Math.sin(t * 1.7) * 6 * k2;
-      o *= 1 - seg(t, 19.4, 19.9);
-    }
-    $('drone').setAttribute('transform', 'translate(' + dx + ' ' + dy + ') rotate(' + rot + ') scale(' + sc + ')');
-    op($('drone'), o);
-    $('drone').classList.toggle('flat', flat > .5);
-    $('propblade').setAttribute('transform', 'translate(0 64) scale(' + (flat < .05 ? Math.cos(t * 40).toFixed(2) : 1) + ' 1) translate(0 -64)');
-    parts.forEach(function (p) {
-      p.el.setAttribute('transform', 'translate(' + p.dx * flat + ' ' + p.dy * flat + ') rotate(' + p.r * flat + ' ' + p.cx + ' ' + p.cy + ')');
-    });
-    $('sheet').setAttribute('transform', 'translate(' + HUB[0] + ' ' + HUB[1] + ')');
-    op($('sheet'), ease(seg(t, 4.6, 5.4)) * (1 - seg(t, 7.3, 7.8)));
-    // scan line
-    var s = seg(t, .9, 2.9);
-    $('scanbar').setAttribute('x', lerp(130, 530, ease(s)));
-    op($('scanbar'), s > 0 && s < 1 ? Math.sin(s * Math.PI) : 0);
-    // hub
-    $('hub').setAttribute('transform', 'translate(' + HUB[0] + ' ' + HUB[1] + ')');
-    op($('hub'), ease(seg(t, 8.0, 8.6)) * (1 - seg(t, 14.2, 15)));
-    // garages, links, packets, boxes
-    var gOut = 1 - seg(t, 15.4, 16);
-    gar.forEach(function (g, i) {
-      var pop = ease(seg(t, 8.4 + i * .15, 8.9 + i * .15));
-      g.g.setAttribute('transform', 'translate(' + g.x + ' ' + g.y + ') scale(' + (.6 + .4 * pop) + ')');
-      op(g.g, pop * gOut);
-      var lit = t > 10.4 + i * .12 && t < 15.4;
-      [].forEach.call(g.g.children, function (c) { c.setAttribute('stroke', lit ? '#ffffff' : '#8d928c'); });
-      var ln = links[i], d = ease(seg(t, 8.8 + i * .1, 9.6 + i * .1));
-      ln.setAttribute('x2', lerp(HUB[0], g.x, d)); ln.setAttribute('y2', lerp(HUB[1], g.y, d));
-      op(ln, (d > 0 ? 1 : 0) * (1 - seg(t, 14.2, 15)));
-      var pk = seg(t, 9.6 + i * .12, 10.4 + i * .12);
-      packets[i].setAttribute('transform', 'translate(' + lerp(HUB[0], g.x, ease(pk)) + ' ' + lerp(HUB[1], g.y, ease(pk)) + ')');
-      op(packets[i], pk > 0 && pk < 1 ? 1 : 0);
-      var bx = ease(seg(t, 12.6 + i * .25, 14.2 + i * .25));
-      var tx = FIELD[0] - 20 + (i % 3) * 20, ty = FIELD[1] + 6 - Math.floor(i / 3) * 14;
-      boxes[i].setAttribute('transform', 'translate(' + lerp(g.x, tx, bx) + ' ' + (lerp(g.y, ty, bx) - Math.sin(bx * Math.PI) * 40) + ')');
-      op(boxes[i], (bx > 0 ? 1 : 0) * (1 - seg(t, 15.5, 16.0)));
-    });
-    $('field').setAttribute('transform', 'translate(' + FIELD[0] + ' ' + FIELD[1] + ')');
-    op($('field'), ease(seg(t, 12, 12.6)) * (1 - seg(t, 15.5, 16.0)));
-    // captions
-    var sc5 = t < 3.5 ? 0 : t < 7.5 ? 1 : t < 12 ? 2 : t < 15.6 ? 3 : 4;
-    $('stage').textContent = labels[sc5];
-    steps.forEach(function (li, i) { li.classList.toggle('on', i === Math.min(sc5, 3)); });
-  }
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduce) { render(11); return; }
-  render(0);
-  var t0 = null;
-  function frame(ts) {
-    if (t0 === null) t0 = ts;
-    render(((ts - t0) / 1000) % T);
-    requestAnimationFrame(frame);
-  }
-  requestAnimationFrame(frame);
-})();
-</script>
 
 
 <script>
