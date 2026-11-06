@@ -9,7 +9,7 @@ Put the files in `media/` and replace the placeholder `<div class="ph ...">` wit
 
 ## Request-a-quote page
 
-`quote.html` is the sourcing request form (linked as "Get a quote" in the nav). There is
+`quote.html` is the sourcing request form (linked as "Partner with us" in the nav). There is
 no backend: submitting opens the visitor's email app with a pre-filled RFQ addressed to
 suhoindustries@gmail.com. The page tells visitors not to email ITAR-controlled or CUI
 drawings; those need a secure transfer arranged separately.
