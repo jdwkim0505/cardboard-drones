@@ -228,9 +228,13 @@
   </div>
 </template>
 
+<script src="js/config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <script>
 (function () {
   var TO = 'suhoindustries@gmail.com';
+  var cfg = window.SUHO_CONFIG || {}, sb = null;
+  try { if (cfg.supabaseUrl && cfg.supabaseAnonKey && window.supabase) sb = window.supabase.createClient(cfg.supabaseUrl, cfg.supabaseAnonKey, { auth: { persistSession: false } }); } catch (e) { sb = null; }
   var parts = document.getElementById('parts'), tpl = document.getElementById('part-tpl');
   var form = document.getElementById('rfq'), err = document.getElementById('err'), done = document.getElementById('done');
   var lastSummary = '';
@@ -292,8 +296,31 @@
 
     lastSummary = L.join('\n');
     var subject = 'RFQ: ' + val('company') + ' (' + rows.length + ' part' + (rows.length > 1 ? 's' : '') + ')';
-    window.location.href = 'mailto:' + TO + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lastSummary);
-    done.classList.add('on'); done.focus();
+    function viaEmail() {
+      window.location.href = 'mailto:' + TO + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lastSummary);
+      done.classList.add('on'); done.focus();
+    }
+    if (!sb) { viaEmail(); return; }
+
+    // Save straight to Suho's database. The public key can only add requests, never read them.
+    var FLAG = { 'NDAA-compliant (no covered foreign components)': 'NDAA', 'Blue UAS framework components': 'Blue UAS',
+      'Some parts are ITAR-controlled': 'ITAR', 'Drawings contain CUI': 'CUI', 'AS9100 or ISO 9001 supplier required': 'AS9100 needed' };
+    var flags = comp.map(function (c) { return FLAG[c]; }).filter(Boolean);
+    if (val('sourcing') === 'US-made only') flags.push('US-made only');
+    var btn = form.querySelector('button[type=submit]'); btn.disabled = true; btn.textContent = 'Sending…';
+    sb.from('requests').insert({
+      company: val('company'), contact: val('name') + (val('role') ? ', ' + val('role') : ''), email: val('email'),
+      parts: rows.map(function (o) { return o.Part || o.Type; }).join(', '),
+      qty: rows.map(function (o) { return o.Qty || '?'; }).join(' / '),
+      due: val('need') || null, flags: flags, stage: 'New', source: 'quote-form',
+      details: { summary: lastSummary, parts: rows, stage: val('stage'), sourcing: val('sourcing'), compliance: comp, paperwork: docs, platform: val('platform'), notes: val('notes') }
+    }).then(function (r) {
+      btn.disabled = false; btn.textContent = 'Send request';
+      if (r.error) { viaEmail(); return; }
+      form.hidden = true;
+      done.innerHTML = '<h2>Request received. Thank you!</h2><p>We\'ll reply to ' + val('email').replace(/[<>&"]/g, '') + ' within 48 hours. To share non-controlled files (STEP, PDF drawings, BOMs), reply to that email or write to <a href="mailto:' + TO + '">' + TO + '</a>.</p>';
+      done.classList.add('on'); done.focus(); window.scrollTo(0, 0);
+    });
   });
 
   document.getElementById('copy').addEventListener('click', function () {
