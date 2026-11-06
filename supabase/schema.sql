@@ -7,10 +7,10 @@ create table if not exists public.team (
   email text primary key
 );
 
--- Replace these with your two real sign-in emails before running.
+-- Team sign-in emails. To add someone later, run:
+--   insert into public.team (email) values ('their@email.com');
 insert into public.team (email) values
-  ('founder1@example.com'),
-  ('founder2@example.com')
+  ('jdwkim0505@gmail.com')
 on conflict do nothing;
 
 create table if not exists public.suppliers (
