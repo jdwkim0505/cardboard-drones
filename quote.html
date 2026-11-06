@@ -24,7 +24,8 @@
   * { box-sizing: border-box; }
   body { margin:0; background:var(--ivory); color:var(--charcoal); font-family:var(--sans); font-weight:300; font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased; }
   a { color: inherit; }
-  .wrap { max-width:1120px; margin:0 auto; padding-left:max(24px,env(safe-area-inset-left,0px)); padding-right:max(24px,env(safe-area-inset-right,0px)); }
+  .wrap { max-width:1600px;margin:0 auto;padding-left:max(24px,4.5vw,env(safe-area-inset-left,0px));padding-right:max(24px,4.5vw,env(safe-area-inset-right,0px)); }
+  .formwrap > form, .formwrap > .done { max-width:1120px; }
   .label { font-family:var(--sans); font-weight:500; font-size:12px; line-height:1; letter-spacing:.22em; text-transform:uppercase; color:var(--oxblood); }
 
   header.nav { background:var(--midnight); color:var(--ivory); }
