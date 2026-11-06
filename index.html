@@ -45,6 +45,9 @@
   .links { display: flex; gap: 28px; }
   .links a { font: 500 12px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; text-decoration: none; color: var(--muted); }
   .links a:hover { color: var(--ink); }
+  .links { align-items: center; }
+  .links a.nav-cta { padding: 11px 16px; background: var(--ink); color: var(--bg); border: 1px solid var(--ink); }
+  .links a.nav-cta:hover { background: var(--bg); color: var(--ink); }
   section[id], .col[id] { scroll-margin-top: 100px; }
   .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
   .duo .col { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
@@ -65,6 +68,8 @@
 
   .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
   @media (max-width: 560px) { .links { gap: 16px; } .links a { font-size: 11px; letter-spacing: .08em; } .brand img { height: 32px; } }
+  @media (max-width: 560px) { .links a.nav-cta { padding: 9px 10px; } }
+  @media (max-width: 480px) { .links a[href="#mission"], .links a[href="#newsletter"] { display: none; } }
 
   .hero { padding: 72px 0; }
   h1 { font-size: clamp(38px, 6.4vw, 72px); line-height: 1.02; letter-spacing: -0.03em; font-weight: 600; margin: 20px 0 24px; max-width: 14ch; }
@@ -172,7 +177,7 @@
       <a href="#mission">Mission</a>
       <a href="#contact">Contact</a>
       <a href="#newsletter">Newsletter</a>
-      <a href="quote.html">Get a quote</a>
+      <a class="nav-cta" href="quote.html">Get a quote</a>
     </nav>
   </div>
 </header>
