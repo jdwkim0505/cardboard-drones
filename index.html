@@ -138,10 +138,11 @@ footer .base{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
 .fc-intro{grid-column:1 / 3;grid-row:1;max-width:none;pointer-events:none;display:grid;gap:14px}
 .fc-intro .label{color:var(--brass-soft);display:flex;align-items:center;gap:14px}
 .fc-intro .label::before{content:"";width:34px;height:1px;background:currentColor}
-.fc-intro h2{font-size:clamp(46px,6.4vw,100px);line-height:.92;max-width:none}
+.fc-intro h2{font-size:clamp(40px,4.4vw,76px);line-height:.94;max-width:none}
 .fc-intro{transform:none;transition:opacity .6s cubic-bezier(.23,1,.32,1),transform .6s cubic-bezier(.23,1,.32,1),visibility 0s}
 .fc[data-phase="hero"] .fc-intro{transform:translateY(16px)}
-@media (max-width:820px){.fc-intro h2{font-size:clamp(40px,11.5vw,60px)}}
+@media (max-width:820px){.fc-intro h2{font-size:clamp(38px,10.5vw,54px)}}
+@media (min-width:821px){.fc-ui .fc-dossier{position:absolute;grid-column:auto;grid-row:auto;left:0;top:0;width:300px;margin:0}}
 .fc-intro p{margin:0;max-width:42ch;font-size:15px;line-height:1.55;color:var(--dim)}
 .fc-dossier{grid-column:2;grid-row:2;align-self:center;margin:-4vh 0 0 clamp(0px,3vw,48px);padding:0 0 0 18px;border-left:1px solid var(--line);display:grid;gap:12px;min-width:0;opacity:0;visibility:hidden;transform:translateX(8px);transition:opacity .22s cubic-bezier(.23,1,.32,1),transform .22s cubic-bezier(.23,1,.32,1),visibility 0s .22s;text-shadow:0 1px 12px rgba(16,34,43,.9)}
 .fc-dossier.open{opacity:1;visibility:visible;transform:none;transition:opacity .22s cubic-bezier(.23,1,.32,1),transform .22s cubic-bezier(.23,1,.32,1)}
@@ -691,6 +692,21 @@ FLAGS.CN = '<svg viewBox="0 0 30 20"><rect width="30" height="20" fill="#de2910"
 const ORIGIN = { pcb: ["US", "United States"], mcu: ["FR", "France"], imu: ["JP", "Japan"], baro: ["DE", "Germany"], flash: ["TW", "Taiwan"], power: ["US", "United States"], tant: ["CZ", "Czech Republic"], passives: ["JP", "Japan"], leds: ["DE", "Germany"], conn: ["JP", "Japan"], usb: ["TW", "Taiwan"], grom: ["US", "United States"] };
 let selected = null, hovered = null;
 const box3 = new THREE.Box3();
+// on wide screens, park the part panel just right of the board and centered on it vertically
+const dossierEl = $("fc-dossier"), uiEl = document.querySelector(".fc-ui");
+const allBox = new THREE.Box3(), bc = new THREE.Vector3(), edge = new THREE.Vector3(), bsize = new THREE.Vector3();
+let boxT = -1, boxR = 0, dCy = null;
+function placeDossier(r) {
+  if (r.width < 820) { if (dossierEl.style.top) dossierEl.style.left = dossierEl.style.top = ""; return; }
+  if (boxT !== t) { allBox.makeEmpty(); parts.forEach(p => allBox.expandByObject(p.group)); allBox.getCenter(bc); allBox.getSize(bsize); boxR = Math.hypot(bsize.x, bsize.z) / 2; boxT = t; }
+  const ur = uiEl.getBoundingClientRect(), padR = parseFloat(getComputedStyle(uiEl).paddingRight) || 0;
+  let y0 = 1, y1 = -1; for (let i = 0; i < 8; i++) { edge.set(i & 1 ? allBox.max.x : allBox.min.x, i & 2 ? allBox.max.y : allBox.min.y, i & 4 ? allBox.max.z : allBox.min.z).project(camera); y0 = Math.min(y0, edge.y); y1 = Math.max(y1, edge.y); } const cyT = (1 - (y0 + y1) / 2) / 2 * r.height; dCy = dCy == null ? cyT : dCy + (cyT - dCy) * 0.08; const cy = dCy;
+  edge.setFromMatrixColumn(camera.matrixWorld, 0).multiplyScalar(boxR).add(bc).project(camera); const rx = (edge.x + 1) / 2 * r.width;
+  const w = dossierEl.offsetWidth, h = dossierEl.offsetHeight;
+  const left = Math.max(ur.width * 0.5, Math.min(rx - (ur.left - r.left) + 40, ur.width - padR - w));
+  const top = Math.max(16, Math.min(cy - (ur.top - r.top) - h / 2, ur.height - h - 90));
+  dossierEl.style.left = Math.round(left) + "px"; dossierEl.style.top = Math.round(top) + "px";
+}
 const alerts = [...FLAGGED].map(id => {
   const p = parts.find(q => q.id === id), lvl = LEVEL[id];
   const b = document.createElement("button"); b.type = "button"; b.className = "fc-alert " + lvl;
@@ -788,7 +804,7 @@ canvas.addEventListener("pointerup", e => { if (fcEl.dataset.phase === "hero" ||
 function frame() {
   const w = canvas.clientWidth, h = canvas.clientHeight, k = view;
   if (w < 820) camera.setViewOffset(w, h, 0, Math.round(h * (-0.17 + 0.25 * k)), w, h);
-  else camera.setViewOffset(w, h, Math.round(-w * 0.2 + (Math.min(200, w * 0.12) + w * 0.2) * k), Math.round(h * -0.05), w, h);
+  else camera.setViewOffset(w, h, Math.round(-w * 0.2 + (Math.min(170, w * 0.12) + w * 0.2) * k), Math.round(h * -0.05), w, h);
   const z0 = w < 820 ? 0.7 : 0.82; camera.zoom = z0 + (1 - z0) * k;
   camera.updateProjectionMatrix();
 }
@@ -817,6 +833,7 @@ renderer.setAnimationLoop(() => {
     el.style.opacity = tmp.z < 1 ? 1 : 0;
     if (selected !== p && hovered !== p) p.lineMat.opacity = 0.55 + 0.45 * pulse;
   });
+  placeDossier(r);
   renderer.render(scene, camera);
 });
 </script>
