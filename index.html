@@ -10,27 +10,29 @@
 <link rel="apple-touch-icon" href="media/apple-touch-icon.png?v=4">
 <meta name="theme-color" content="#182F3B">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Archivo:wght@300;400;500;600&display=swap">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Serif:opsz,wdth,wght@8..144,50..150,300..500&family=Roboto+Mono:wght@400;500&family=Archivo:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
-/* Suho guild identity: midnight hero, ivory body, thin midnight CTA strip, footer closed by a monumental wordmark. */
+/* Suho: midnight scroll scene with the 3D board, ivory mission, stone contact block. */
 :root{
   --midnight:#182F3B; --midnight-deep:#10222B; --ivory:#F0E8D8; --stone:#E5DBC7;
   --brass:#A17B48; --brass-soft:#C29A63; --oxblood:#742E30; --charcoal:#262725;
   --ink-soft:#4A5459;
-  --display:"Instrument Serif","Cormorant Garamond",Georgia,serif;
+  --display:"Roboto Serif",Georgia,serif;
   --sans:"Archivo","Helvetica Neue",Arial,sans-serif;
   --gutter:max(16px,env(safe-area-inset-left,0px));
   color-scheme:light;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--ivory);color:var(--charcoal);font-family:var(--sans);font-weight:300;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--ivory);color:var(--charcoal);font-family:var(--sans);font-weight:400;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--midnight-deep)}
 .wrap{max-width:1600px;margin:0 auto;padding-left:max(24px,4.5vw,env(safe-area-inset-left,0px));padding-right:max(24px,4.5vw,env(safe-area-inset-right,0px))}
 a{color:inherit}
 .label{font-family:var(--sans);font-weight:500;font-size:12px;letter-spacing:.22em;text-transform:uppercase}
 h1,h2{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance;letter-spacing:-.005em}
-.btn{display:inline-flex;align-items:center;gap:.7em;font-family:var(--sans);font-weight:500;font-size:12px;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;padding:13px 22px;border:1px solid currentColor;background:transparent;color:inherit;cursor:pointer;transition:background .25s,color .25s,border-color .25s}
+.btn{display:inline-flex;align-items:center;gap:.7em;font-family:var(--sans);font-weight:500;font-size:12px;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;padding:13px 22px;border:1px solid currentColor;background:transparent;color:inherit;cursor:pointer;transition:background .2s ease,color .2s ease,border-color .2s ease,transform .16s cubic-bezier(.23,1,.32,1)}
 .btn:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--brass-soft);outline-offset:3px}
 .btn .lz{width:7px;height:7px;background:currentColor;transform:rotate(45deg);flex:none}
 
@@ -43,37 +45,22 @@ h1,h2{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance;lett
 .brand .wm b{font-family:var(--display);font-weight:400;font-size:23px;letter-spacing:.06em}
 .brand .wm i{font-style:normal;font-size:7.5px;letter-spacing:.42em;font-weight:500;margin-top:4px}
 .links{display:flex;align-items:center;gap:28px}
-.links a{text-decoration:none;font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;opacity:.85}
-.links a:hover{opacity:1}
+.links a{text-decoration:none;font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:#CFCDC3;transition:color .15s ease}
+.links a:hover{color:var(--ivory)}
 .links .btn{opacity:1;padding:10px 16px;font-size:10.5px;border-color:var(--brass-soft);color:var(--ivory)}
 .links .btn:hover{background:var(--brass);border-color:var(--brass)}
 
 /* HERO */
-.hero{position:relative;color:var(--ivory);background:var(--midnight-deep);overflow:hidden;isolation:isolate}
-.hero::before{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(120% 90% at 85% 40%,rgba(36,64,78,.9) 0%,rgba(24,47,59,0) 60%)}
-.hero .seal{position:absolute;right:-3%;top:50%;height:112%;transform:translateY(-50%);z-index:-1;fill:var(--ivory);opacity:.07}
-.hero .seal{position:absolute;right:1%;top:54%;height:96%;transform:translateY(-50%);z-index:-1;opacity:.07;fill:var(--ivory)}
-.hero{display:flex;flex-direction:column;justify-content:center;background:var(--midnight);min-height:100vh;min-height:100svh}
-.hero .wrap{width:100%;padding-top:clamp(120px,13vw,170px);padding-bottom:clamp(72px,8vw,120px);display:grid;gap:28px}
-.hero .label{color:var(--brass-soft);display:flex;align-items:center;gap:14px}
-.hero .label::before{content:"";width:34px;height:1px;background:currentColor}
-.hero h1{font-size:clamp(46px,6.8vw,100px);line-height:.92;max-width:11ch}
-.hero h1 em{font-style:italic;color:var(--brass-soft)}
-.hero .sub{max-width:52ch;font-size:clamp(16px,1.25vw,18px);color:rgba(240,232,216,.86);margin:0}
-.hero .btn{justify-self:start;margin-top:8px;border-color:var(--brass-soft)}
-.hero .btn:hover{background:var(--brass);border-color:var(--brass)}
+.fc-hero h1 em,.fc-intro h2 em{font-family:inherit;font-style:normal;font-weight:inherit;font-size:1em;letter-spacing:inherit;color:var(--brass-soft)}
+
 
 
 /* ORNAMENT RULE */
-.rule{display:flex;align-items:center;gap:16px;color:var(--brass)}
-.rule::before,.rule::after{content:"";flex:1;height:5px;border-top:1px solid currentColor;border-bottom:1px solid currentColor;opacity:.7}
-.rule svg{width:22px;height:22px;fill:currentColor;flex:none}
 
 /* MISSION */
 #mission{padding-block:clamp(64px,8vw,110px);background:var(--ivory)}
-#mission .grid{display:grid;justify-items:center;text-align:center;gap:28px;margin:clamp(48px,6vw,80px) auto}
-#mission .label{color:var(--oxblood)}
-#mission h2{font-size:clamp(38px,4.6vw,66px);line-height:.96;color:var(--midnight);margin-top:18px}
+#mission .grid{display:grid;justify-items:center;text-align:center;gap:24px;margin:0 auto}
+#mission h2{font-size:clamp(38px,4.6vw,66px);line-height:.96;color:var(--midnight)}
 #mission p{text-wrap:pretty;margin:0;font-size:clamp(16px,1.3vw,19px);line-height:1.6;color:var(--ink-soft);max-width:54ch}
 .mark-row{display:flex;justify-content:center}
 
@@ -109,28 +96,137 @@ h1,h2{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance;lett
 footer{background:var(--ivory);color:var(--midnight);overflow:hidden;border-top:1px solid rgba(24,47,59,.15)}
 footer .top{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding-block:48px 28px;color:var(--ink-soft)}
 footer .top svg{height:46px;fill:var(--midnight)}
-footer .giant{font-family:var(--display);font-size:clamp(120px,31vw,420px);line-height:.78;letter-spacing:.02em;color:var(--ivory);text-align:center;margin:28px 0 -0.06em;white-space:nowrap}
 footer .base{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:16px;border-top:1px solid rgba(24,47,59,.15);color:var(--ink-soft)}
-footer .giant{font-family:var(--display);font-size:40vw;line-height:.7;text-align:center;letter-spacing:-.005em;color:rgba(24,47,59,.06);-webkit-text-stroke:1px rgba(24,47,59,.28);-webkit-mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.35) 100%);mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.35) 100%);white-space:nowrap;margin:calc(clamp(16px,3vw,40px) - .1em) 0 0;padding-top:.16em;transform:translateY(.02em);user-select:none}
 
 @media (max-width:760px){
   .links a:not(.btn){display:none}
   .brand .wm{display:none}
   .duo{grid-template-columns:minmax(0,1fr)}
-  .hero .seal{right:-18%;height:80%;opacity:.08}
 }
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media (prefers-reduced-motion:reduce){.btn,.signup .btn span{transition-property:background,color,border-color!important}.btn:active{transform:none!important}}
 
-/* Motion: swipe hovers, hero network, mission scaling */
+/* Motion: hover swipes (pointer devices only) and press feedback */
+.btn:active{transform:scale(.97)}
 .links a:not(.btn){position:relative;padding-block:6px}
-.links a:not(.btn)::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--brass-soft);transform:scaleX(0);transform-origin:right center;transition:transform .45s cubic-bezier(.7,0,.2,1)}
-.links a:not(.btn):hover::after,.links a:not(.btn):focus-visible::after{transform:scaleX(1);transform-origin:left center}
+.links a:not(.btn)::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--brass-soft);transform:scaleX(0);transform-origin:right center;transition:transform .25s cubic-bezier(.23,1,.32,1)}
+.links a:not(.btn):focus-visible::after{transform:scaleX(1);transform-origin:left center}
+@media (hover:hover) and (pointer:fine){.links a:not(.btn):hover::after{transform:scaleX(1);transform-origin:left center}.swipe:hover::before{transform:scaleX(1);transform-origin:left center}}
 .swipe{position:relative;overflow:hidden;isolation:isolate}
-.swipe::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--brass);transform:scaleX(0);transform-origin:right center;transition:transform .5s cubic-bezier(.7,0,.2,1)}
-.swipe:hover::before,.swipe:focus-visible::before{transform:scaleX(1);transform-origin:left center}
-.links .btn.swipe:hover,.hero .btn.swipe:hover,.band .btn.swipe:hover{background:transparent;border-color:var(--brass)}
-#mission{position:relative;isolation:isolate;overflow:hidden}
+.swipe::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--brass);transform:scaleX(0);transform-origin:right center;transition:transform .28s cubic-bezier(.23,1,.32,1)}
+.swipe:focus-visible::before{transform:scaleX(1);transform-origin:left center}
+.links .btn.swipe:hover,.fc-hero .btn.swipe:hover,.band .btn.swipe:hover{background:transparent;border-color:var(--brass)}
 @media (prefers-reduced-motion:reduce){.swipe::before,.links a:not(.btn)::after{transition:none}}
+
+/* HOW IT WORKS: interactive 3D flight-controller teardown on a dark stage */
+#how{background:var(--midnight);color:var(--ivory);scroll-margin-top:0;--line:rgba(240,232,216,.14);--dim:#A9B1AE;--mono:"Roboto Mono",ui-monospace,Menlo,monospace}
+.scene{position:relative;height:230vh;height:230svh;border-top:0}
+.how-anchor{position:absolute;left:0;top:100vh;top:100svh;height:1px;width:1px}
+.fc{position:sticky;top:0;height:100vh;height:100svh;min-height:560px;overflow:hidden;background:radial-gradient(120% 90% at 78% 45%,rgba(36,64,78,.9) 0%,rgba(24,47,59,0) 60%),var(--midnight)}
+.steps{background:var(--midnight);color:var(--ivory);--line:rgba(240,232,216,.14);--dim:#A9B1AE;--mono:"Roboto Mono",ui-monospace,Menlo,monospace;padding-top:8px}
+.fc-hero{grid-column:1;grid-row:1 / 4;align-self:center;display:grid;justify-items:start;max-width:40rem;transition:opacity .45s cubic-bezier(.23,1,.32,1),transform .45s cubic-bezier(.23,1,.32,1)}
+.fc-hero h1{font-size:clamp(46px,6.8vw,100px);line-height:.92;max-width:11ch}
+.fc-hero .sub{max-width:44ch;font-size:clamp(17px,1.4vw,20px);line-height:1.5;color:#D3D3CA;margin:24px 0 0}
+.fc-hero .btn{margin-top:40px;border-color:var(--brass-soft)}
+.fc-intro,.fc-dock,#fc-alerts{transition:opacity .45s cubic-bezier(.23,1,.32,1),visibility 0s}
+.fc[data-phase="hero"] .fc-intro,.fc[data-phase="hero"] .fc-dock,.fc[data-phase="hero"] #fc-alerts{opacity:0;visibility:hidden;transition:opacity .3s ease,visibility 0s .3s}
+.fc:not([data-phase="hero"]) .fc-hero{opacity:0;transform:translateY(-12px);pointer-events:none}
+.fc:not([data-phase="hero"]) .fc-hero *{pointer-events:none}
+#fc-stage{position:absolute;inset:0;display:block;width:100%;height:100%;cursor:grab}
+#fc-stage.hovering{cursor:pointer}
+.fc-ui{position:absolute;inset:0;pointer-events:none;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,300px);grid-template-rows:auto 1fr auto;gap:16px;padding-top:clamp(40px,5vw,72px);padding-bottom:28px}
+.fc-ui > *{pointer-events:auto}
+.fc-intro{grid-column:1 / 3;grid-row:1;max-width:none;pointer-events:none;display:grid;gap:14px}
+.fc-intro .label{color:var(--brass-soft);display:flex;align-items:center;gap:14px}
+.fc-intro .label::before{content:"";width:34px;height:1px;background:currentColor}
+.fc-intro h2{font-size:clamp(46px,6.4vw,100px);line-height:.92;max-width:none}
+.fc-intro{transform:none;transition:opacity .6s cubic-bezier(.23,1,.32,1),transform .6s cubic-bezier(.23,1,.32,1),visibility 0s}
+.fc[data-phase="hero"] .fc-intro{transform:translateY(16px)}
+@media (max-width:820px){.fc-intro h2{font-size:clamp(40px,11.5vw,60px)}}
+.fc-intro p{margin:0;max-width:42ch;font-size:15px;line-height:1.55;color:var(--dim)}
+.fc-dossier{grid-column:2;grid-row:2;align-self:center;margin:-4vh 0 0 clamp(0px,3vw,48px);padding:0 0 0 18px;border-left:1px solid var(--line);display:grid;gap:12px;min-width:0;opacity:0;visibility:hidden;transform:translateX(8px);transition:opacity .22s cubic-bezier(.23,1,.32,1),transform .22s cubic-bezier(.23,1,.32,1),visibility 0s .22s;text-shadow:0 1px 12px rgba(16,34,43,.9)}
+.fc-dossier.open{opacity:1;visibility:visible;transform:none;transition:opacity .22s cubic-bezier(.23,1,.32,1),transform .22s cubic-bezier(.23,1,.32,1)}
+.fc-dossier .ref{font-family:var(--mono);font-size:11px;color:var(--brass-soft);letter-spacing:.06em}
+.fc-dossier h3{font-family:var(--display);font-weight:400;font-size:26px;line-height:1;margin:0}
+.fc-dossier h4{font-size:10.5px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin:4px 0 0}
+.fc-dossier .origin{display:flex;align-items:center;gap:12px;font-size:17px;font-weight:400}
+.fc-dossier .flag{display:block;width:36px;height:24px;flex:none;box-shadow:0 0 0 1px rgba(240,232,216,.25)}
+.fc-dossier .flag svg{display:block;width:100%;height:100%}
+.fc-dossier .x{justify-self:start;background:none;border:0;padding:0;font:inherit;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);cursor:pointer}
+.fc-dock{grid-column:1 / 3;grid-row:3;display:flex;flex-wrap:nowrap;align-items:center;gap:10px 18px}
+.fc-dock .btn{border-color:var(--brass-soft);padding:12px 18px;font-size:11px}
+.fc-dock .btn:active{transform:scale(.97)}
+.fc-dock .btn[aria-pressed="true"]{background:var(--brass-soft);color:var(--midnight-deep)}
+.fc-dock .btn.ghost{border-color:var(--line)}
+.fc-chips{display:flex;flex-wrap:nowrap;gap:6px;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none}
+.fc-chips::-webkit-scrollbar{display:none}
+.fc-dock .btn{flex:none;white-space:nowrap}
+.fc-chips button{flex:none;white-space:nowrap;font-family:var(--mono);font-size:11px;color:var(--dim);background:rgba(16,34,43,.7);border:1px solid var(--line);padding:7px 10px;cursor:pointer;transition:color .15s ease,border-color .15s ease}
+.fc-chips button[aria-current="true"]{color:var(--midnight-deep);background:var(--ivory);border-color:var(--ivory)}
+.fc-chips button:focus-visible,.fc-dossier .x:focus-visible{outline:2px solid var(--brass-soft);outline-offset:3px}
+@media (hover:hover) and (pointer:fine){.fc-dock .btn:hover{background:rgba(194,154,99,.16)}.fc-dock .btn[aria-pressed="true"]:hover{background:var(--brass-soft)}.fc-chips button:hover{color:var(--ivory);border-color:rgba(240,232,216,.4)}.fc-dossier .x:hover{color:var(--ivory)}}
+.fc-tip{position:fixed;z-index:6;pointer-events:none;font-family:var(--mono);font-size:11px;background:var(--ivory);color:var(--midnight-deep);padding:5px 8px;transform:translate(12px,-50%);opacity:0;transition:opacity .12s ease}
+.fc-tip.on{opacity:1}
+.fc-fallback{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:24px;color:var(--dim)}
+.steps ol{list-style:none;margin:0;padding:0 0 clamp(36px,4vw,60px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line)}
+.steps li{padding:22px clamp(16px,2.4vw,36px) 4px 0;display:grid;gap:8px;align-content:start}
+.steps li+li{padding-left:clamp(16px,2.4vw,36px);border-left:1px solid var(--line)}
+.steps .n{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--brass-soft)}
+.steps li h3{font-family:var(--display);font-weight:400;font-size:clamp(24px,2.1vw,32px);line-height:1;margin:0}
+.steps li p{margin:0;font-size:clamp(15px,1.15vw,17px);line-height:1.6;color:var(--dim);max-width:34ch}
+@media (prefers-reduced-motion:reduce){.fc-dossier,.fc-dossier.open{transition:none;transform:none}}
+@media (max-width:820px){
+  .fc-hero{grid-row:1;align-self:start;margin-top:64px}
+  .fc-hero h1{font-size:clamp(44px,12vw,64px)}
+  .fc-hero .sub{margin-top:16px;font-size:17px}
+  .fc-hero .btn{margin-top:24px}
+  .fc-ui{grid-template-columns:minmax(0,1fr);grid-template-rows:auto 1fr auto auto;gap:10px;padding-top:36px;padding-bottom:20px}
+  .fc-intro p{display:none}
+  .fc-dossier{grid-column:1;grid-row:3;align-self:end;margin:0;padding:14px 16px;gap:8px;border:1px solid var(--line);background:rgba(16,34,43,.9);transform:translateY(8px)}
+  .fc-dossier h3{font-size:24px}
+  .fc-dock{grid-column:1;grid-row:4}
+  .fc-chips{display:none}
+  .steps ol{grid-template-columns:minmax(0,1fr)}.steps li,.steps li+li{padding:12px 0;border-left:0;gap:4px}.steps li+li{border-top:1px solid var(--line)}
+}
+h1,h2,h3,.giant,.brand .wm b{font-weight:300;font-variation-settings:"wdth" 70}
+.skip{position:absolute;left:16px;top:-60px;z-index:20;background:var(--ivory);color:var(--midnight);padding:10px 14px;font-size:13px;text-decoration:none}
+.skip:focus{top:12px}
+button,.btn,a{touch-action:manipulation}
+p{text-wrap:pretty}
+#mission,#how,#contact,#newsletter,.how-anchor{scroll-margin-top:0}
+.band{border-top:1px solid rgba(240,232,216,.12)}
+.fc-chips button{background:rgba(24,47,59,.7)}
+@media (max-width:820px){.fc-dossier{background:rgba(24,47,59,.94)}}
+.fc-dock .btn[hidden]{display:none}
+.fc-dossier .owner{display:grid;gap:12px;padding-top:12px;border-top:1px solid var(--line)}
+.fc-dossier .owner[hidden]{display:none}
+.fc-dossier .owner h4{color:#D9897F}
+.fc-dossier .owner .note{margin:0;font-size:13px;line-height:1.5;color:var(--dim);max-width:30ch}
+.fc-alert{--ac:#E0675C;position:absolute;left:0;top:0;z-index:3;width:26px;height:26px;padding:0;border:0;background:none;cursor:pointer;opacity:0;transition:opacity .2s ease;will-change:transform}
+.fc-alert span{display:grid;place-items:center;width:26px;height:26px;transform:rotate(45deg);background:var(--ac);color:#fff;font:600 13px/1 var(--sans)}
+.fc-alert span::before{content:"";position:absolute;inset:-6px;border:1px solid var(--ac);animation:fcPing 1.6s cubic-bezier(.23,1,.32,1) infinite}
+.fc-alert span{position:relative}
+.fc-alert b{display:block;transform:rotate(-45deg);font-weight:600}
+@keyframes fcPing{from{opacity:.9;transform:scale(.8)}to{opacity:0;transform:scale(1.6)}}
+@media (prefers-reduced-motion:reduce){.fc-alert span::before{animation:none;opacity:.6}}
+.fc-alert:focus-visible{outline:2px solid var(--brass-soft);outline-offset:6px}
+.fc-alert.yellow{--ac:#E2B33C}.fc-alert.yellow b{color:#10222B}
+.fc-chips button.flagged{--ac:#E0675C;position:relative;border-color:var(--ac);color:#F0B3AA}
+.fc-chips button.flagged.yellow{--ac:#E2B33C;color:#F1D79A}
+.fc-chips button.flagged::after{content:"";position:absolute;top:-3px;right:-3px;width:7px;height:7px;background:var(--ac);transform:rotate(45deg)}
+.fc-chips{padding-top:4px}
+.fc-dossier .rows{display:grid;gap:14px}
+.fc-dossier .row{display:grid;gap:8px}
+.fc-dossier .row .origin{align-items:flex-start}
+.fc-dossier .who{display:grid;gap:2px;line-height:1.25}
+.fc-dossier .who b{font-weight:500;font-size:16px}
+.fc-dossier .who i{font-style:normal;font-size:13px;color:var(--dim)}
+.fc-dossier .row.red h4{color:#E8857A}.fc-dossier .row.yellow h4{color:#E2B33C}
+.fc-dossier .note{margin:0;font-size:13px;line-height:1.5;color:var(--dim);max-width:30ch;padding-left:10px;border-left:2px solid var(--line)}
+.fc-dossier .note.red{border-left-color:#E0675C}.fc-dossier .note.yellow{border-left-color:#E2B33C}
+.fc-dossier .flag{margin-top:1px}
+.fc-dossier .fine{margin:0;font-size:11px;color:var(--dim);opacity:.8}
+.fc-dossier{position:relative;z-index:4}
+@media (max-width:820px){.fc-dossier{max-height:48svh;overflow-y:auto;overscroll-behavior:contain}.fc-dossier .rows{gap:10px}.fc-dossier .row{gap:4px}.fc-dossier .who b{font-size:15px}}
 </style>
 </head>
 <body>
@@ -144,6 +240,7 @@ footer .giant{font-family:var(--display);font-size:40vw;line-height:.7;text-alig
     </a>
     <nav class="links" aria-label="Sections">
       <a href="#mission">Mission</a>
+      <a href="#how-anchor">How it works</a>
       <a href="#contact">Contact</a>
       <a href="#newsletter">Newsletter</a>
       <a class="btn swipe" href="mailto:suhoindustries@gmail.com?subject=Partnering%20with%20Suho%20Industries">Partner with us</a>
@@ -151,28 +248,56 @@ footer .giant{font-family:var(--display);font-size:40vw;line-height:.7;text-alig
   </div>
 </header>
 
+<a class="skip" href="#how-anchor">Skip to content</a>
 <main id="top">
-  <section class="hero">
-    <svg class="seal" viewBox="0 0 1541 2211" aria-hidden="true"><use href="#s"/></svg>
-    <div class="wrap">
-      <div class="label">Sub-tier Supply Chain Assessment</div>
-      <h1>Trust, with <em>confidence.</em></h1>
-      <p class="sub">Suho verifies sub-tier suppliers to match regulations.</p>
-      <a class="btn swipe" href="mailto:suhoindustries@gmail.com?subject=Partnering%20with%20Suho%20Industries"><span class="lz"></span>Partner with us</a>
+  <section id="how" class="scene">
+    <div class="how-anchor" id="how-anchor"></div>
+    <div class="fc" data-phase="hero">
+      <canvas id="fc-stage" aria-label="Interactive 3D model of a flight controller. Drag to rotate, select a part to see where it comes from."></canvas>
+      <div class="fc-ui wrap">
+        <header class="fc-hero">
+          <h1>Trust, with <em>confidence.</em></h1>
+          <p class="sub">Suho verifies sub-tier suppliers to match regulations.</p>
+          <a class="btn swipe" href="#how-anchor"><span class="lz"></span>See how it works</a>
+        </header>
+        <header class="fc-intro">
+          <h2>Every part,<br><em>accounted for.</em></h2>
+        </header>
+        <aside class="fc-dossier" id="fc-dossier" aria-live="polite">
+          <div class="ref" id="d-ref"></div>
+          <h3 id="d-name"></h3>
+          <div class="rows" id="d-rows"></div>
+          <p class="note" id="d-note" hidden></p>
+          <p class="fine">Example data. Company names are fictional.</p>
+          <button class="x" id="d-close" type="button">Close ×</button>
+        </aside>
+        <div class="fc-dock">
+          <button class="btn" id="fc-explode" aria-pressed="false" hidden>Pull apart</button>
+          <button class="btn ghost" id="fc-reset" hidden>Reset view</button>
+          <div class="fc-chips" id="fc-chips" role="list"></div>
+        </div>
+      </div>
+      <div class="fc-tip" id="fc-tip"></div>
+      <div id="fc-alerts"></div>
     </div>
   </section>
-
+  <section class="steps" aria-label="How it works, step by step">
+    <div class="wrap">
+      <ol>
+        <li><span class="n">01</span><h3>Share</h3><p>Suppliers send their records and sample parts to Suho under NDA.</p></li>
+        <li><span class="n">02</span><h3>Check</h3><p>Suho checks each part and sub-tier supplier against NDAA, DFARS, and allied regulations.</p></li>
+        <li><span class="n">03</span><h3>Report</h3><p>The report answers questions of compliance while omitting sensitive data. Suppliers choose who receives their report.</p></li>
+      </ol>
+    </div>
+  </section>
   <section id="mission">
     <div class="wrap">
-      <div class="rule"><svg viewBox="0 0 1541 2211" aria-hidden="true"><use href="#s"/></svg></div>
       <div class="grid">
         <div>
-          <div class="label">Mission</div>
           <h2>Prove each part.</h2>
         </div>
         <p>Defense makers shouldn't answer for unverified parts. Suho checks suppliers against NDAA, DFARS, and allied regulations.</p>
       </div>
-      <div class="rule"><svg viewBox="0 0 1541 2211" aria-hidden="true"><use href="#s"/></svg></div>
     </div>
   </section>
 
@@ -204,14 +329,496 @@ footer .giant{font-family:var(--display);font-size:40vw;line-height:.7;text-alig
 <footer>
   <div class="wrap top">
     <svg viewBox="0 0 1541 2211" aria-hidden="true"><use href="#s"/></svg>
-    <span class="label">Est. MMXXVI</span>
+    <span class="label">Est. 2026</span>
   </div>
   <div class="wrap base label"><span>&copy; 2026 Suho Industries, Inc.</span><span>Suho Industries</span></div>
-  <div class="giant" aria-hidden="true">SUHO</div>
 </footer>
 
 <script>
 document.getElementById('signup').addEventListener('submit',e=>{e.preventDefault();e.currentTarget.classList.add('done')});
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{var el=document.getElementById(a.getAttribute('href').slice(1));if(el){e.preventDefault();el.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});}}));
+</script>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/"
+} }
+</script>
+<script type="module">
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
+import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
+
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const canvas = document.getElementById("fc-stage");
+let renderer;
+try { renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true }); }
+catch (e) { canvas.parentElement.insertAdjacentHTML("beforeend", '<div class="fc-fallback">This model needs WebGL, which this browser has turned off.</div>'); throw e; }
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.toneMapping = THREE.AgXToneMapping;
+renderer.toneMappingExposure = 1.12;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFShadowMap;
+
+const scene = new THREE.Scene();
+scene.background = null;
+scene.fog = new THREE.Fog("#182F3B", 120, 260);
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+scene.environmentIntensity = 0.5;
+
+const camera = new THREE.PerspectiveCamera(32, 1, 0.5, 600);
+const HOME = new THREE.Vector3(46, 54, 62).multiplyScalar(1.22);
+camera.position.copy(HOME);
+const controls = new OrbitControls(camera, canvas);
+controls.enableDamping = true; controls.dampingFactor = 0.08;
+controls.minDistance = 40; controls.maxDistance = 170;
+controls.maxPolarAngle = Math.PI * 0.86;
+controls.target.set(0, 4, 0);
+controls.autoRotate = true; controls.autoRotateSpeed = 0.8;
+controls.enableZoom = false; controls.enablePan = false;
+const coarse = matchMedia("(pointer: coarse)").matches;
+if (coarse) { controls.enableRotate = false; canvas.style.touchAction = "pan-y"; }
+// keep spinning at all times; a drag simply takes over while held
+
+// Lights
+const key = new THREE.DirectionalLight("#fff4e2", 2.0);
+key.position.set(30, 70, 25); key.castShadow = true;
+key.shadow.mapSize.set(2048, 2048);
+Object.assign(key.shadow.camera, { left: -40, right: 40, top: 40, bottom: -40, near: 10, far: 160 });
+key.shadow.bias = -0.0004;
+scene.add(key);
+const rim = new THREE.DirectionalLight("#9fc2d6", 1.1); rim.position.set(-40, 25, -50); scene.add(rim);
+scene.add(new THREE.HemisphereLight("#d9e4ea", "#10222B", 0.35));
+
+// Ground: shadow catcher plus a faint blueprint grid
+const ground = new THREE.Mesh(new THREE.PlaneGeometry(400, 400), new THREE.ShadowMaterial({ opacity: 0.35 }));
+ground.rotation.x = -Math.PI / 2; ground.position.y = -14; ground.receiveShadow = true; scene.add(ground);
+const grid = new THREE.GridHelper(240, 48, "#C29A63", "#C29A63");
+grid.material.transparent = true; grid.material.opacity = 0.16; grid.position.y = -13.98; scene.add(grid);
+
+// ---------- helpers ----------
+const W = 1536, PX = W / 36;            // board texture: 36 mm square
+const toPx = (x, z) => [(x + 18) * PX, (z + 18) * PX];
+const parts = [];                        // { id, name, group, home, away, mats, ...meta }
+function std(color, o = {}) { return new THREE.MeshStandardMaterial({ color, roughness: 0.5, metalness: 0, ...o }); }
+function box(w, h, d, mat) { const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat); m.castShadow = true; m.receiveShadow = true; return m; }
+function rbox(w, h, d, r, mat) { const m = new THREE.Mesh(new RoundedBoxGeometry(w, h, d, 3, r), mat); m.castShadow = true; m.receiveShadow = true; return m; }
+function labelTex(lines, w, h, opts = {}) {
+  const c = document.createElement("canvas"); c.width = w; c.height = h; const g = c.getContext("2d");
+  g.fillStyle = "#1F3B4A"; g.fillRect(0, 0, w, h);
+  g.fillStyle = "rgba(240,232,216,.62)"; g.textAlign = "center"; g.textBaseline = "middle";
+  lines.forEach((t, i) => { g.font = `${i ? 400 : 500} ${opts.size?.[i] || 40}px "JetBrains Mono", monospace`; g.fillText(t, w / 2, h / 2 + (i - (lines.length - 1) / 2) * (opts.lh || 52)); });
+  if (opts.dot) { g.beginPath(); g.arc(opts.dot[0], opts.dot[1], opts.dot[2], 0, 7); g.fillStyle = "rgba(240,232,216,.35)"; g.fill(); }
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; return t;
+}
+// a chip: body + engraved top, sides plain
+function chipBody(w, h, d, lines, opts = {}) {
+  const side = std(opts.color || "#18191b", { roughness: 0.62 });
+  const top = std("#ffffff", { roughness: 0.6, map: labelTex(lines, 512, Math.round(512 * d / w), opts) });
+  const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), [side, side, top, side, side, side]);
+  m.castShadow = true; m.receiveShadow = true; return m;
+}
+function instanced(geo, mat, matrices) {
+  const im = new THREE.InstancedMesh(geo, mat, matrices.length);
+  matrices.forEach((m, i) => im.setMatrixAt(i, m)); im.castShadow = true; im.receiveShadow = true; return im;
+}
+const M = (x, y, z, ry = 0) => new THREE.Matrix4().compose(new THREE.Vector3(x, y, z), new THREE.Quaternion().setFromEuler(new THREE.Euler(0, ry, 0)), new THREE.Vector3(1, 1, 1));
+function addPart(meta, group, away) {
+  group.userData.partId = meta.id;
+  const mats = new Set();
+  group.traverse(o => { if (o.isMesh) { o.userData.partId = meta.id; (Array.isArray(o.material) ? o.material : [o.material]).forEach(m => { if (m.emissive) mats.add(m); }); } });
+  const p = { ...meta, group, home: group.position.clone(), away: group.position.clone().add(away), mats: [...mats] };
+  parts.push(p); scene.add(group); return p;
+}
+const T = 1.6;                           // board thickness, top surface at y = T
+
+// ---------- board texture (solder mask, ENIG pads, silkscreen) ----------
+const pads = [];                         // filled as parts are placed: [x, z, w, d]
+function drawBoard() {
+  const c = document.createElement("canvas"); c.width = c.height = W; const g = c.getContext("2d");
+  g.fillStyle = "#C9BFAA"; g.fillRect(0, 0, W, W);
+  // inner copper pour shimmer under mask
+  g.globalAlpha = 0.5; g.fillStyle = "#C5BBA5"; g.fillRect(1.2 * PX, 1.2 * PX, 33.6 * PX, 33.6 * PX); g.globalAlpha = 1;
+  // traces
+  g.strokeStyle = "rgba(122,92,52,.3)"; g.lineCap = "round"; g.lineJoin = "round";
+  const rnd = (s => () => (s = (s * 16807) % 2147483647) / 2147483647)(7);
+  for (let i = 0; i < 40; i++) {
+    g.lineWidth = (0.08 + rnd() * 0.08) * PX;
+    const side = i % 4, k = rnd() * 9 - 4.5;
+    let [x, z] = side === 0 ? [-5.6, k] : side === 1 ? [5.6, k] : side === 2 ? [k, -5.6] : [k, 5.6];
+    g.beginPath(); g.moveTo(...toPx(x, z));
+    const tx = (rnd() * 30 - 15), tz = (rnd() * 30 - 15);
+    const mx = side < 2 ? x + Math.sign(x) * (1 + rnd() * 3) : x, mz = side < 2 ? z : z + Math.sign(z) * (1 + rnd() * 3);
+    g.lineTo(...toPx(mx, mz)); g.lineTo(...toPx(mx + (tx - mx) * 0.5, mz + (tz - mz) * 0.5)); g.lineTo(...toPx(tx, tz)); g.stroke();
+    g.fillStyle = "rgba(122,92,52,.55)"; g.beginPath(); g.arc(...toPx(tx, tz), 0.28 * PX, 0, 7); g.fill();
+    g.fillStyle = "#C9BFAA"; g.beginPath(); g.arc(...toPx(tx, tz), 0.12 * PX, 0, 7); g.fill();
+  }
+  // ENIG pads
+  g.fillStyle = "rgba(122,92,52,.35)";
+  pads.forEach(([x, z, w, d]) => { const [px, pz] = toPx(x - w / 2, z - d / 2); g.fillRect(px, pz, w * PX, d * PX); });
+  // motor pads along two edges + mounting rings
+  for (let i = 0; i < 4; i++) { const [px, pz] = toPx(-6 + i * 4 - 1, 16.4); g.fillRect(px, pz, 2 * PX, 1.2 * PX); }
+  [[-15.25, -15.25], [15.25, -15.25], [-15.25, 15.25], [15.25, 15.25]].forEach(([x, z]) => { g.beginPath(); g.arc(...toPx(x, z), 2.7 * PX, 0, 7); g.fill(); });
+  // silkscreen
+  g.fillStyle = "rgba(24,47,59,.75)"; g.strokeStyle = "rgba(24,47,59,.75)"; g.lineWidth = 0.12 * PX;
+  g.font = `600 ${0.95 * PX}px Archivo, sans-serif`; g.textAlign = "left";
+  g.fillText("SUHO FC-1", ...toPx(-12.4, 13.6));
+  g.font = `400 ${0.62 * PX}px "JetBrains Mono", monospace`;
+  g.fillText("REV C · 2026", ...toPx(-12.4, 14.8));
+  [["M1", -7, 15.6], ["M2", -3, 15.6], ["M3", 1, 15.6], ["M4", 5, 15.6], ["U1", -6.2, -6.6], ["IMU", -11.6, -10.2], ["BARO", 6.8, -11.2], ["U4", 4.6, 8.2], ["L1", -11.6, 10.6], ["C9", -14.4, -2.6]].forEach(([t, x, z]) => g.fillText(t, ...toPx(x, z)));
+  g.strokeRect(...toPx(-5.6, -5.6), 11.2 * PX, 11.2 * PX);
+  g.beginPath(); g.moveTo(...toPx(0, -17)); g.lineTo(...toPx(-0.8, -16)); g.lineTo(...toPx(0.8, -16)); g.closePath(); g.fill();
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8;
+  t.repeat.set(1 / 36, 1 / 36); t.offset.set(0.5, 0.5); return t;
+}
+
+// ---------- parts ----------
+const metal = () => std("#a9a7a1", { metalness: 0.8, roughness: 0.58 });
+const tin = () => std("#b4b1a9", { metalness: 0.75, roughness: 0.6 });
+
+// MCU: LQFP-64, 10 x 10 mm
+{
+  const g = new THREE.Group(); g.position.set(0, T, 0);
+  const body = chipBody(10, 1.4, 10, ["VM32H7", "Q3  2618", "VALCOUR"], { size: [52, 36, 30], dot: [60, 60, 18] });
+  body.position.y = 0.85; g.add(body);
+  const mats = [];
+  for (let s = 0; s < 4; s++) for (let i = 0; i < 16; i++) {
+    const o = -3.75 + i * 0.5, ry = s * Math.PI / 2, r = 5.55;
+    const v = new THREE.Vector3(o, 0.12, r).applyAxisAngle(new THREE.Vector3(0, 1, 0), ry);
+    mats.push(M(v.x, v.y, v.z, ry));
+    const pv = new THREE.Vector3(o, 0, 5.75).applyAxisAngle(new THREE.Vector3(0, 1, 0), ry);
+    pads.push([pv.x, pv.z, s % 2 ? 1.4 : 0.28, s % 2 ? 0.28 : 1.4]);
+  }
+  g.add(instanced(new THREE.BoxGeometry(0.22, 0.16, 1.1), tin(), mats));
+  addPart({ id: "mcu", chip: "U1", name: "Main processor", ref: "U1 · LQFP-64 · 10 × 10 mm",
+    spec: "32-bit Arm microcontroller. Runs the flight firmware and talks to every other chip on the board.",
+    checks: ["Which fab made the silicon die, as opposed to the brand printed on the package?", "Was it bought from the maker or an authorized distributor, with lot traceability?", "Is the part new, or used, refurbished or mixed with returned stock?"],
+    rules: ["NDAA FY23 §5949", "DFARS 252.246-7008", "1260H list"] }, g, new THREE.Vector3(0, 15, 0));
+}
+// IMU: 3 x 3 LGA
+{
+  const g = new THREE.Group(); g.position.set(-9, T, -8);
+  const b = chipBody(3, 0.9, 3, ["KS6A"], { size: [120], dot: [80, 80, 40] }); b.position.y = 0.5; g.add(b);
+  pads.push([-9, -8, 3.4, 3.4]);
+  addPart({ id: "imu", chip: "IMU", name: "Motion sensor (IMU)", ref: "U2 · LGA-14 · 3 × 3 mm",
+    spec: "6-axis gyroscope and accelerometer. Tells the processor how the aircraft is moving.",
+    checks: ["Who makes it, where is it packaged, and who owns the maker?", "Is the maker or its parent on the 1260H, Entity or OFAC lists?", "Was it bought through an authorized source?"],
+    rules: ["NDAA FY20 §848", "1260H list", "Entity List"] }, g, new THREE.Vector3(-2, 11, -3));
+}
+// Barometer: metal lid LGA
+{
+  const g = new THREE.Group(); g.position.set(9, T, -9);
+  const lid = rbox(2.2, 0.9, 2.6, 0.12, metal()); lid.position.y = 0.48; g.add(lid);
+  const vent = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.22, 0.05, 20), std("#111", { roughness: 1 })); vent.position.set(0.4, 0.94, 0.6); g.add(vent);
+  pads.push([9, -9, 2.6, 3.0]);
+  addPart({ id: "baro", chip: "BARO", name: "Barometer", ref: "U3 · LGA-8 · 2.0 × 2.5 mm",
+    spec: "Air-pressure sensor. Holds altitude when GPS is weak or missing.",
+    checks: ["Who is the maker, and what is the country of origin?", "Does the distributor's certificate of conformance trace back to the maker?"],
+    rules: ["DFARS 252.246-7008", "Entity List"] }, g, new THREE.Vector3(2, 11, -3));
+}
+// Flash memory: SOIC-8
+{
+  const g = new THREE.Group(); g.position.set(8.5, T, 6.5);
+  const b = chipBody(4.9, 1.5, 3.9, ["HS25N1G", "HOLLIS"], { size: [64, 44], dot: [44, 44, 14] }); b.position.y = 0.9; g.add(b);
+  const mats = [];
+  for (let i = 0; i < 4; i++) for (const s of [-1, 1]) { mats.push(M(-1.905 + i * 1.27, 0.2, s * 2.5)); pads.push([8.5 - 1.905 + i * 1.27, 6.5 + s * 2.9, 0.6, 1.2]); }
+  g.add(instanced(new THREE.BoxGeometry(0.42, 0.2, 1.2), tin(), mats));
+  addPart({ id: "flash", chip: "U4", name: "Flight-log memory", ref: "U4 · SOIC-8 · 5 × 4 mm",
+    spec: "Flash memory that records flight logs and stores settings.",
+    checks: ["Who fabricated the memory die? Memory is where YMTC and CXMT parts can appear under other brands.", "Was it bought from the maker or an authorized distributor?"],
+    rules: ["NDAA FY23 §5949", "DFARS 252.246-7008"] }, g, new THREE.Vector3(3, 10, 2));
+}
+// Power stage: inductor + regulator
+{
+  const g = new THREE.Group(); g.position.set(-9.5, T, 8);
+  const ind = rbox(4, 2.2, 4, 0.35, std("#3a3b3c", { roughness: 0.75 })); ind.position.y = 1.1; g.add(ind);
+  const cap = new THREE.Mesh(new THREE.BoxGeometry(3.98, 0.02, 3.98), std("#fff", { map: labelTex(["4R7"], 256, 256, { bg: "#3a3b3c", size: [72], fg: "rgba(230,230,225,.5)" }), roughness: 0.75 })); cap.position.y = 2.21; g.add(cap);
+  const reg = chipBody(2.9, 1.1, 1.6, ["R50"], { size: [140] }); reg.position.set(4.4, 0.6, 2.4); g.add(reg);
+  pads.push([-9.5, 8, 4.4, 4.4], [-5.1, 10.4, 3.4, 2.4]);
+  addPart({ id: "power", chip: "L1", name: "Power stage", ref: "L1 · U5 · 4 × 4 mm inductor",
+    spec: "Converts battery voltage down to the 5 V and 3.3 V the chips run on.",
+    checks: ["Who makes the regulator and the inductor, and where?", "Do the inductor's ferrite and wire come from a declared source?", "Is the regulator from an authorized source, not a broker?"],
+    rules: ["DFARS 252.246-7008", "Entity List"] }, g, new THREE.Vector3(-3, 9, 2));
+}
+// Tantalum capacitor (3TG)
+{
+  const g = new THREE.Group(); g.position.set(-13.2, T, -1.5);
+  const b = rbox(2.8, 1.9, 3.5, 0.18, std("#b98330", { roughness: 0.8 })); b.position.y = 0.95; g.add(b);
+  const stripe = new THREE.Mesh(new THREE.BoxGeometry(2.6, 0.02, 0.5), std("#6b3f10")); stripe.position.set(0, 1.91, -1.2); g.add(stripe);
+  for (const s of [-1, 1]) { const t = box(2.2, 0.5, 0.5, tin()); t.position.set(0, 0.25, s * 1.95); g.add(t); pads.push([-13.2, -1.5 + s * 1.9, 2.4, 1.2]); }
+  addPart({ id: "tant", chip: "C9", name: "Tantalum capacitor", ref: "C9 · case B · 3.5 × 2.8 mm",
+    spec: "Bulk capacitor that smooths power spikes from the motors.",
+    checks: ["Which smelter refined the tantalum, and is it on the RMI conformant list?", "Does the maker publish a conflict-minerals report (CMRT)?"],
+    rules: ["Dodd-Frank §1502", "SEC Form SD", "RMI CMRT"] }, g, new THREE.Vector3(-4, 8, 0));
+}
+// Passive capacitors 0402 around the MCU
+{
+  const g = new THREE.Group(); g.position.set(0, T, 0);
+  const spots = [];
+  for (let i = 0; i < 6; i++) { spots.push([-7 + i * 1.6, -7.2, 0], [-6.8 + i * 1.6, 7.2, 0], [-7.2, -4 + i * 1.6, 1], [7.2, -4.6 + i * 1.6, 1]); }
+  spots.push([12, -4, 1], [12, -2.4, 1], [-2, -12, 0], [-0.4, -12, 0], [3, 12, 0], [-12, 4.5, 1]);
+  const body = [], ends = [];
+  spots.forEach(([x, z, r]) => { const ry = r * Math.PI / 2; body.push(M(x, 0.25, z, ry)); const d = new THREE.Vector3(0.42, 0, 0).applyAxisAngle(new THREE.Vector3(0, 1, 0), ry); ends.push(M(x + d.x, 0.25, z + d.z, ry), M(x - d.x, 0.25, z - d.z, ry)); pads.push(r ? [x, z, 0.6, 1.3] : [x, z, 1.3, 0.6]); });
+  g.add(instanced(new THREE.BoxGeometry(0.62, 0.5, 0.5), std("#a8936a", { roughness: 0.7 }), body));
+  g.add(instanced(new THREE.BoxGeometry(0.2, 0.52, 0.52), tin(), ends));
+  addPart({ id: "passives", chip: "C1–C30", name: "Ceramic capacitors", ref: "C1–C30 · 0402 · 1.0 × 0.5 mm",
+    spec: "Thirty tiny capacitors that keep each chip's power clean.",
+    checks: ["Which maker and distributor? Passives are a common counterfeit target.", "Were reels bought new from an authorized source?"],
+    rules: ["DFARS 252.246-7008", "DFARS 252.246-7007"] }, g, new THREE.Vector3(0, 5, 0));
+}
+// LEDs
+{
+  const g = new THREE.Group(); g.position.set(13.2, T, 11);
+  [["#4fb0ff", 0], ["#5ce08a", 1.8]].forEach(([c, z]) => {
+    const b = box(1.6, 0.35, 0.8, std("#dcd8cd", { roughness: 0.75 })); b.position.set(0, 0.18, z); g.add(b);
+    const lens = box(1.0, 0.25, 0.6, std(c, { emissive: c, emissiveIntensity: 0.9, roughness: 0.5, transparent: true, opacity: 0.9 })); lens.position.set(0, 0.45, z); g.add(lens);
+    pads.push([13.2, 11 + z, 2, 1]);
+  });
+  addPart({ id: "leds", chip: "LED", name: "Status lights", ref: "D1–D2 · 0603",
+    spec: "Status and arming lights.",
+    checks: ["Maker and country of origin, declared by the supplier."],
+    rules: ["Origin declaration"] }, g, new THREE.Vector3(3, 6, 2));
+}
+// JST-SH connectors
+function jst(pins) {
+  const g = new THREE.Group(); const w = pins + 1;
+  const shell = std("#d8d0bd", { roughness: 0.8 });
+  const b = box(w, 2.9, 4.25, shell); b.position.y = 1.45; g.add(b);
+  const mouth = box(w - 0.8, 1.9, 0.8, std("#2a2a26", { roughness: 0.9 })); mouth.position.set(0, 1.5, 1.8); g.add(mouth);
+  const mats = []; for (let i = 0; i < pins; i++) mats.push(M(-(pins - 1) / 2 + i, 0.12, -2.4));
+  g.add(instanced(new THREE.BoxGeometry(0.32, 0.18, 0.9), tin(), mats));
+  return g;
+}
+{
+  const g = new THREE.Group();
+  const a = jst(8); a.position.set(0, T, 14.8); g.add(a); pads.push([0, 13.6, 9, 1.4]);
+  const b = jst(6); b.position.set(14.8, T, 0); b.rotation.y = Math.PI / 2; g.add(b); pads.push([13.6, 0, 1.4, 7]);
+  const c = jst(6); c.position.set(-14.8, T, -9.5); c.rotation.y = -Math.PI / 2; g.add(c); pads.push([-13.6, -9.5, 1.4, 7]);
+  addPart({ id: "conn", chip: "J1–J3", name: "Connectors", ref: "J1–J3 · JST-SH · 1.0 mm pitch",
+    spec: "Plugs for the motor controller, receiver and GPS.",
+    checks: ["Genuine JST, or a look-alike? Who made them and where?", "Is the maker or its parent on the 1260H or Entity lists?"],
+    rules: ["1260H list", "Entity List", "OFAC SDN"] }, g, new THREE.Vector3(0, 7, 0));
+  g.userData.spread = [[a, new THREE.Vector3(0, 0, 6)], [b, new THREE.Vector3(6, 0, 0)], [c, new THREE.Vector3(-6, 0, 0)]];
+}
+// USB-C
+{
+  const g = new THREE.Group(); g.position.set(0, T + 1.63, -15.6);
+  const shell = rbox(8.94, 3.26, 7.35, 1.5, metal()); g.add(shell);
+  const port = rbox(8.2, 2.5, 0.6, 1.1, std("#0c0c0c", { roughness: 1 })); port.position.z = -3.5; g.add(port);
+  const tongue = box(6.6, 0.7, 0.4, std("#1c1c1c")); tongue.position.z = -3.4; g.add(tongue);
+  pads.push([0, -14.2, 10, 2]);
+  addPart({ id: "usb", chip: "USB", name: "USB-C port", ref: "J4 · USB-C receptacle",
+    spec: "For setup and firmware updates.",
+    checks: ["Who made the receptacle, and where?", "Was it bought through an authorized source?"],
+    rules: ["DFARS 252.246-7008", "Origin declaration"] }, g, new THREE.Vector3(0, 6, -6));
+}
+// Board
+{
+  const s = new THREE.Shape(); const h = 18, r = 2.2;
+  s.moveTo(-h + r, -h); s.lineTo(h - r, -h); s.quadraticCurveTo(h, -h, h, -h + r); s.lineTo(h, h - r); s.quadraticCurveTo(h, h, h - r, h); s.lineTo(-h + r, h); s.quadraticCurveTo(-h, h, -h, h - r); s.lineTo(-h, -h + r); s.quadraticCurveTo(-h, -h, -h + r, -h);
+  [[-15.25, -15.25], [15.25, -15.25], [-15.25, 15.25], [15.25, 15.25]].forEach(([x, y]) => { const p = new THREE.Path(); p.absarc(x, y, 1.6, 0, Math.PI * 2, true); s.holes.push(p); });
+  const geo = new THREE.ExtrudeGeometry(s, { depth: T, bevelEnabled: false, curveSegments: 28 });
+  geo.rotateX(-Math.PI / 2);
+  const mask = std("#ffffff", { map: drawBoard(), roughness: 0.68, metalness: 0 });
+  const edge = std("#9c8a5c", { roughness: 0.85 });
+  const board = new THREE.Mesh(geo, [mask, edge]); board.castShadow = true; board.receiveShadow = true;
+  const g = new THREE.Group(); g.add(board);
+  addPart({ id: "pcb", chip: "PCB", name: "Circuit board", ref: "PCB · 6-layer · 36 × 36 × 1.6 mm",
+    spec: "The bare board every part is soldered to. Fabricated and assembled in two separate steps, often in two countries.",
+    checks: ["Where was the bare board fabricated, and where was it assembled?", "Does the UL file number printed on the board match the fab the supplier names?", "Is the assembler IPC-1791 trusted-assembler qualified?"],
+    rules: ["10 U.S.C. 4873", "IPC-1791"] }, g, new THREE.Vector3(0, 0, 0));
+}
+// Soft-mount grommets
+{
+  const g = new THREE.Group();
+  const pts = [[1.0, -1.6], [2.6, -1.6], [2.6, -0.6], [1.55, -0.2], [1.55, 1.8], [2.6, 2.2], [2.6, 3.2], [1.0, 3.2]].map(([x, y]) => new THREE.Vector2(x, y));
+  const geo = new THREE.LatheGeometry(pts, 40);
+  const mat = std("#7d3336", { roughness: 0.92 });
+  [[-15.25, -15.25], [15.25, -15.25], [-15.25, 15.25], [15.25, 15.25]].forEach(([x, z]) => { const m = new THREE.Mesh(geo, mat); m.position.set(x, 0, z); m.castShadow = true; m.receiveShadow = true; g.add(m); });
+  addPart({ id: "grom", chip: "GR", name: "Soft-mount grommets", ref: "4 × natural rubber · M3",
+    spec: "Rubber mounts that isolate the motion sensor from motor vibration.",
+    checks: ["Country of origin, declared by the supplier. Low risk."],
+    rules: ["Origin declaration"] }, g, new THREE.Vector3(0, -9, 0));
+}
+
+// ---------- drawing style: flat midnight fills + ivory line work, to match the site's engraved look ----------
+const LEVEL = { power: "red", flash: "red", conn: "yellow", grom: "yellow" }, ALERTC = { red: "#E0675C", yellow: "#E2B33C" };
+const FLAGGED = new Set(Object.keys(LEVEL));
+const FILL = "#1F3B4A", LINE = "#E8DFCC", BRASS = "#C29A63";
+const ACCENT = { pcb: "#ADA28B", grom: "#5E2A2D", leds: "#3B4A44", tant: "#3A3426" };
+const lineFor = (geo, mat) => { const l = new THREE.LineSegments(new THREE.EdgesGeometry(geo, geo.type === "RoundedBoxGeometry" ? 10 : 28), mat); l.raycast = () => {}; return l; };
+parts.forEach(p => {
+  const flagged = FLAGGED.has(p.id);
+  const baseLine = flagged ? ALERTC[LEVEL[p.id]] : p.id === "pcb" ? "#182F3B" : LINE, baseOp = flagged ? 1 : p.id === "pcb" ? 0.55 : 0.8;
+  const lineMat = new THREE.LineBasicMaterial({ color: baseLine, transparent: true, opacity: baseOp, toneMapped: false });
+  lineMat.userData = { baseLine, baseOp };
+  const fills = []; const meshes = []; p.group.traverse(o => { if (o.isMesh) meshes.push(o); });
+  meshes.forEach(o => {
+    const conv = m => { const f = new THREE.MeshBasicMaterial({ color: m.map ? "#ffffff" : (ACCENT[p.id] || FILL), map: m.map || null, toneMapped: false, polygonOffset: true, polygonOffsetFactor: 1, polygonOffsetUnits: 1 }); fills.push(f); return f; };
+    o.material = Array.isArray(o.material) ? o.material.map(conv) : conv(o.material);
+    o.castShadow = true; o.receiveShadow = false;
+    if (o.isInstancedMesh) {
+      const base = new THREE.EdgesGeometry(o.geometry, 28), pos = base.attributes.position, out = [], v = new THREE.Vector3(), mtx = new THREE.Matrix4();
+      for (let i = 0; i < o.count; i++) { o.getMatrixAt(i, mtx); for (let k = 0; k < pos.count; k++) { v.fromBufferAttribute(pos, k).applyMatrix4(mtx); out.push(v.x, v.y, v.z); } }
+      const g = new THREE.BufferGeometry(); g.setAttribute("position", new THREE.Float32BufferAttribute(out, 3));
+      const l = new THREE.LineSegments(g, lineMat); l.raycast = () => {}; o.add(l);
+      l.matrixAutoUpdate = false; // instance matrices already baked in, relative to the instanced mesh
+    } else o.add(lineFor(o.geometry, lineMat));
+  });
+  p.fills = fills; p.lineMat = lineMat;
+});
+rim.intensity = 0; scene.environment = null;
+ground.material.opacity = 0.22;
+
+// ---------- UI wiring ----------
+const $ = id => document.getElementById(id);
+const chips = $("fc-chips"); const order = ["pcb", "mcu", "imu", "baro", "flash", "power", "tant", "passives", "conn", "usb", "leds", "grom"];
+order.forEach(id => { const p = parts.find(q => q.id === id); const b = document.createElement("button"); b.type = "button"; b.textContent = p.chip; b.title = p.name; b.setAttribute("role", "listitem"); b.id = "chip-" + id; b.onclick = () => select(id); chips.appendChild(b); });
+const FLAGS = {
+  US: '<svg viewBox="0 0 19 10" preserveAspectRatio="none"><rect width="19" height="10" fill="#b22234"/><path d="M0 1.15h19M0 2.7h19M0 4.23h19M0 5.77h19M0 7.3h19M0 8.85h19" stroke="#fff" stroke-width=".77"/><rect width="7.6" height="5.38" fill="#3c3b6e"/></svg>',
+  FR: '<svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#ed2939"/><rect width="2" height="2" fill="#fff"/><rect width="1" height="2" fill="#002395"/></svg>',
+  DE: '<svg viewBox="0 0 5 3"><rect width="5" height="3" fill="#ffce00"/><rect width="5" height="2" fill="#dd0000"/><rect width="5" height="1" fill="#000"/></svg>',
+  JP: '<svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#fff"/><circle cx="1.5" cy="1" r=".6" fill="#bc002d"/></svg>',
+  TW: '<svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#fe0000"/><rect width="1.5" height="1" fill="#000095"/><circle cx=".75" cy=".5" r=".22" fill="#fff"/></svg>',
+  CZ: '<svg viewBox="0 0 6 4"><rect width="6" height="4" fill="#d7141a"/><rect width="6" height="2" fill="#fff"/><path d="M0 0l3 2-3 2z" fill="#11457e"/></svg>'
+};
+FLAGS.AU = '<svg viewBox="0 0 20 10"><rect width="20" height="10" fill="#012169"/><path d="M0 0l10 5M10 0L0 5" stroke="#fff" stroke-width="1"/><path d="M5 0v5M0 2.5h10" stroke="#fff" stroke-width="1.6"/><path d="M5 0v5M0 2.5h10" stroke="#c8102e" stroke-width=".9"/><g fill="#fff"><circle cx="5" cy="7.6" r=".9"/><circle cx="15" cy="2" r=".5"/><circle cx="13" cy="4.6" r=".5"/><circle cx="17.2" cy="4" r=".5"/><circle cx="15" cy="8.2" r=".5"/></g></svg>';
+FLAGS.VN = '<svg viewBox="0 0 30 20"><rect width="30" height="20" fill="#da251d"/><path fill="#ffff00" d="M15 4l1.76 5.4h5.7l-4.6 3.35 1.76 5.4L15 14.8l-4.62 3.35 1.76-5.4-4.6-3.35h5.7z"/></svg>';
+FLAGS.PH = '<svg viewBox="0 0 30 15"><rect width="30" height="7.5" fill="#0038a8"/><rect y="7.5" width="30" height="7.5" fill="#ce1126"/><path d="M0 0l13 7.5L0 15z" fill="#fff"/><circle cx="4.3" cy="7.5" r="1.6" fill="#fcd116"/></svg>';
+FLAGS.CN = '<svg viewBox="0 0 30 20"><rect width="30" height="20" fill="#de2910"/><path fill="#ffde00" d="M5 2.5l1.18 3.6H10L6.9 8.3l1.18 3.6L5 9.7l-3.08 2.2L3.1 8.3 0 6.1h3.82z"/><g fill="#ffde00"><circle cx="10.5" cy="2.2" r=".9"/><circle cx="12.4" cy="4.4" r=".9"/><circle cx="12.4" cy="7.4" r=".9"/><circle cx="10.5" cy="9.6" r=".9"/></g></svg>';
+const ORIGIN = { pcb: ["US", "United States"], mcu: ["FR", "France"], imu: ["JP", "Japan"], baro: ["DE", "Germany"], flash: ["TW", "Taiwan"], power: ["US", "United States"], tant: ["CZ", "Czech Republic"], passives: ["JP", "Japan"], leds: ["DE", "Germany"], conn: ["JP", "Japan"], usb: ["TW", "Taiwan"], grom: ["US", "United States"] };
+let selected = null, hovered = null;
+const box3 = new THREE.Box3();
+const alerts = [...FLAGGED].map(id => {
+  const p = parts.find(q => q.id === id), lvl = LEVEL[id];
+  const b = document.createElement("button"); b.type = "button"; b.className = "fc-alert " + lvl;
+  b.setAttribute("aria-label", (lvl === "red" ? "Flagged part: " : "Part needs review: ") + p.name + ". Show details");
+  b.innerHTML = "<span><b>!</b></span>"; b.onclick = () => select(id); $("fc-alerts").appendChild(b);
+  $("chip-" + id)?.classList.add("flagged", lvl);
+  return { p, el: b, anchor: p.group.userData.spread?.[0]?.[0] || (id === "grom" ? p.group.children[0] : p.group) };
+});
+$("d-close").onclick = () => select(null);
+// supply chain record per part. All company names are fictional.
+// level: "red" = traced to a Chinese company, "yellow" = needs review
+const REC = {
+  pcb: { rows: [["Fabricated by", "US", "Ardent Circuits", "United States"], ["Assembled by", "US", "Ridgeway Assembly", "United States"]] },
+  mcu: { rows: [["Made by", "FR", "Valcour Microsystems", "France"]] },
+  imu: { rows: [["Made by", "JP", "Kisaragi Sensing", "Japan"]] },
+  baro: { rows: [["Made by", "DE", "Brandt Sensortechnik", "Germany"]] },
+  flash: { level: "red", rows: [["Sold by", "TW", "Hollis Semiconductor", "Taiwan"], ["Memory die made by", "CN", "Huarong Storage Fab", "China"]] },
+  power: { level: "red", rows: [["Sold by", "US", "Calder Magnetics, Inc.", "United States"], ["Parent company", "CN", "Jinhe Precision Group", "China"]] },
+  tant: { rows: [["Made by", "CZ", "Lanskron Capacitors", "Czech Republic"], ["Tantalum ore from", "AU", "Certified conflict-free mine", "Australia"]] },
+  passives: { rows: [["Made by", "JP", "Oribe Ceramics", "Japan"]] },
+  leds: { rows: [["Made by", "DE", "Halde Optoelektronik", "Germany"]] },
+  conn: { level: "yellow", rows: [["Sold by", "US", "Northgate Interconnect LLC", "United States"], ["Majority owner (62%)", "CN", "Private individual", "Chinese national"]] },
+  usb: { rows: [["Made by", "TW", "Kaiwen Interconnect", "Taiwan"]] },
+  grom: { level: "yellow", rows: [["Made by", "US", "Pell Creek Rubber Co.", "United States"], ["Rubber from", "VN", "Song Be Latex Cooperative", "Vietnam"], ["Rubber from", "PH", "Davao Highland Estates", "Philippines"], ["Davao estates controlled by", "CN", "Hengtai Agri Holdings", "China"]] }
+};
+function fill(d) {
+  $("d-ref").textContent = d.ref; $("d-name").textContent = d.name;
+  const r = REC[d.id] || { rows: [] };
+  $("d-rows").replaceChildren(...r.rows.map(([label, code, name, country]) => {
+    const row = document.createElement("div"); row.className = "row";
+    row.innerHTML = `<h4></h4><div class="origin"><span class="flag">${FLAGS[code] || ""}</span><span class="who"><b></b><i></i></span></div>`;
+    row.querySelector("h4").textContent = label; row.querySelector("b").textContent = name; row.querySelector("i").textContent = country;
+    if (r.level && code === "CN") row.classList.add(r.level);
+    return row;
+  }));
+  const n = $("d-note"); n.hidden = !r.note; n.textContent = r.note || ""; n.className = "note " + (r.level || "");
+  $("fc-dossier").dataset.level = r.level || "";
+}
+function glow(p, v) {
+  const u = p.lineMat.userData; p.lineMat.color.set(v ? (p.id === "pcb" ? "#8A6436" : BRASS) : u.baseLine); p.lineMat.opacity = v >= 0.3 ? 1 : v ? 0.95 : u.baseOp;
+  p.fills.forEach(f => { if (!f.userData.base) f.userData.base = f.color.clone(); f.color.copy(f.userData.base); if (v && !f.map) f.color.lerp(new THREE.Color(BRASS), v >= 0.3 ? 0.22 : 0.1); });
+}
+function select(id) {
+  if (selected) glow(selected, 0);
+  selected = id && id !== selected?.id ? parts.find(p => p.id === id) : null;
+  document.querySelectorAll("#fc-chips button").forEach(b => b.setAttribute("aria-current", String(!!selected && b.id === "chip-" + selected.id)));
+  if (selected) { glow(selected, 0.35); fill(selected); }
+  $("fc-dossier").classList.toggle("open", !!selected);
+}
+
+// explode / assemble
+let exploded = false, t = 0, tTarget = 0;
+const ease = x => x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+function setExplode(v) { exploded = v; $("fc-explode").setAttribute("aria-pressed", String(v)); $("fc-explode").textContent = v ? "Assemble" : "Pull apart"; if (reduce) t = tTarget; }
+$("fc-explode").onclick = () => setExplode(!exploded);
+// scroll drives the scene: assembled board beside the headline, pulled apart as you scroll on
+const fcEl = canvas.closest(".fc"), sceneEl = fcEl.parentElement;
+let prog = 0, view = 0;
+const sstep = (a, b, x) => { const k = Math.min(1, Math.max(0, (x - a) / (b - a))); return k * k * (3 - 2 * k); };
+function onScroll() {
+  const r = sceneEl.getBoundingClientRect(), span = Math.max(1, r.height - innerHeight);
+  prog = Math.min(1, Math.max(0, -r.top / span));
+  tTarget = sstep(0.08, 0.5, prog); exploded = tTarget > 0.5; if (reduce) t = tTarget;
+  const phase = prog < 0.4 ? "hero" : "how";
+  if (phase !== fcEl.dataset.phase) {
+    fcEl.dataset.phase = phase;
+    if (phase === "how") setTimeout(() => { if (fcEl.dataset.phase === "how" && !selected) select("pcb"); }, 900);
+    else select(null);
+  }
+}
+addEventListener("scroll", onScroll, { passive: true }); addEventListener("resize", onScroll); onScroll();
+$("fc-reset").onclick = () => { select(null); setExplode(false); camera.position.copy(HOME); controls.target.set(0, 4, 0); controls.autoRotate = true; };
+
+// picking
+const ray = new THREE.Raycaster(), ptr = new THREE.Vector2(); const tip = $("fc-tip");
+function pick(e) {
+  const r = canvas.getBoundingClientRect(); ptr.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+  ray.setFromCamera(ptr, camera); const hit = ray.intersectObjects(parts.map(p => p.group), true)[0];
+  return hit ? parts.find(p => p.id === hit.object.userData.partId) : null;
+}
+canvas.addEventListener("pointermove", e => {
+  if (e.pointerType !== "mouse") return;
+  const p = pick(e);
+  if (p !== hovered) { if (hovered && hovered !== selected) glow(hovered, 0); hovered = p; if (p && p !== selected) glow(p, 0.18); }
+  canvas.classList.toggle("hovering", !!p); tip.classList.toggle("on", !!p);
+  if (p) { tip.textContent = p.name; tip.style.left = e.clientX + "px"; tip.style.top = e.clientY + "px"; }
+});
+canvas.addEventListener("pointerleave", () => { tip.classList.remove("on"); if (hovered && hovered !== selected) glow(hovered, 0); hovered = null; });
+let down = null;
+canvas.addEventListener("pointerdown", e => { down = [e.clientX, e.clientY]; });
+canvas.addEventListener("pointerup", e => { if (fcEl.dataset.phase === "hero" || !down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 6) return; const p = pick(e); select(p ? p.id : null); });
+
+// resize + loop
+// the board sits right of the headline in the hero, then slides left to make room for the part details
+function frame() {
+  const w = canvas.clientWidth, h = canvas.clientHeight, k = view;
+  if (w < 820) camera.setViewOffset(w, h, 0, Math.round(h * (-0.17 + 0.25 * k)), w, h);
+  else camera.setViewOffset(w, h, Math.round(-w * 0.2 + (Math.min(200, w * 0.12) + w * 0.2) * k), Math.round(h * -0.05), w, h);
+  const z0 = w < 820 ? 0.7 : 0.82; camera.zoom = z0 + (1 - z0) * k;
+  camera.updateProjectionMatrix();
+}
+function resize() { const w = canvas.clientWidth, h = canvas.clientHeight; renderer.setSize(w, h, false); camera.aspect = w / h; camera.fov = w < 820 ? 50 : 45; frame(); }
+new ResizeObserver(resize).observe(canvas); resize();
+const timer = new THREE.Timer(); timer.connect(document);
+const tmp = new THREE.Vector3();
+let onScreen = true;
+new IntersectionObserver(([en]) => { onScreen = en.isIntersecting; }).observe(canvas);
+renderer.setAnimationLoop(() => {
+  if (!onScreen) return;
+  timer.update(); const dt = Math.min(timer.getDelta(), 0.05);
+  const vt = sstep(0.1, 0.5, prog); if (Math.abs(view - vt) > 1e-4) { view += (vt - view) * Math.min(1, dt * 6); if (reduce) view = vt; frame(); }
+  if (t !== tTarget) { t += Math.sign(tTarget - t) * dt / 0.9; t = Math.min(1, Math.max(0, t)); if (Math.abs(t - tTarget) < 1e-3) t = tTarget; }
+  parts.forEach((p, i) => {
+    const k = ease(Math.min(1, Math.max(0, t * 1.25 - (p.id === "grom" ? 0 : i * 0.02))));
+    p.group.position.lerpVectors(p.home, p.away, k);
+    p.group.userData.spread?.forEach(([o, d]) => { o.userData.base ??= o.position.clone(); o.position.copy(tmp.copy(o.userData.base).addScaledVector(d, k)); });
+  });
+  controls.update();
+  // keep each alert marker pinned above its part, and pulse the part's outline
+  const r = canvas.getBoundingClientRect(), pulse = 0.5 + 0.5 * Math.sin(performance.now() / 320);
+  alerts.forEach(({ p, el, anchor }) => {
+    box3.setFromObject(anchor); box3.getCenter(tmp); tmp.y = box3.max.y + 1.5; tmp.project(camera);
+    el.style.transform = `translate(${(tmp.x + 1) / 2 * r.width}px, ${(1 - tmp.y) / 2 * r.height}px) translate(-50%, -100%)`;
+    el.style.opacity = tmp.z < 1 ? 1 : 0;
+    if (selected !== p && hovered !== p) p.lineMat.opacity = 0.55 + 0.45 * pulse;
+  });
+  renderer.render(scene, camera);
+});
 </script>
 </body>
 </html>
