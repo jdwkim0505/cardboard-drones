@@ -6,5 +6,5 @@ browser; there is no build step and no backend.
 - `index.html`: the homepage.
 - `media/`: logo, favicons and older video assets.
 
-Contact and "Partner with us" buttons open an email to suhoindustries@gmail.com. Don't ask
+Contact and "Partner with us" buttons open an email to jason@suhoindustries.com. Don't ask
 visitors to send ITAR-controlled or CUI files through the site or email.
